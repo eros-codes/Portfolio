@@ -1,0 +1,66 @@
+.contact-cta { display: none; }
+
+.contact-cta-mobile {
+	width: 85%;
+	padding: clamp(2rem, 5vw, 4rem);
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: start;
+	align-items: start;
+	gap: 0.5rem;
+	border: 1px solid rgba(255, 255, 255, 0.16);
+	border-radius: 1.25rem;
+	background:
+		linear-gradient(135deg, rgba(62, 62, 62, 0.58), rgba(14, 14, 14, 0.92) 55%, rgba(0, 0, 0, 0.72)),
+		radial-gradient(circle at 85% 15%, rgba(169, 255, 191, 0.18), transparent 32%);
+	box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.18), 0 2rem 4rem rgba(0, 0, 0, 0.2);
+	overflow: hidden;
+	color: #fff;
+
+	&::before {
+		content: "";
+		position: absolute;
+		inset: 0;
+		background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.65' numOctaves='4'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)'/%3E%3C/svg%3E");
+		opacity: 0.7;
+		mix-blend-mode: soft-light;
+		pointer-events: none;
+	}
+
+	h2 {
+		font-size: clamp(3rem, 6vw, 6rem);
+		font-weight: 400;
+		line-height: 0.95;
+	}
+	em {
+		color: #a9ffbf;
+		font-style: normal;
+	}
+	p {
+		max-width: 31rem;
+		font-family: "Poppins", sans-serif;
+		font-size: clamp(0.78rem, 1vw, 0.95rem);
+		line-height: 1.8;
+		color: rgba(255, 255, 255, 0.65);
+	}
+	.contact-cta-p-laptop { display: none; }
+
+	.contact-button {
+		width: max-content;
+		padding: 0.5rem 1rem;
+		border-radius: 999px;
+		background: #a9ffbf;
+		color: #101712;
+		font-size: 1.2rem;
+		font-weight: 300;
+		margin-top: 0.75rem;
+	
+		span {
+			margin-left: 0.5rem;
+			font-size: 1.1rem;
+		}
+		&:hover,
+		&:focus-visible { background: #d2ffdc; }
+	}
+}

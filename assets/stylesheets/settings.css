@@ -16,6 +16,7 @@
 *,
 *::before,
 *::after {
+	text-decoration: none;
 	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
@@ -70,3 +71,4 @@ select {
 
 
 #about { width: 100%; display: flex; justify-content: center; scroll-margin-top: 3rem; }
+#contact { width: 100%; display: flex; justify-content: center; scroll-margin-top: 3rem; }
