@@ -1,0 +1,72 @@
+@font-face {
+	font-family: "Roaheregular";
+	src: url("../fonts/Roah/roaheregular-maoan.otf") format("opentype");
+	font-style: normal;
+	font-weight: 400;
+}
+
+@font-face {
+	font-family: "Poppins";
+	src: url("../fonts/Poppins/Poppins-Regular.woff2") format("woff2"),
+		url("../fonts/Poppins/Poppins-Regular.woff") format("woff");
+	font-style: normal;
+	font-weight: 400;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+html {
+	font-size: 14px;
+	scroll-behavior: smooth;
+}
+
+body,
+button,
+input,
+textarea,
+select {
+	font-family: "Roaheregular", sans-serif;
+}
+
+body {
+	min-height: 100vh;
+	line-height: 1.5;
+	background-color: #ededed;
+    background-image: radial-gradient(
+        rgba(14, 14, 14, 0.1) 1px,
+        transparent 1px
+    );
+    background-size: 10px 10px;
+	display: flex;
+	flex-direction: column;
+	justify-content: start;
+	align-items: center;
+	gap: 3rem;
+
+	overflow-x: hidden;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+	display: block;
+	max-width: 100%;
+}
+
+button,
+input,
+textarea,
+select {
+	font-size: inherit;
+}
+
+
+#about { width: 100%; display: flex; justify-content: center; scroll-margin-top: 3rem; }

@@ -1,0 +1,154 @@
+.bento-grid-laptop, .bento-grid-mobile { display: none; }
+.bento-grid-tablet {
+	width: 85%;
+	display: grid;
+	grid-template-columns: 1fr;
+	row-gap: 2rem;
+	position: relative;
+
+	.bento-top {
+		display: flex;
+		flex-direction: column;
+	}
+	.bento-middle {
+		display: grid;
+		grid-template-columns: 0.65fr 1px 0.35fr;
+		column-gap: 3.75rem;
+		align-items: start;
+	}
+	.vertical-divider {
+		width: 0.75px;
+		height: 100%;
+		background: rgba(0, 0, 0, 0.15);
+		justify-self: start;
+	}
+	.bento-bottom {
+		display: flex;
+		flex-direction: column;
+		gap: 4rem;
+	}
+}
+
+.about-card,
+.education-card,
+.skills-card,
+.connect-card {
+	padding: 0;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: start;
+	align-items: start;
+	gap: 1.25rem;
+
+	h3{
+		font-size: 3rem;
+		font-weight: 400;
+		line-height: 1;
+	}
+}
+
+.bento-middle .skills-card {
+	margin-top: 0;
+}
+
+.bento-bottom .connect-card {
+	margin-top: 0;
+}
+
+.about-card {
+	.about-text {
+		display: flex;
+		flex-direction: column;
+		justify-content: start;
+		align-items: start;
+		gap: 1rem;
+		
+		p {
+			font-family: "Poppins", sans-serif;
+			font-size: 0.9rem;
+			line-height: 1.5;
+			color: #222;
+		}
+	}
+}
+
+.skill-group {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 0.7rem;
+	
+	> span {
+		width: auto;
+		padding-top: 0;
+		font-family: "Poppins", sans-serif;
+		font-size: 0.65rem;
+		letter-spacing: 3px;
+		color: #777;
+	}
+	.skill-icons {
+		display: flex;
+		flex-wrap: nowrap;
+		gap: 2rem;
+		align-items: flex-start;
+
+		div {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			gap: 0.5rem;
+		}
+		img {
+			width: 2rem;
+			height: 2rem;
+		}
+		p {
+			font-family: "Poppins", sans-serif;
+			font-size: 0.6rem;
+			margin: 0;
+		}
+	}
+}
+
+.education-info {
+	font-family: "Poppins", sans-serif;
+	font-size: 1rem;
+	line-height: 2;
+
+	strong {
+		font-weight: 600;
+	}
+	em {
+		font-style: italic;
+	}
+	h3 {
+		margin-bottom: 3rem;
+	}
+}
+
+.connect-card {
+	margin-top: 4rem;
+
+	.connect-links {
+		display: flex;
+		gap: 3rem;
+		
+		a {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			gap: 0.7rem;
+			text-decoration: none;
+			color: #222;
+		}
+		img {
+			width: 35px;
+			height: 35px;
+		}
+		span {
+			font-family: "Poppins", sans-serif;
+			font-size: 0.75rem;
+		}
+	}
+}
