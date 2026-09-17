@@ -142,8 +142,7 @@
 	align-items: center;
 	gap: 0.75rem;
 	padding: 0.75rem 0.75rem;
-	border-radius: 2rem;
-	corner-shape: squircle;
+	border-radius: 1.5rem;
 	background: linear-gradient(
 		145deg,
 		rgba(62, 62, 62, 0.5) 3%,
