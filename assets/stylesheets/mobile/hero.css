@@ -1,7 +1,7 @@
 .hero {
 	width: 22.85rem;
 	position: relative;
-	min-height: 36.5rem;
+	height: 36.5rem;
 	margin-top: 4rem;
 
 	h2 {
@@ -14,7 +14,7 @@
 	h1 {
 		position: absolute;
 		left: 50%;
-		transform: translateX(-50%);
+		transform: translateX(-50%) translateY(-3px);
 		font-size: 7rem;
 	}
 }
@@ -70,7 +70,7 @@
 			line-height: 1.1;
 		}
 		width: 8.7rem;
-		bottom: 27.4rem;
+		bottom: 27.35rem;
 		left: 9rem;
 	}
 	@media screen and (max-width: 320px){
