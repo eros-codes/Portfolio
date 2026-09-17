@@ -25,7 +25,7 @@ const mainProjects = [
 		main: true
 	},
 	{
-		imageAddress: "assets/images/projects/shop.png",
+		imageAddress: "assets/images/projects/shop.PNG",
 		folderName: "Shop",
 		main: true
 	},
@@ -50,7 +50,7 @@ const minorProjects = [
 		main: false,
 	},
 	{
-		imageAddress: "assets/images/projects/infinitic.png",
+		imageAddress: "assets/images/projects/infinitic.PNG",
 		folderName: "InfiniTic",
 		main: false,
 	},
