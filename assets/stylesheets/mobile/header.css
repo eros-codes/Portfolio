@@ -147,7 +147,7 @@
 			border: 1px solid rgba(255, 255, 255, 0.16);
 
 			span {
-				&:nth-child(1) { transform: translateY(0.25rem) rotate(45deg); }
+				&:nth-child(1) { transform: translateY(0.2rem) rotate(45deg); }
 				&:nth-child(2) { opacity: 0; }
 				&:nth-child(3) { transform: translateY(-0.5rem) rotate(-45deg); }
 			}
