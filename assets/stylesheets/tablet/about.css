@@ -1,31 +1,30 @@
 .bento-grid-laptop, .bento-grid-mobile { display: none; }
 .bento-grid-tablet {
 	width: 85%;
-	display: grid;
-	grid-template-columns: 1fr;
-	row-gap: 2rem;
+	display: flex;
+	justify-content: start;
+	align-items: start;
+	flex-direction: column;
+	gap: 3rem;
 	position: relative;
 
 	.bento-top {
+		width: 100%;
 		display: flex;
 		flex-direction: column;
 	}
-	.bento-middle {
+	.bento-bottom {
+		width: 100%;
 		display: grid;
 		grid-template-columns: 0.65fr 1px 0.35fr;
 		column-gap: 3.75rem;
-		align-items: start;
+		align-items: center;
 	}
 	.vertical-divider {
 		width: 0.75px;
 		height: 100%;
 		background: rgba(0, 0, 0, 0.15);
 		justify-self: start;
-	}
-	.bento-bottom {
-		display: flex;
-		flex-direction: column;
-		gap: 4rem;
 	}
 }
 
@@ -46,14 +45,6 @@
 		font-weight: 400;
 		line-height: 1;
 	}
-}
-
-.bento-middle .skills-card {
-	margin-top: 0;
-}
-
-.bento-bottom .connect-card {
-	margin-top: 0;
 }
 
 .about-card {
@@ -111,118 +102,127 @@
 	}
 }
 
-.education-info {
-	font-family: "Poppins", sans-serif;
-	font-size: 1rem;
-	line-height: 2;
-
-	strong {
-		font-weight: 600;
-	}
-	em {
-		font-style: italic;
-	}
-	h3 {
-		margin-bottom: 3rem;
-	}
-}
-
-.profile-card {
-	width: 15rem;
+.bento-bottom-right {
+	width: 100%;
 	display: flex;
-	align-items: center;
-	gap: 0.75rem;
-	padding: 0.65rem 0.65rem;
-	border-radius: 1.4rem;
-	background: linear-gradient(
-		145deg,
-		rgba(62, 62, 62, 0.5) 3%,
-		rgba(14, 14, 14, 0.8) 35%,
-		rgba(0, 0, 0, 0.5)
-	);
-	backdrop-filter: blur(18px);
-	-webkit-backdrop-filter: blur(18px);
-	border: 1px solid rgba(255, 255, 255, 0.18);
-	box-shadow:
-		inset 0 0 40px rgba(255, 255, 255, 0.05),
-		0 20px 60px rgba(0, 0, 0, 0.25);
+	flex-direction: column;
+	justify-content: start;
+	align-items: start;
+	gap: 3rem;
 
-	position: relative;
-	overflow: hidden;
-	text-decoration: none;
-	color: white;
+	.education-info {
+		font-family: "Poppins", sans-serif;
+		font-size: 1rem;
+		line-height: 2;
 	
-	&::before {
-		content: "";
-		position: absolute;
-		inset: 0;
-		background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.65' numOctaves='4'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)'/%3E%3C/svg%3E");
-		opacity: 0.9;
-		mix-blend-mode: soft-light;
-		pointer-events: none;
-	}
-	&::after {
-		content: "";
-		position: absolute;
-		inset: 0;
-		background: linear-gradient(
-			120deg,
-			rgba(255, 255, 255, 0.18),
-			transparent 25%,
-			transparent 70%,
-			rgba(255, 255, 255, 0.04)
-		);
-		opacity: 0.9;
-		pointer-events: none;
-	}
-	.profile-image {
-		width: 3rem;
-		height: 3rem;
-		border-radius: 50%;
-		overflow: hidden;
-		opacity: 1;
-		border: 1px solid rgba(255, 255, 255, 0.2);
-	
-		flex-shrink: 0;
-		img {
-			width: 100%;
-			height: 100%;
-			object-fit: cover;
+		strong {
+			font-weight: 600;
 		}
-	}
-	.profile-info {
-		position: relative;
-		z-index: 2;
-		display: flex;
-		flex-direction: column;
-		justify-content: space-between;
-		align-items: start;
-		gap: 0.2rem;
-	
+		em {
+			font-style: italic;
+		}
 		h3 {
-			margin: 0;
-			font-family: "Poppins", serif;
-			font-size: 1.1rem;
-			font-weight: 400;
-			letter-spacing: -1px;
-		}
-		span {
-			font-family: "Poppins", sans-serif;
-			font-size: 0.7rem;
-			color: rgba(255, 255, 255, 0.55);
+			margin-bottom: 3rem;
 		}
 	}
-	.github-icon {
-		margin-left: auto;
-		width: 2rem;
-		height: 2rem;
-		opacity: 0.12;
-		position: relative;
-		z-index: 2;
 	
-		img {
-			width: 100%;
-			height: 100%;
+	.profile-card {
+		width: 15rem;
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+		padding: 0.65rem 0.65rem;
+		border-radius: 1.4rem;
+		background: linear-gradient(
+			145deg,
+			rgba(62, 62, 62, 0.5) 3%,
+			rgba(14, 14, 14, 0.8) 35%,
+			rgba(0, 0, 0, 0.5)
+		);
+		backdrop-filter: blur(18px);
+		-webkit-backdrop-filter: blur(18px);
+		border: 1px solid rgba(255, 255, 255, 0.18);
+		box-shadow:
+			inset 0 0 40px rgba(255, 255, 255, 0.05),
+			0 20px 60px rgba(0, 0, 0, 0.25);
+	
+		position: relative;
+		overflow: hidden;
+		text-decoration: none;
+		color: white;
+		
+		&::before {
+			content: "";
+			position: absolute;
+			inset: 0;
+			background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.65' numOctaves='4'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)'/%3E%3C/svg%3E");
+			opacity: 0.9;
+			mix-blend-mode: soft-light;
+			pointer-events: none;
+		}
+		&::after {
+			content: "";
+			position: absolute;
+			inset: 0;
+			background: linear-gradient(
+				120deg,
+				rgba(255, 255, 255, 0.18),
+				transparent 25%,
+				transparent 70%,
+				rgba(255, 255, 255, 0.04)
+			);
+			opacity: 0.9;
+			pointer-events: none;
+		}
+		.profile-image {
+			width: 3rem;
+			height: 3rem;
+			border-radius: 50%;
+			overflow: hidden;
+			opacity: 1;
+			border: 1px solid rgba(255, 255, 255, 0.2);
+		
+			flex-shrink: 0;
+			img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+			}
+		}
+		.profile-info {
+			position: relative;
+			z-index: 2;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			align-items: start;
+			gap: 0.2rem;
+		
+			h3 {
+				margin: 0;
+				font-family: "Poppins", serif;
+				font-size: 1.1rem;
+				font-weight: 400;
+				letter-spacing: -1px;
+			}
+			span {
+				font-family: "Poppins", sans-serif;
+				font-size: 0.7rem;
+				color: rgba(255, 255, 255, 0.55);
+			}
+		}
+		.github-icon {
+			margin-left: auto;
+			width: 2rem;
+			height: 2rem;
+			opacity: 0.12;
+			position: relative;
+			z-index: 2;
+		
+			img {
+				width: 100%;
+				height: 100%;
+			}
 		}
 	}
 }

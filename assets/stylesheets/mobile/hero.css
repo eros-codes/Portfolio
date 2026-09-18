@@ -22,7 +22,7 @@
 	width: 19rem;
 	height: 25.5rem;
 	position: absolute;
-	top: 6.3rem;
+	top: 6rem;
 	left: 50%;
 	transform: translateX(-3%) rotate(2deg);
 	overflow: hidden;
@@ -45,7 +45,7 @@
 	justify-content: center;
 	align-items: center;
 	position: absolute;
-	top: 20.5rem;
+	top: 20.2rem;
 
 	> :nth-child(1) {
 		h3 {

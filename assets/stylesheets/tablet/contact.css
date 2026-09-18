@@ -54,15 +54,19 @@
 
 .contact-button {
 	width: max-content;
+	display: flex;
+	justify-content: start;
+	align-items: center;
+	gap: 0.3rem;
 	padding: 0.8rem 1.25rem;
 	border-radius: 999px;
 	background: #a9ffbf;
 	color: #101712;
 	font-size: 1.3rem;
 
-	span {
-		margin-left: 0.7rem;
-		font-size: 1.1rem;
+	svg {
+		width: 1.2rem;
+		height: 1.2rem;
 	}
 	&:hover,
 	&:focus-visible { background: #d2ffdc; }

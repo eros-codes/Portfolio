@@ -54,16 +54,22 @@
 
 .contact-button {
 	width: max-content;
+	display: flex;
+	justify-content: start;
+	align-items: center;
+	gap: 0.5rem;
 	padding: 0.9rem 1.35rem;
 	border-radius: 999px;
 	background: #a9ffbf;
 	color: #101712;
 	font-size: 1.6rem;
+	transition: all 0.35s ease-in-out;
 
-	span {
-		margin-left: 0.7rem;
-		font-size: 1.75rem;
+	svg {
+		width: 1.5rem;
+		height: 1.5rem;
 	}
 	&:hover,
-	&:focus-visible { background: #d2ffdc; }
+	&:focus-visible { background: #d2ffdc; scale: 1.03; }
+	&:active { background: #fff; scale: 1.03; }
 }

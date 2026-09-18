@@ -1,4 +1,6 @@
-.contact-cta { display: none; }
+.contact-cta {
+	display: none;
+}
 
 .contact-cta-mobile {
 	width: 85%;
@@ -12,9 +14,20 @@
 	border: 1px solid rgba(255, 255, 255, 0.16);
 	border-radius: 1.25rem;
 	background:
-		linear-gradient(135deg, rgba(62, 62, 62, 0.58), rgba(14, 14, 14, 0.92) 55%, rgba(0, 0, 0, 0.72)),
-		radial-gradient(circle at 85% 15%, rgba(169, 255, 191, 0.18), transparent 32%);
-	box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.18), 0 2rem 4rem rgba(0, 0, 0, 0.2);
+		linear-gradient(
+			135deg,
+			rgba(62, 62, 62, 0.58),
+			rgba(14, 14, 14, 0.92) 55%,
+			rgba(0, 0, 0, 0.72)
+		),
+		radial-gradient(
+			circle at 85% 15%,
+			rgba(169, 255, 191, 0.18),
+			transparent 32%
+		);
+	box-shadow:
+		inset 0 1px 1px rgba(255, 255, 255, 0.18),
+		0 2rem 4rem rgba(0, 0, 0, 0.2);
 	overflow: hidden;
 	color: #fff;
 
@@ -44,10 +57,16 @@
 		line-height: 1.8;
 		color: rgba(255, 255, 255, 0.65);
 	}
-	.contact-cta-p-laptop { display: none; }
+	.contact-cta-p-laptop {
+		display: none;
+	}
 
 	.contact-button {
 		width: max-content;
+		display: flex;
+		justify-content: start;
+		align-items: center;
+		gap: 0.3rem;
 		padding: 0.5rem 1rem;
 		border-radius: 999px;
 		background: #a9ffbf;
@@ -55,12 +74,14 @@
 		font-size: 1.2rem;
 		font-weight: 300;
 		margin-top: 0.75rem;
-	
-		span {
-			margin-left: 0.5rem;
-			font-size: 1.1rem;
+
+		svg {
+			width: 1rem;
+			height: 1rem;
 		}
 		&:hover,
-		&:focus-visible { background: #d2ffdc; }
+		&:focus-visible {
+			background: #d2ffdc;
+		}
 	}
 }
