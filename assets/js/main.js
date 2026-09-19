@@ -16,10 +16,31 @@ const mainProjects = [
 			"Rivo web application built by Arvin Saghafi using Node.js and PostgreSQL",
 		folderName: "Rivo",
 		description:
-			"Rivo is a web application built with HTML, CSS, JavaScript, Node.js, and PostgreSQL.",
+			"Rivo is a real-time web application built with Node.js and PostgreSQL, featuring Socket.IO communication and secure message encryption using envelope encryption with HashiCorp Vault key management.",
 		category: "Web Application",
-		technologies: ["HTML", "CSS", "JavaScript", "Node.js", "PostgreSQL"],
-		keywords: ["Web Application", "Backend", "Database", "Node.js"],
+		operatingSystem: "Web",
+		technologies: [
+			"HTML",
+			"CSS",
+			"JavaScript",
+			"Node.js",
+			"Express.js",
+			"PostgreSQL",
+			"Socket.IO",
+			"WebSocket",
+			"HashiCorp Vault",
+			"Envelope Encryption",
+			"Key Management",
+			"REST API",
+		],
+		keywords: [
+			"Real-time Application",
+			"Secure Messaging",
+			"Backend System",
+			"Encryption",
+			"Database",
+			"API",
+		],
 		main: true,
 	},
 
@@ -31,6 +52,7 @@ const mainProjects = [
 		description:
 			"Bank is a desktop banking management system developed using Java, JavaFX, and MySQL.",
 		category: "Desktop Application",
+		operatingSystem: "Windwos",
 		technologies: ["Java", "JavaFX", "MySQL"],
 		keywords: ["Banking System", "Desktop Application", "Database"],
 		main: true,
@@ -44,6 +66,7 @@ const mainProjects = [
 		description:
 			"Reservation is a web application for managing reservations built with HTML, CSS, JavaScript, Node.js, and PostgreSQL.",
 		category: "Web Application",
+		operatingSystem: "Windows",
 		technologies: ["HTML", "CSS", "JavaScript", "Node.js", "PostgreSQL"],
 		keywords: ["Reservation System", "Backend", "API", "Database"],
 		main: true,
@@ -57,6 +80,7 @@ const mainProjects = [
 		description:
 			"Shop is an e-commerce web application built with React, NestJS, and PostgreSQL.",
 		category: "E-commerce Application",
+		operatingSystem: "Web",
 		technologies: ["React", "NestJS", "PostgreSQL"],
 		keywords: ["E-commerce", "Backend", "API", "Database"],
 		main: true,
@@ -71,6 +95,7 @@ const minorProjects = [
 		description:
 			"Cafe is a web application project developed by Arvin Saghafi.",
 		category: "Web Application",
+		operatingSystem: "Web",
 		technologies: [],
 		keywords: ["Web Application"],
 		main: false,
@@ -82,7 +107,8 @@ const minorProjects = [
 		folderName: "PassVault",
 		description:
 			"PassVault is a password management application project developed by Arvin Saghafi.",
-		category: "Software Application",
+		category: "Desktop Application",
+		operatingSystem: "Web",
 		technologies: [],
 		keywords: ["Security", "Password Management"],
 		main: false,
@@ -95,6 +121,7 @@ const minorProjects = [
 		description:
 			"IG Downloader is an application project developed by Arvin Saghafi.",
 		category: "Software Application",
+		operatingSystem: "Web",
 		technologies: [],
 		keywords: ["Downloader", "Application"],
 		main: false,
@@ -107,6 +134,7 @@ const minorProjects = [
 		description:
 			"Task Manager is a productivity application developed by Arvin Saghafi.",
 		category: "Productivity Application",
+		operatingSystem: "Web",
 		technologies: [],
 		keywords: ["Productivity", "Task Management"],
 		main: false,
@@ -119,6 +147,7 @@ const minorProjects = [
 		description:
 			"InfiniTic is a software project developed by Arvin Saghafi.",
 		category: "Software Project",
+		operatingSystem: "Web",
 		technologies: [],
 		keywords: ["Software Development"],
 		main: false,
@@ -132,6 +161,7 @@ const minorProjects = [
 		description:
 			"To Do List is a task management application developed by Arvin Saghafi.",
 		category: "Productivity Application",
+		operatingSystem: "Web",
 		technologies: [],
 		keywords: ["Task Management"],
 		main: false,

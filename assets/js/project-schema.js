@@ -9,6 +9,7 @@ export function generateProjectSchema(projects) {
 			name: project.folderName,
 			description: project.description,
 			applicationCategory: project.category,
+			operatingSystem: project.operatingSystem || "Web",
 			author: {
 				"@id": "https://aboutarvin.ir/#person",
 			},
