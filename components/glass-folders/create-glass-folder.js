@@ -1,8 +1,9 @@
 const $ = document;
 
-export function createGlassFolder(imageAddress, folderName, main) {
+export function createGlassFolder(imageAddress, altText, folderName, main) {
 	const folder = $.createElement("div");
 	folder.classList.add("folder");
+	folder.setAttribute("role", "article");
 
 	const folderBack = $.createElement("div");
 	folderBack.classList.add("folder-back");
@@ -13,24 +14,21 @@ export function createGlassFolder(imageAddress, folderName, main) {
 		folderImage.classList.add("folder-image");
 		folderImage.src = imageAddress;
 		folderImage.loading = "lazy";
-		if (folderName) {
-			folderImage.alt = folderName;
-		} else {
-			folderImage.alt = "Project"
-		}
+		folderImage.decoding = "async";
+		folderImage.alt = altText || `${folderName} project by Arvin Saghafi`;
+		folderImage.title = folderName;
 	}
-
 	const folderFront = $.createElement("div");
 	folderFront.classList.add("folder-front");
 
 	let folderTitle = null;
 	if (folderName) {
 		folderTitle = $.createElement("div");
-		if (main) {
-			folderTitle.classList.add("main-folder-title");
-		} else {
-			folderTitle.classList.add("sub-folder-title");
-		}
+
+		folderTitle.classList.add(
+			main ? "main-folder-title" : "sub-folder-title",
+		);
+
 		folderTitle.textContent = folderName;
 	}
 
@@ -42,6 +40,5 @@ export function createGlassFolder(imageAddress, folderName, main) {
 	if (folderTitle) {
 		folderFront.appendChild(folderTitle);
 	}
-
 	return folder;
 }

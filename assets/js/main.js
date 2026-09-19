@@ -1,69 +1,150 @@
 import { createGlassFolder } from "../../components/glass-folders/create-glass-folder.js";
+import { generateProjectSchema } from "./project-schema.js";
 
-const $ = document
+const $ = document;
 
 const menuToggle = $.querySelector(".menu-toggle");
 const mobileNav = $.querySelector(".mobile-nav");
-const header = $.getElementById("header")
+const header = $.getElementById("header");
 const mainProjectsGrid = $.getElementById("main-projects-grid");
 const sideProjectsGrid = $.getElementById("side-projects-grid");
 
 const mainProjects = [
 	{
 		imageAddress: "assets/images/projects/rivo.webp",
+		altText:
+			"Rivo web application built by Arvin Saghafi using Node.js and PostgreSQL",
 		folderName: "Rivo",
-		main: true
+		description:
+			"Rivo is a web application built with HTML, CSS, JavaScript, Node.js, and PostgreSQL.",
+		category: "Web Application",
+		technologies: ["HTML", "CSS", "JavaScript", "Node.js", "PostgreSQL"],
+		keywords: ["Web Application", "Backend", "Database", "Node.js"],
+		main: true,
 	},
+
 	{
 		imageAddress: "assets/images/projects/bank.webp",
+		altText:
+			"Bank management system desktop application built with Java, JavaFX, and MySQL by Arvin Saghafi",
 		folderName: "Bank",
-		main: true
+		description:
+			"Bank is a desktop banking management system developed using Java, JavaFX, and MySQL.",
+		category: "Desktop Application",
+		technologies: ["Java", "JavaFX", "MySQL"],
+		keywords: ["Banking System", "Desktop Application", "Database"],
+		main: true,
 	},
+
 	{
 		imageAddress: "assets/images/projects/reservasion.webp",
+		altText:
+			"Reservation management web application built with Node.js and PostgreSQL by Arvin Saghafi",
 		folderName: "Reservation",
-		main: true
+		description:
+			"Reservation is a web application for managing reservations built with HTML, CSS, JavaScript, Node.js, and PostgreSQL.",
+		category: "Web Application",
+		technologies: ["HTML", "CSS", "JavaScript", "Node.js", "PostgreSQL"],
+		keywords: ["Reservation System", "Backend", "API", "Database"],
+		main: true,
 	},
+
 	{
 		imageAddress: "assets/images/projects/shop.webp",
+		altText:
+			"Shop e-commerce web application built with React, NestJS, and PostgreSQL by Arvin Saghafi",
 		folderName: "Shop",
-		main: true
+		description:
+			"Shop is an e-commerce web application built with React, NestJS, and PostgreSQL.",
+		category: "E-commerce Application",
+		technologies: ["React", "NestJS", "PostgreSQL"],
+		keywords: ["E-commerce", "Backend", "API", "Database"],
+		main: true,
 	},
 ];
 
 const minorProjects = [
 	{
 		imageAddress: "assets/images/projects/cafe.webp",
+		altText: "Cafe web application project built by Arvin Saghafi",
 		folderName: "Cafe",
+		description:
+			"Cafe is a web application project developed by Arvin Saghafi.",
+		category: "Web Application",
+		technologies: [],
+		keywords: ["Web Application"],
 		main: false,
 	},
+
 	{
+		altText:
+			"PassVault password management application project built by Arvin Saghafi",
 		folderName: "PassVault",
+		description:
+			"PassVault is a password management application project developed by Arvin Saghafi.",
+		category: "Software Application",
+		technologies: [],
+		keywords: ["Security", "Password Management"],
 		main: false,
 	},
+
 	{
+		altText:
+			"Instagram downloader application project built by Arvin Saghafi",
 		folderName: "IG Downloader",
+		description:
+			"IG Downloader is an application project developed by Arvin Saghafi.",
+		category: "Software Application",
+		technologies: [],
+		keywords: ["Downloader", "Application"],
 		main: false,
 	},
+
 	{
-		folderName: "Task Maneger",
+		altText:
+			"Task Manager productivity application project built by Arvin Saghafi",
+		folderName: "Task Manager",
+		description:
+			"Task Manager is a productivity application developed by Arvin Saghafi.",
+		category: "Productivity Application",
+		technologies: [],
+		keywords: ["Productivity", "Task Management"],
 		main: false,
 	},
+
 	{
 		imageAddress: "assets/images/projects/infinitic.webp",
+		altText: "InfiniTic software project built by Arvin Saghafi",
 		folderName: "InfiniTic",
+		description:
+			"InfiniTic is a software project developed by Arvin Saghafi.",
+		category: "Software Project",
+		technologies: [],
+		keywords: ["Software Development"],
 		main: false,
 	},
+
 	{
 		imageAddress: "assets/images/projects/todolist.webp",
+		altText:
+			"To Do List task management application built by Arvin Saghafi",
 		folderName: "To Do List",
-		main: false,
-	},
-	{
-		folderName: "Task Maneger",
+		description:
+			"To Do List is a task management application developed by Arvin Saghafi.",
+		category: "Productivity Application",
+		technologies: [],
+		keywords: ["Task Management"],
 		main: false,
 	},
 ];
+
+const allProjects = [...mainProjects, ...minorProjects];
+
+const projectSchema = generateProjectSchema(allProjects);
+const schemaScript = document.createElement("script");
+schemaScript.type = "application/ld+json";
+schemaScript.textContent = JSON.stringify(projectSchema);
+document.head.appendChild(schemaScript);
 
 function closeMobileMenu() {
 	menuToggle?.setAttribute("aria-expanded", "false");
@@ -106,12 +187,22 @@ function updateHeaderState() {
 window.addEventListener("scroll", updateHeaderState);
 updateHeaderState();
 
-mainProjects.forEach(project => {
-	const folder = createGlassFolder(project.imageAddress, project.folderName, project.main);
+mainProjects.forEach((project) => {
+	const folder = createGlassFolder(
+		project.imageAddress,
+		project.altText,
+		project.folderName,
+		project.main,
+	);
 	mainProjectsGrid.appendChild(folder);
 });
 
-minorProjects.forEach(project => {
-	const folder = createGlassFolder(project.imageAddress, project.folderName, project.main);
+minorProjects.forEach((project) => {
+	const folder = createGlassFolder(
+		project.imageAddress,
+		project.altText,
+		project.folderName,
+		project.main,
+	);
 	sideProjectsGrid.appendChild(folder);
 });

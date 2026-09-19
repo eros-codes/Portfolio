@@ -1,0 +1,47 @@
+# Arvin Saghafi
+
+## Identity
+
+Arvin Saghafi is a backend-focused software developer and Computer Engineering student.
+
+Website:
+https://aboutarvin.ir/
+
+
+## Professional Focus
+
+Arvin specializes in backend development, software engineering, API development, database design, and building scalable software systems.
+
+
+## Skills
+
+- Backend Development
+- Software Engineering
+- REST API Development
+- Database Design
+- JavaScript
+- NodeJs
+- React
+- NestJS
+- Java
+- C#
+- C++
+- Python
+- SQL
+- Git
+
+
+## Education
+
+Computer Engineering student at Tabriz University.
+
+
+## Projects
+
+Arvin builds software projects including web applications, backend systems, APIs, and developer tools.
+
+
+## Contact
+
+GitHub:
+https://github.com/eros-codes
