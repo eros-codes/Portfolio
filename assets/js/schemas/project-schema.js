@@ -13,13 +13,15 @@ export function generateProjectSchema(projects) {
       }),
       url: "https://aboutarvin.ir/#projects",
       applicationCategory: project.category,
-      operatingSystem: project.operatingSystem,
-      featureList: project.features,
+      ...(project.operatingSystem && {
+        operatingSystem: project.operatingSystem
+      }),
+      featureList: [...(project.features || []), ...(project.technologies || [])],
       author: {
         "@id": "https://aboutarvin.ir/#person"
       },
-      programmingLanguage: project.technologies,
-      keywords: project.keywords
+      keywords: project.keywords || []
     }))
   };
 }
+
