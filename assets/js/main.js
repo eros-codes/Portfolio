@@ -10,22 +10,22 @@ const sideProjectsGrid = $.getElementById("side-projects-grid");
 
 const mainProjects = [
 	{
-		imageAddress: "assets/images/projects/rivo.png",
+		imageAddress: "assets/images/projects/rivo.webp",
 		folderName: "Rivo",
 		main: true
 	},
 	{
-		imageAddress: "assets/images/projects/bank.png",
+		imageAddress: "assets/images/projects/bank.webp",
 		folderName: "Bank",
 		main: true
 	},
 	{
-		imageAddress: "assets/images/projects/reservation.png",
+		imageAddress: "assets/images/projects/reservasion.webp",
 		folderName: "Reservation",
 		main: true
 	},
 	{
-		imageAddress: "assets/images/projects/shop.PNG",
+		imageAddress: "assets/images/projects/shop.webp",
 		folderName: "Shop",
 		main: true
 	},
@@ -33,7 +33,7 @@ const mainProjects = [
 
 const minorProjects = [
 	{
-		imageAddress: "assets/images/projects/cafe.png",
+		imageAddress: "assets/images/projects/cafe.webp",
 		folderName: "Cafe",
 		main: false,
 	},
@@ -50,12 +50,12 @@ const minorProjects = [
 		main: false,
 	},
 	{
-		imageAddress: "assets/images/projects/infinitic.PNG",
+		imageAddress: "assets/images/projects/infinitic.webp",
 		folderName: "InfiniTic",
 		main: false,
 	},
 	{
-		imageAddress: "assets/images/projects/todolist.png",
+		imageAddress: "assets/images/projects/todolist.webp",
 		folderName: "To Do List",
 		main: false,
 	},

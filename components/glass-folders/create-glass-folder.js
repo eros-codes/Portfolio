@@ -12,7 +12,12 @@ export function createGlassFolder(imageAddress, folderName, main) {
 		folderImage = $.createElement("img");
 		folderImage.classList.add("folder-image");
 		folderImage.src = imageAddress;
-		folderImage.alt = "Folder Image";
+		folderImage.loading = "lazy";
+		if (folderName) {
+			folderImage.alt = folderName;
+		} else {
+			folderImage.alt = "Project"
+		}
 	}
 
 	const folderFront = $.createElement("div");
