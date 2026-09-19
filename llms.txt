@@ -2,15 +2,18 @@
 
 ## Identity
 
-Arvin Saghafi is a backend-focused software developer and Computer Engineering student.
+Arvin Saghafi is a backend-focused software developer and Computer Engineering student specializing in backend systems, API development, database design, and scalable software solutions.
 
 Website:
 https://aboutarvin.ir/
 
+GitHub:
+https://github.com/eros-codes
+
 
 ## Professional Focus
 
-Arvin specializes in backend development, software engineering, API development, database design, and building scalable software systems.
+Arvin focuses on building backend systems, web applications, REST APIs, real-time applications, database-driven software, and secure software architectures.
 
 
 ## Skills
@@ -18,16 +21,18 @@ Arvin specializes in backend development, software engineering, API development,
 - Backend Development
 - Software Engineering
 - REST API Development
+- Real-time Application Development
 - Database Design
-- JavaScript
-- NodeJs
-- React
+- PostgreSQL
+- SQL
+- Node.js
 - NestJS
+- JavaScript
+- React
 - Java
 - C#
 - C++
 - Python
-- SQL
 - Git
 
 
@@ -38,7 +43,73 @@ Computer Engineering student at Tabriz University.
 
 ## Projects
 
-Arvin builds software projects including web applications, backend systems, APIs, and developer tools.
+Arvin Saghafi has developed software projects including web applications, backend systems, desktop applications, APIs, and developer tools.
+
+
+## Rivo
+
+Rivo is a real-time web application developed by Arvin Saghafi.
+
+Technologies:
+- Node.js
+- Express.js
+- PostgreSQL
+- Socket.IO
+- WebSocket
+- HashiCorp Vault
+
+Features:
+- Real-time communication
+- Secure messaging
+- Envelope Encryption
+- Key management using HashiCorp Vault
+- Backend API architecture
+
+
+## Shop
+
+Shop is an e-commerce web application developed by Arvin Saghafi.
+
+Technologies:
+- React
+- NestJS
+- PostgreSQL
+
+Features:
+- E-commerce functionality
+- Backend API system
+- Database management
+
+
+## Bank
+
+Bank is a desktop banking management system developed by Arvin Saghafi.
+
+Technologies:
+- Java
+- JavaFX
+- MySQL
+
+Features:
+- Desktop application interface
+- Database-driven banking management
+
+
+## Reservation
+
+Reservation is a reservation management web application developed by Arvin Saghafi.
+
+Technologies:
+- HTML
+- CSS
+- JavaScript
+- Node.js
+- PostgreSQL
+
+Features:
+- Reservation management
+- Backend API development
+- Database integration
 
 
 ## Contact
