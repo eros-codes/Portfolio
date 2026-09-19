@@ -1,5 +1,6 @@
 import { createGlassFolder } from "../../components/glass-folders/create-glass-folder.js";
 import { generateProjectSchema } from "./schemas/project-schema.js";
+import { generatePersonSchema } from "./schemas/person-schema.js";
 import { projects } from "./data/projects.js";
 
 const $ = document;
@@ -15,6 +16,13 @@ const schemaScript = document.createElement("script");
 schemaScript.type = "application/ld+json";
 schemaScript.textContent = JSON.stringify(projectSchema);
 document.head.appendChild(schemaScript);
+
+const personSchema = generatePersonSchema();
+
+const personScript = document.createElement("script");
+personScript.type = "application/ld+json";
+personScript.textContent = JSON.stringify(personSchema);
+document.head.appendChild(personScript);
 
 function closeMobileMenu() {
 	menuToggle?.setAttribute("aria-expanded", "false");
