@@ -30,7 +30,10 @@
 	inset: -20px;
 	z-index: -1;
 	pointer-events: none;
-	background-image: radial-gradient(rgba(14, 14, 14, 0.1) 1px, transparent 1px);
+	background-image: radial-gradient(
+		rgba(14, 14, 14, 0.1) 1px,
+		transparent 1px
+	);
 	background-size: 10px 10px;
 	will-change: transform;
 }
@@ -276,7 +279,11 @@
 		transform: translateX(-4%)
 			translate(var(--fx, 0px), calc(var(--shift, 0px) + var(--fy, 0px)))
 			rotate(calc(1deg + var(--swing, 0deg)));
-		-webkit-mask-image: linear-gradient(to bottom, #000 84%, transparent 100%);
+		-webkit-mask-image: linear-gradient(
+			to bottom,
+			#000 84%,
+			transparent 100%
+		);
 		mask-image: linear-gradient(to bottom, #000 84%, transparent 100%);
 	}
 }
@@ -286,7 +293,11 @@
 		transform: translateX(0%)
 			translate(var(--fx, 0px), calc(var(--shift, 0px) + var(--fy, 0px)))
 			rotate(calc(2deg + var(--swing, 0deg)));
-		-webkit-mask-image: linear-gradient(to bottom, #000 70%, transparent 100%);
+		-webkit-mask-image: linear-gradient(
+			to bottom,
+			#000 70%,
+			transparent 100%
+		);
 		mask-image: linear-gradient(to bottom, #000 70%, transparent 100%);
 	}
 }
@@ -296,7 +307,11 @@
 		transform: translateX(-3%)
 			translate(var(--fx, 0px), calc(var(--shift, 0px) + var(--fy, 0px)))
 			rotate(calc(2deg + var(--swing, 0deg)));
-		-webkit-mask-image: linear-gradient(to bottom, #000 70%, transparent 100%);
+		-webkit-mask-image: linear-gradient(
+			to bottom,
+			#000 70%,
+			transparent 100%
+		);
 		mask-image: linear-gradient(to bottom, #000 70%, transparent 100%);
 	}
 }
@@ -391,12 +406,6 @@
    4. PROJECTS — folders rise out of the page
    ========================================================= */
 
-.js-motion #main-projects-grid,
-.js-motion #side-projects-grid {
-	perspective: 1400px;
-	perspective-origin: 50% 15%;
-}
-
 .js-motion .folder {
 	--rv-y: 3.5rem;
 	--rv-rot: 20deg;
@@ -405,7 +414,7 @@
 
 	opacity: 0;
 	transform-origin: 50% 100%;
-	transform: translateY(calc(var(--rv-y) + var(--hv-y)))
+	transform: perspective(1400px) translateY(calc(var(--rv-y) + var(--hv-y)))
 		rotateX(var(--rv-rot)) scale(var(--rv-s));
 	transition:
 		opacity 0.95s var(--ease-out) var(--rv-delay, 0ms),
@@ -423,10 +432,12 @@
    short snappy transition the component was designed with */
 .js-motion .folder.is-settled {
 	transition: transform 0.35s ease;
+	transform-origin: 50% 50%;
+	transform: none;
 }
 
 .js-motion .folder.is-settled:hover {
-	--hv-y: -1rem;
+	transform: translateY(-1rem);
 }
 
 /* =========================================================
