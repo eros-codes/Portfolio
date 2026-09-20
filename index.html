@@ -3,7 +3,6 @@
 
 <head>
 	<title>Arvin Saghafi | Backend-Focused Software Developer</title>
-	<link rel="preload" href="assets/fonts/Roah/roaheregular-maoan.otf" as="font" type="font/otf" crossorigin>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<!-- SEO -->
@@ -41,7 +40,48 @@
 		})();
 	</script>
 	<!-- Styles -->
-	<link rel="stylesheet" href="assets/stylesheets/main.css">
+	<!-- Preload the two things that were stuck at the end of the CSS chain -->
+	<link rel="preload" as="image" href="assets/images/me/Me.webp" fetchpriority="high">
+	<link rel="preload" as="font" type="font/otf" href="assets/fonts/Roah/roaheregular-maoan.woff2" crossorigin>
+	<link rel="preload" as="font" type="font/woff2" href="assets/fonts/Poppins/Poppins-Regular.woff2" crossorigin>
+	
+	<link rel="stylesheet" href="assets/stylesheets/settings.css">
+	
+	<link rel="stylesheet" href="assets/stylesheets/laptop/header.css" media="screen and (min-width: 1025px)">
+	<link rel="stylesheet" href="assets/stylesheets/laptop/hero.css" media="screen and (min-width: 1025px)">
+	<link rel="stylesheet" href="assets/stylesheets/laptop/about.css" media="screen and (min-width: 1025px)">
+	<link rel="stylesheet" href="assets/stylesheets/laptop/projects.css" media="screen and (min-width: 1025px)">
+	<link rel="stylesheet" href="assets/stylesheets/laptop/contact.css" media="screen and (min-width: 1025px)">
+	<link rel="stylesheet" href="assets/stylesheets/laptop/footer.css" media="screen and (min-width: 1025px)">
+	
+	<link rel="stylesheet" href="assets/stylesheets/tablet/header.css"
+		media="screen and (min-width: 768px) and (max-width: 1024px)">
+	<link rel="stylesheet" href="assets/stylesheets/tablet/hero.css"
+		media="screen and (min-width: 768px) and (max-width: 1024px)">
+	<link rel="stylesheet" href="assets/stylesheets/tablet/about.css"
+		media="screen and (min-width: 768px) and (max-width: 1024px)">
+	<link rel="stylesheet" href="assets/stylesheets/tablet/projects.css"
+		media="screen and (min-width: 768px) and (max-width: 1024px)">
+	<link rel="stylesheet" href="assets/stylesheets/tablet/contact.css"
+		media="screen and (min-width: 768px) and (max-width: 1024px)">
+	<link rel="stylesheet" href="assets/stylesheets/tablet/footer.css"
+		media="screen and (min-width: 768px) and (max-width: 1024px)">
+	
+	<link rel="stylesheet" href="assets/stylesheets/mobile/header.css"
+		media="screen and (min-width: 320px) and (max-width: 767px)">
+	<link rel="stylesheet" href="assets/stylesheets/mobile/hero.css"
+		media="screen and (min-width: 320px) and (max-width: 767px)">
+	<link rel="stylesheet" href="assets/stylesheets/mobile/about.css"
+		media="screen and (min-width: 320px) and (max-width: 767px)">
+	<link rel="stylesheet" href="assets/stylesheets/mobile/projects.css"
+		media="screen and (min-width: 320px) and (max-width: 767px)">
+	<link rel="stylesheet" href="assets/stylesheets/mobile/contact.css"
+		media="screen and (min-width: 320px) and (max-width: 767px)">
+	<link rel="stylesheet" href="assets/stylesheets/mobile/footer.css"
+		media="screen and (min-width: 320px) and (max-width: 767px)">
+	
+	<link rel="stylesheet" href="components/glass-folders/glass-folder.css">
+	<link rel="stylesheet" href="assets/stylesheets/animations.css">
 	<!-- Theme -->
 	<meta name="theme-color" content="#000000">
 	<!-- Open Graph -->
