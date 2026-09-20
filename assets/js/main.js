@@ -1,8 +1,7 @@
 import { createGlassFolder } from "../../components/glass-folders/create-glass-folder.js";
 import { generateProjectSchema } from "./schemas/project-schema.js";
-import { generatePersonSchema } from "./schemas/person-schema.js";
-import { generateFAQSchema } from "./schemas/faq-schema.js";
 import { projects } from "./data/projects.js";
+import { initMotion } from "./animations/index.js";
 
 const $ = document;
 
@@ -12,25 +11,11 @@ const header = $.getElementById("header");
 const mainProjectsGrid = $.getElementById("main-projects-grid");
 const sideProjectsGrid = $.getElementById("side-projects-grid");
 
-/* Schema injection*/
 const projectSchema = generateProjectSchema(projects);
 const schemaScript = document.createElement("script");
 schemaScript.type = "application/ld+json";
 schemaScript.textContent = JSON.stringify(projectSchema);
 document.head.appendChild(schemaScript);
-
-const personSchema = generatePersonSchema();
-const personScript = document.createElement("script");
-personScript.type = "application/ld+json";
-personScript.textContent = JSON.stringify(personSchema);
-document.head.appendChild(personScript);
-
-const faqSchema = generateFAQSchema();
-const faqScript = document.createElement("script");
-faqScript.type = "application/ld+json";
-faqScript.textContent = JSON.stringify(faqSchema);
-document.head.appendChild(faqScript);
-/* Schema injection*/
 
 function closeMobileMenu() {
 	menuToggle?.setAttribute("aria-expanded", "false");
@@ -96,3 +81,7 @@ projects
 		);
 		sideProjectsGrid.appendChild(folder);
 	});
+
+/* Motion is initialised LAST: the reveal observer needs the
+   project folders to already exist in the DOM. */
+initMotion();

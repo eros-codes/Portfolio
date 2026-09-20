@@ -15,6 +15,31 @@
 	<link rel="canonical" href="https://aboutarvin.ir/">
 	<!-- Favicon -->
 	<link rel="shortcut icon" href="assets/images/me/fav.ico" type="image/x-icon">
+	<!-- Motion gate: animations.css only hides anything when this class
+	     is present. No JS, or reduced-motion preference, means the page
+	     renders fully visible. Must run before the stylesheet. -->
+	<script>
+		(function () {
+			try {
+				var d = document.documentElement;
+				if (window.matchMedia &&
+					window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+				d.classList.add("js-motion");
+
+				/* A tab opened in the background still advances the animation
+				   clock, so the hero entrance would be finished before anyone
+				   ever looked at it. Pause it and release on the first view.
+				   Running is the default: if this block fails, the page simply
+				   behaves as it did before. */
+				if (document.visibilityState === "hidden") {
+					d.classList.add("motion-hold");
+					var release = function () { d.classList.remove("motion-hold"); };
+					document.addEventListener("visibilitychange", release, { once: true });
+					setTimeout(release, 8000); /* never hold forever */
+				}
+			} catch (e) { }
+		})();
+	</script>
 	<!-- Styles -->
 	<link rel="stylesheet" href="assets/stylesheets/main.css">
 	<!-- Theme -->
@@ -53,15 +78,19 @@
 						"REST APIs",
 						"Database Design",
 						"Web Applications",
+						"JavaScript",
+						"TypeScript",
 						"Node.js",
 						"NestJS",
 						"Java",
 						"C#",
 						"C++",
 						"Python",
+						"HTML",
+						"CSS",
 						"SQL",
+						"MySQL",
 						"PostgreSQL",
-						"React",
 						"Git"
 					],
 					"alumniOf": {
@@ -70,15 +99,7 @@
 					},
 					"sameAs": [
 						"https://github.com/eros-codes"
-					],
-					"hasOccupation": {
-						"@type": "Occupation",
-						"name": "Software Developer"
-					},
-					"worksFor": {
-						"@type": "Organization",
-						"name": "Independent Software Developer"
-					}
+					]
 				},
 				{
 					"@type": "WebSite",
@@ -86,10 +107,6 @@
 					"name": "Arvin Saghafi Portfolio",
 					"url": "https://aboutarvin.ir/",
 					"creator": {
-						"@id": "https://aboutarvin.ir/#person"
-					},
-					"about": {
-						"@id": "https://aboutarvin.ir/#person",
 						"@id": "https://aboutarvin.ir/#person"
 					}
 				},
@@ -136,7 +153,7 @@
 			<h1>Arvin</h1>
 			<div class="hero-image">
 				<img src="assets/images/me/Me.webp" alt="Arvin Saghafi - Backend-Focused Software Developer"
-					loading="lazy">
+					fetchpriority="high">
 			</div>
 			<section class="hero-cards-container">
 				<div class="hero-card">
