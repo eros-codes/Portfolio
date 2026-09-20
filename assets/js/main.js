@@ -23,6 +23,7 @@ function closeMobileMenu() {
 	mobileNav?.classList.remove("is-open");
 }
 
+
 menuToggle?.addEventListener("click", () => {
 	const isOpen = menuToggle.getAttribute("aria-expanded") === "true";
 	menuToggle.setAttribute("aria-expanded", String(!isOpen));
