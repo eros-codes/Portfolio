@@ -8,7 +8,15 @@
    thing stays a single composited transform.
    ========================================================= */
 
-import { onFrame, scroll, pointer, round, prefersReduced, root } from "./core.js";
+import {
+	onFrame,
+	scroll,
+	pointer,
+	round,
+	prefersReduced,
+	hasFinePointer,
+	root,
+} from "./core.js";
 
 const TILE = 10; // must match background-size in animations.css
 const SCROLL_RATE = 0.3; // 0 = pinned to viewport, 1 = pinned to page
@@ -16,6 +24,10 @@ const POINTER_SHIFT = 6; // px
 
 export function initBackdrop() {
 	if (prefersReduced()) return;
+	/* Same reason as hero.js: scroll-driven, main thread, lags the
+	compositor on touch. Without this layer the body keeps its
+	own dot background, so nothing is lost visually. */
+	if (!hasFinePointer()) return;
 
 	const layer = document.createElement("div");
 	layer.className = "bg-parallax";

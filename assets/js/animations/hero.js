@@ -80,6 +80,12 @@ export function initHero() {
 	}
 
 	if (reduced) return;
+	/* Scroll-linked motion is desktop-only, on purpose.
+		On a touch device the page scrolls on the compositor thread
+		while this loop runs on the main thread, so anything driven
+		from scrollY is permanently a frame or more behind the page
+		and visibly swims during momentum scrolling. */
+	if (!fine) return;
 
 	let swing = 0;
 	const last = [];
@@ -93,7 +99,11 @@ export function initHero() {
 		const py = fine ? pointer.y : 0;
 
 		/* ---- 1. pendulum ---- */
-		const target = clamp(scroll.smoothVelocity * SWING_GAIN, -SWING_MAX, SWING_MAX);
+		const target = clamp(
+			scroll.smoothVelocity * SWING_GAIN,
+			-SWING_MAX,
+			SWING_MAX,
+		);
 		swing = lerp(swing, target, 0.08);
 
 		if (frame) {
@@ -118,8 +128,14 @@ export function initHero() {
 		}
 
 		/* ---- 3. headline layer ---- */
-		if (title) setVar(title, "--shift", `${round(scroll.y * TITLE_RATE)}px`);
-		if (kicker) setVar(kicker, "--shift", `${round(scroll.y * TITLE_RATE * 0.55)}px`);
+		if (title)
+			setVar(title, "--shift", `${round(scroll.y * TITLE_RATE)}px`);
+		if (kicker)
+			setVar(
+				kicker,
+				"--shift",
+				`${round(scroll.y * TITLE_RATE * 0.55)}px`,
+			);
 
 		/* ---- 4. cards ----
 		   Only on a real cursor. These carry backdrop-filter, and
@@ -130,8 +146,13 @@ export function initHero() {
 
 		cards.forEach((card, i) => {
 			const [strength, amp, period] = CARDS[i] || CARDS[0];
-			const floatY = Math.sin((t / period) * Math.PI * 2 + i * 1.9) * amp * intro;
-			const floatX = Math.cos((t / period) * Math.PI * 2 + i * 2.7) * amp * 0.45 * intro;
+			const floatY =
+				Math.sin((t / period) * Math.PI * 2 + i * 1.9) * amp * intro;
+			const floatX =
+				Math.cos((t / period) * Math.PI * 2 + i * 2.7) *
+				amp *
+				0.45 *
+				intro;
 
 			/* negative = moves AGAINST the cursor */
 			const x = -px * strength * intro + floatX;
