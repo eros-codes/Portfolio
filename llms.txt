@@ -49,6 +49,8 @@ Arvin Saghafi has developed software projects including web applications, backen
 ## Rivo
 
 Rivo is a real-time web application developed by Arvin Saghafi.
+Case study:
+https://aboutarvin.ir/rivo/
 
 Technologies:
 - Node.js

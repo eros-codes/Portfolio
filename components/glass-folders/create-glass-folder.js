@@ -1,9 +1,14 @@
 const $ = document;
 
-export function createGlassFolder(imageAddress, altText, folderName, main) {
-	const folder = $.createElement("div");
+export function createGlassFolder(imageAddress, altText, folderName, main, pageUrl) {
+	const folder = $.createElement(pageUrl ? "a" : "div");
 	folder.classList.add("folder");
-	folder.setAttribute("role", "article");
+	if (pageUrl) {
+		folder.href = pageUrl;
+		folder.setAttribute("aria-label", `${folderName} case study`);
+	} else {
+		folder.setAttribute("role", "article");
+	}
 
 	const folderBack = $.createElement("div");
 	folderBack.classList.add("folder-back");

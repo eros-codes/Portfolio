@@ -67,6 +67,7 @@ projects
 			project.altText,
 			project.folderName,
 			project.main,
+			project.pageUrl,
 		);
 		mainProjectsGrid.appendChild(folder);
 	});
@@ -79,6 +80,7 @@ projects
 			project.altText,
 			project.folderName,
 			project.main,
+			project.pageUrl,
 		);
 		sideProjectsGrid.appendChild(folder);
 	});

@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Rivo — Real-time encrypted chat | Arvin Saghafi</title>
+	<meta name="description"
+		content="Rivo is a real-time chat app by Arvin Saghafi. A chat stays active until its last message is seen, archived chats disappear from the main screen, messages can open once or open later, and every message is encrypted with HashiCorp Vault before it is stored.">
+	<meta name="author" content="Arvin Saghafi">
+	<meta name="robots" content="index, follow">
+	<meta name="theme-color" content="#000000">
+
+	<link rel="canonical" href="https://aboutarvin.ir/rivo/">
+
+	<meta property="og:type" content="article">
+	<meta property="og:site_name" content="Arvin Saghafi">
+	<meta property="og:title" content="Rivo — Real-time encrypted chat">
+	<meta property="og:description"
+		content="A real-time chat app that sorts itself, hides archived chats for real, and adds one-time messages, time capsules and Vault-backed encryption.">
+	<meta property="og:url" content="https://aboutarvin.ir/rivo/">
+	<meta property="og:image" content="https://aboutarvin.ir/assets/images/projects/rivo.webp">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="Rivo — Real-time encrypted chat">
+	<meta name="twitter:description"
+		content="A real-time chat app that sorts itself, hides archived chats for real, and adds one-time messages, time capsules and Vault-backed encryption.">
+	<meta name="twitter:image" content="https://aboutarvin.ir/assets/images/projects/rivo.webp">
+
+	<script type="application/ld+json">
+		{
+			"@context": "https://schema.org",
+			"@graph": [
+				{
+					"@type": "SoftwareSourceCode",
+					"@id": "https://aboutarvin.ir/rivo/#project",
+					"name": "Rivo",
+					"description": "A real-time chat application where a conversation stays active until its last message is seen, archived chats are hidden from the main screen, messages can be one-time or time capsules, and every message is stored with envelope encryption backed by HashiCorp Vault.",
+					"url": "https://aboutarvin.ir/rivo/",
+					"image": "https://aboutarvin.ir/assets/images/projects/rivo.webp",
+					"codeRepository": "https://github.com/eros-codes",
+					"programmingLanguage": ["JavaScript", "SQL"],
+					"runtimePlatform": "Node.js",
+					"keywords": ["real-time chat", "Socket.IO", "envelope encryption", "HashiCorp Vault", "Prisma", "PostgreSQL"],
+					"author": { "@id": "https://aboutarvin.ir/#person" }
+				},
+				{
+					"@type": "WebPage",
+					"@id": "https://aboutarvin.ir/rivo/#webpage",
+					"url": "https://aboutarvin.ir/rivo/",
+					"name": "Rivo — Real-time encrypted chat",
+					"isPartOf": { "@id": "https://aboutarvin.ir/#website" },
+					"about": { "@id": "https://aboutarvin.ir/rivo/#project" },
+					"breadcrumb": { "@id": "https://aboutarvin.ir/rivo/#breadcrumb" }
+				},
+				{
+					"@type": "BreadcrumbList",
+					"@id": "https://aboutarvin.ir/rivo/#breadcrumb",
+					"itemListElement": [
+						{ "@type": "ListItem", "position": 1, "name": "Home", "item": "https://aboutarvin.ir/" },
+						{ "@type": "ListItem", "position": 2, "name": "Rivo", "item": "https://aboutarvin.ir/rivo/" }
+					]
+				}
+			]
+		}
+	</script>
+
+	<!-- Motion gate — identical to the homepage -->
+	<script>
+		(function () {
+			try {
+				var d = document.documentElement;
+				if (window.matchMedia &&
+					window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+				d.classList.add("js-motion");
+				if (document.visibilityState === "hidden") {
+					d.classList.add("motion-hold");
+					var release = function () { d.classList.remove("motion-hold"); };
+					document.addEventListener("visibilitychange", release, { once: true });
+					setTimeout(release, 8000);
+				}
+			} catch (e) { }
+		})();
+	</script>
+
+	<link rel="preload" as="font" type="font/woff2" href="../assets/fonts/Poppins/Poppins-Regular.woff2" crossorigin>
+	<link rel="preload" as="font" type="font/otf" href="../assets/fonts/Roah/roaheregular-maoan.woff2" crossorigin>
+
+	<!-- Shared with the homepage so the header and footer are pixel-identical -->
+	<link rel="stylesheet" href="../assets/stylesheets/settings.css">
+	<link rel="stylesheet" href="../assets/stylesheets/laptop/header.css" media="screen and (min-width: 1025px)">
+	<link rel="stylesheet" href="../assets/stylesheets/laptop/footer.css" media="screen and (min-width: 1025px)">
+	<link rel="stylesheet" href="../assets/stylesheets/tablet/header.css"
+		media="screen and (min-width: 768px) and (max-width: 1024px)">
+	<link rel="stylesheet" href="../assets/stylesheets/tablet/footer.css"
+		media="screen and (min-width: 768px) and (max-width: 1024px)">
+	<link rel="stylesheet" href="../assets/stylesheets/mobile/header.css"
+		media="screen and (min-width: 320px) and (max-width: 767px)">
+	<link rel="stylesheet" href="../assets/stylesheets/mobile/footer.css"
+		media="screen and (min-width: 320px) and (max-width: 767px)">
+
+	<!-- Project template, shared by every case study page -->
+	<link rel="stylesheet" href="../assets/stylesheets/project/project.css">
+</head>
+
+<!-- Each case study sets its own accent; everything else comes from the template -->
+
+<body class="project-page" style="--accent: #f66018; --accent-ink: #1f0c02;">
+
+	<header class="header header-deactive" id="header">
+		<a class="site-logo" href="../" aria-label="Arvin home">PORTFOLIO<span>.</span></a>
+		<nav class="desktop-nav" aria-label="Primary navigation">
+			<a href="../#home">Home</a>
+			<a href="../#about">About</a>
+			<a href="../#projects">Projects</a>
+			<a href="../#contact">Contact</a>
+		</nav>
+		<button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false"
+			aria-controls="mobile-menu">
+			<span></span>
+			<span></span>
+			<span></span>
+		</button>
+		<nav class="mobile-nav" id="mobile-menu" aria-label="Mobile navigation" aria-hidden="true">
+			<a href="../#home">Home</a>
+			<a href="../#about">About</a>
+			<a href="../#projects">Projects</a>
+			<a href="../#contact">Contact</a>
+		</nav>
+	</header>
+
+	<main class="case">
+
+		<!-- ============ HERO ============ -->
+		<section class="case-hero" aria-labelledby="case-title">
+			<a class="case-back" href="../#projects">
+				<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true">
+					<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+						stroke-width="2" d="M19 12H5m6-6l-6 6l6 6" />
+				</svg>
+				All projects
+			</a>
+
+			<div class="case-title-wrap">
+				<p class="case-kicker">Case study</p>
+				<h1 class="case-title" id="case-title">Rivo</h1>
+			</div>
+
+			<div class="case-stage">
+				<figure class="chat pane" role="img"
+					aria-label="Animated example of a Rivo conversation. A one-time message is opened and then deleted, and a time capsule message unlocks after a short countdown.">
+					<div class="chat-top">
+						<span class="chat-avatar" aria-hidden="true">S</span>
+						<span class="chat-who">
+							<span class="chat-name">Sam</span>
+							<span class="chat-status">online</span>
+						</span>
+					</div>
+
+
+					<ol class="chat-log">
+						<li class="msg msg-them" data-step="0">Did the build pass?</li>
+						<li class="msg msg-me" data-step="1">Just now. Sending you the deploy key.</li>
+						<li class="msg msg-me msg-once" data-step="2">
+							<span class="msg-tag">One-time message</span>
+							<span class="msg-swap">
+								<span class="once-sealed">Tap to open</span>
+								<span class="once-body">DEPLOY_KEY ••••••••••</span>
+								<span class="once-gone">Viewed and deleted</span>
+							</span>
+						</li>
+						<li class="msg msg-them" data-step="3">Got it. Gone on my side too.</li>
+						<li class="msg msg-me msg-capsule" data-step="4">
+							<span class="msg-tag">Time capsule</span>
+							<span class="msg-swap">
+								<span class="capsule-lock">Opens in <span class="capsule-count">0:03</span></span>
+								<span class="capsule-body">Happy launch day.</span>
+							</span>
+						</li>
+					</ol>
+
+					<div class="chat-typing" aria-hidden="true"><i></i><i></i><i></i></div>
+				</figure>
+
+				<aside class="note pane note-a">
+					<p class="note-title">One-time messages</p>
+					<p>Readable once. After that, only a trace that it existed.</p>
+				</aside>
+				<aside class="note pane note-b">
+					<p class="note-title">Time capsules</p>
+					<p>Written now, locked until the moment you choose.</p>
+				</aside>
+			</div>
+
+			<button class="chat-replay" type="button">
+				<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true">
+					<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+						stroke-width="2" d="M20 11A8 8 0 1 0 17.7 17M20 4v7h-7" />
+				</svg>
+				Replay the conversation
+			</button>
+		</section>
+
+		<!-- ============ OVERVIEW ============ -->
+		<section class="case-section case-overview" aria-labelledby="overview-title">
+			<div class="overview-copy">
+				<h2 class="case-h2" id="overview-title" data-reveal="wipe">What it is</h2>
+				<p data-reveal>
+					Rivo is a real-time chat app. It runs on Node.js and Socket.IO, so a conversation updates the
+					instant a message is sent, and it keeps everything in PostgreSQL through Prisma.
+				</p>
+				<p data-reveal>It was built to fix four things ordinary messengers get wrong.</p>
+
+				<ul class="problems">
+					<li data-reveal>
+						<a href="#sorting">
+							<span class="problem-q">Every chat is treated the same.</span>
+							<span class="problem-a">Rivo keeps a chat up front only until its last message is seen.</span>
+						</a>
+					</li>
+					<li data-reveal>
+						<a href="#rules">
+							<span class="problem-q">Every message is permanent and instant.</span>
+							<span class="problem-a">Rivo adds messages that open once, or open later.</span>
+						</a>
+					</li>
+					<li data-reveal>
+						<a href="#archive">
+							<span class="problem-q">Archived chats never really leave.</span>
+							<span class="problem-a">In Rivo, an archived chat disappears from the main screen.</span>
+						</a>
+					</li>
+					<li data-reveal>
+						<a href="#security">
+							<span class="problem-q">A copied database means copied conversations.</span>
+							<span class="problem-a">Rivo stores only what Vault can unlock.</span>
+						</a>
+					</li>
+				</ul>
+			</div>
+
+			<div class="overview-side">
+				<dl class="overview-facts" data-reveal>
+					<div>
+						<dt>Role</dt>
+						<dd>Full-stack development</dd>
+					</div>
+					<div>
+						<dt>Type</dt>
+						<dd>Real-time web application</dd>
+					</div>
+					<div>
+						<dt>Server</dt>
+						<dd>Node.js, Express, Socket.IO</dd>
+					</div>
+					<div>
+						<dt>Data</dt>
+						<dd>PostgreSQL through Prisma</dd>
+					</div>
+				</dl>
+
+				<div class="overview-links" data-reveal>
+					<!-- TODO: point this at the Rivo repository -->
+					<a class="btn btn-solid" href="https://github.com/eros-codes" target="_blank" rel="noreferrer">
+						View the code on GitHub
+						<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"
+							aria-hidden="true">
+							<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+								stroke-width="2" d="M18 6L6 18M8 6h10v10" />
+						</svg>
+					</a>
+					<!-- Add when a public demo exists:
+					<a class="btn btn-ghost" href="https://..." target="_blank" rel="noreferrer">Open the live app</a>
+					-->
+				</div>
+			</div>
+		</section>
+
+		<!-- ============ PROBLEM 1 — SORTING ============ -->
+		<section class="case-section case-sorting" id="sorting" aria-labelledby="sorting-title">
+			<div class="sorting-copy">
+				<h2 class="case-h2" id="sorting-title" data-reveal="wipe">Chats that sort themselves</h2>
+				<p data-reveal>
+					Most messengers show every conversation the same way: one long list, ordered by the last
+					message. The friend you talk to every day sits in the same list as someone you have not heard
+					from in a year, and you do the sorting in your head.
+				</p>
+				<p data-reveal>
+					Rivo does it for you, with one rule: a conversation stays in Active chats as long as its last
+					message has not been seen. A message waiting for you keeps it there, and so does one of yours
+					they have not opened yet. Once the last message is seen and nobody replies, the conversation is
+					over, and it moves to Contacts on its own. A new message brings it straight back.
+				</p>
+			</div>
+
+			<div class="sorting-stage" data-reveal>
+				<figure class="rv" role="img"
+					aria-label="Rivo's home screen. Ongoing conversations sit in Active chats on the left, quiet ones sit in Contacts on the right. In the animation, the last message in one conversation is seen and nobody replies, so it moves to Contacts. Then a contact sends a new message, so it moves back to Active chats.">
+					<div class="rv-bar" aria-hidden="true">
+						<i></i><i></i><i></i>
+					</div>
+					<div class="rv-cols">
+						<div class="rv-col">
+							<span class="rv-label">ACTIVE CHATS</span>
+							<ul class="rv-list rv-active">
+								<li class="rv-chat" data-id="reza">
+									<span class="rv-av" style="--av: #3d5a80">R</span>
+									<span class="rv-body">
+										<span class="rv-name">Reza</span>
+										<span class="rv-msg">On my way, ten minutes</span>
+									</span>
+									<span class="rv-time">11:42</span>
+									<span class="rv-badge">2</span>
+								</li>
+								<li class="rv-chat" data-id="sarina">
+									<span class="rv-av" style="--av: #6d597a">S</span>
+									<span class="rv-body">
+										<span class="rv-name">Sarina</span>
+										<span class="rv-msg">Sent you the slides</span>
+									</span>
+									<span class="rv-time">10:27</span>
+									<span class="rv-badge">1</span>
+								</li>
+								<li class="rv-chat" data-id="ali">
+									<span class="rv-av" style="--av: #52796f">A</span>
+									<span class="rv-body">
+										<span class="rv-name">Ali</span>
+										<span class="rv-msg">You: Sounds good <span class="rv-tick">✓</span></span>
+									</span>
+									<span class="rv-time">09:58</span>
+								</li>
+							</ul>
+						</div>
+						<div class="rv-col">
+							<span class="rv-label">CONTACTS</span>
+							<ul class="rv-list rv-contacts">
+								<li class="rv-chat" data-id="lili">
+									<span class="rv-av" style="--av: #b56576">L</span>
+									<span class="rv-body">
+										<span class="rv-name">Lili</span>
+										<span class="rv-msg">Talk soon</span>
+									</span>
+									<span class="rv-time">3 weeks</span>
+								</li>
+								<li class="rv-chat" data-id="farhad">
+									<span class="rv-av" style="--av: #355070">F</span>
+									<span class="rv-body">
+										<span class="rv-name">Farhad</span>
+										<span class="rv-msg">Thanks again</span>
+									</span>
+									<span class="rv-time">2 months</span>
+								</li>
+								<li class="rv-chat" data-id="nima">
+									<span class="rv-av" style="--av: #6b705c">N</span>
+									<span class="rv-body">
+										<span class="rv-name">Nima</span>
+										<span class="rv-msg">Project looks great</span>
+									</span>
+									<span class="rv-time">5 months</span>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</figure>
+				<button class="rv-replay" type="button">
+					<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"
+						aria-hidden="true">
+						<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+							stroke-width="2" d="M20 11A8 8 0 1 0 17.7 17M20 4v7h-7" />
+					</svg>
+					Play again
+				</button>
+			</div>
+		</section>
+
+		<!-- ============ PROBLEM 2 — MESSAGE RULES ============ -->
+		<section class="case-section case-rules" id="rules" aria-labelledby="rules-title">
+			<h2 class="case-h2" id="rules-title" data-reveal="wipe">Messages and chats with their own rules</h2>
+			<p class="rules-intro" data-reveal>
+				A normal message is permanent and arrives the moment it is sent. Sometimes both are wrong: a
+				password should not stay in a chat history forever, and a birthday note should not arrive a week
+				early. And in most apps, an archived chat is still on your main screen, just inside a folder.
+			</p>
+
+			<div class="rule-list">
+				<article class="rule" data-reveal>
+					<div class="rule-demo" aria-hidden="true">
+						<span class="msg msg-me msg-once" data-state="gone">
+							<span class="msg-tag">One-time message</span>
+							<span class="msg-swap">
+								<span class="once-gone">Viewed and deleted</span>
+							</span>
+						</span>
+					</div>
+					<h3>Readable once</h3>
+					<p>The recipient can open a one-time message a single time. After that its content is gone, and
+						only a trace remains that it was sent.</p>
+				</article>
+				<article class="rule" data-reveal>
+					<div class="rule-demo" aria-hidden="true">
+						<span class="msg msg-me msg-capsule" data-state="locked">
+							<span class="msg-tag">Time capsule</span>
+							<span class="msg-swap">
+								<span class="capsule-lock">Opens Friday, 18:00</span>
+							</span>
+						</span>
+					</div>
+					<h3>Opens later</h3>
+					<p>A time capsule is written now and delivered locked. It opens by itself at the moment the
+						sender chose.</p>
+				</article>
+				<article class="rule" id="archive" data-reveal>
+					<div class="rule-demo rule-demo-settings" aria-hidden="true">
+						<span class="rs-label">SETTINGS</span>
+						<span class="rs-row rs-muted">
+							<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
+								<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+									stroke-width="2"
+									d="M10.3 21a1.94 1.94 0 0 0 3.4 0M3.26 15.33A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.67C19.41 13.96 18 12.5 18 8A6 6 0 0 0 6 8c0 4.5-1.41 5.96-2.74 7.33" />
+							</svg>
+							Notifications
+							<svg class="rs-chev" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
+								viewBox="0 0 24 24">
+								<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+									stroke-width="2" d="m9 18l6-6l-6-6" />
+							</svg>
+						</span>
+						<span class="rs-row">
+							<svg class="rs-icon" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
+								viewBox="0 0 24 24">
+								<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+									stroke-width="2"
+									d="M3 3h18v5H3zm2 5v11a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8m-9 4h4" />
+							</svg>
+							Archived chats
+							<span class="rs-count">4</span>
+							<svg class="rs-chev" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
+								viewBox="0 0 24 24">
+								<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+									stroke-width="2" d="m9 18l6-6l-6-6" />
+							</svg>
+						</span>
+					</div>
+					<h3>Out of sight</h3>
+					<p>Archiving in Rivo takes a chat off the main screen entirely. It is only reachable from
+						Settings, so it stays out of sight until you go looking for it.</p>
+				</article>
+			</div>
+		</section>
+
+		<!-- ============ PROBLEM 3 — SECURITY ============ -->
+		<section class="case-section case-security" id="security" aria-labelledby="security-title">
+			<div class="security-intro">
+				<h2 class="case-h2" id="security-title" data-reveal="wipe">A database that reveals nothing</h2>
+				<p data-reveal>
+					If a chat app's database is copied, the conversations in it usually go with it. Rivo uses
+					envelope encryption: each message is locked with a data key, and that data key is locked again
+					by a master key that never leaves HashiCorp Vault. The database only ever holds locked data.
+				</p>
+			</div>
+
+			<ol class="pipeline" data-reveal="pipeline">
+				<li class="pipe-step" data-reveal="step">
+					<span class="pipe-num" aria-hidden="true">1</span>
+					<h3>A message is sent</h3>
+					<p>The server receives the plain text over the socket. It exists unencrypted only in memory,
+						for as long as this request lasts.</p>
+				</li>
+				<li class="pipe-step" data-reveal="step">
+					<span class="pipe-num" aria-hidden="true">2</span>
+					<h3>A data key encrypts it</h3>
+					<p>The message body is encrypted with a data key, turning it into ciphertext that is
+						meaningless on its own.</p>
+				</li>
+				<li class="pipe-step" data-reveal="step">
+					<span class="pipe-num" aria-hidden="true">3</span>
+					<h3>Vault wraps the data key</h3>
+					<p>The data key is sent to Vault and encrypted with a master key. The master key never leaves
+						Vault.</p>
+				</li>
+				<li class="pipe-step" data-reveal="step">
+					<span class="pipe-num" aria-hidden="true">4</span>
+					<h3>Only locked data is saved</h3>
+					<p>PostgreSQL stores the ciphertext next to the wrapped key. Reading a message runs the same
+						steps in reverse.</p>
+				</li>
+			</ol>
+
+			<figure class="stored pane" data-reveal>
+				<figcaption>What one message looks like in the database</figcaption>
+				<dl>
+					<div>
+						<dt>body</dt>
+						<dd><code>6f1c09e4a7b3…d25e</code></dd>
+					</div>
+					<div>
+						<dt>data_key</dt>
+						<dd><code>Zk9QbTRnc1ZyN…hQ2x3</code></dd>
+					</div>
+				</dl>
+				<p>A copy of this table on its own reveals nothing. Reading it needs Vault.</p>
+			</figure>
+		</section>
+
+		<!-- ============ STACK ============ -->
+		<section class="case-section case-stack" aria-labelledby="stack-title">
+			<h2 class="case-h2" id="stack-title" data-reveal="wipe">Built with</h2>
+			<div class="stack-groups">
+				<div class="stack-group" data-reveal>
+					<span>SERVER</span>
+					<ul class="stack-icons">
+						<li><img src="../assets/SVGs/skills/nodejs.svg" alt="" width="40" height="40">Node.js</li>
+						<li><span class="stack-mark" aria-hidden="true">ex</span>Express</li>
+						<li><span class="stack-mark" aria-hidden="true">io</span>Socket.IO</li>
+					</ul>
+				</div>
+				<div class="stack-group" data-reveal>
+					<span>DATA &amp; SECURITY</span>
+					<ul class="stack-icons">
+						<li><img src="../assets/SVGs/skills/psql.svg" alt="" width="40" height="40">PostgreSQL</li>
+						<li><span class="stack-mark" aria-hidden="true">pr</span>Prisma</li>
+						<li><span class="stack-mark" aria-hidden="true">v</span>Vault</li>
+					</ul>
+				</div>
+				<div class="stack-group" data-reveal>
+					<span>CLIENT</span>
+					<ul class="stack-icons">
+						<li><img src="../assets/SVGs/skills/html.svg" alt="" width="40" height="40">HTML</li>
+						<li><img src="../assets/SVGs/skills/css.svg" alt="" width="40" height="40">CSS</li>
+						<li><img src="../assets/SVGs/skills/js.svg" alt="" width="40" height="40">JavaScript</li>
+					</ul>
+				</div>
+			</div>
+		</section>
+
+		<!-- ============ GALLERY ============ -->
+		<section class="case-section case-gallery" aria-labelledby="gallery-title">
+			<h2 class="case-h2" id="gallery-title" data-reveal="wipe">Screens</h2>
+			<div class="shots">
+				<figure class="shot" data-reveal>
+					<!-- TODO: swap in your own screenshot if you want a different crop -->
+					<img src="../assets/images/projects/rivo.webp" alt="Rivo home screen with active chats and contacts" loading="lazy"
+						width="1254" height="1254">
+					<figcaption>Active chats and contacts</figcaption>
+				</figure>
+				<figure class="shot" data-reveal>
+					<!-- TODO: replace with a screenshot of the landing page -->
+					<img src="../assets/images/projects/rivo.webp" alt="Rivo landing page" loading="lazy"
+						width="1254" height="1254">
+					<figcaption>Landing page</figcaption>
+				</figure>
+			</div>
+		</section>
+
+		<!-- ============ NEXT ============ -->
+		<section class="case-next pane" aria-label="Keep exploring">
+			<a class="next-link" href="../bank/">
+				<span>Next project</span>
+				<strong>Bank</strong>
+			</a>
+			<a class="btn btn-mint" href="mailto:saghafiarvin@gmail.com">
+				Start a conversation
+				<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true">
+					<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+						stroke-width="2" d="M18 6L6 18M8 6h10v10" />
+				</svg>
+			</a>
+		</section>
+	</main>
+
+	<footer class="site-footer">
+		<div class="footer-main">
+			<div class="footer-brand">
+				<a class="site-logo" href="../" aria-label="Back to Arvin's home">ARVIN<span>.</span></a>
+				<p>Building thoughtful products with logic, creativity, and a never-settling mindset.</p>
+			</div>
+			<div class="footer-column">
+				<h2 class="footer-heading">Explore</h2>
+				<nav class="footer-links" aria-label="Footer navigation">
+					<a href="../#home">Home</a>
+					<a href="../#about">About</a>
+					<a href="../#projects">Projects</a>
+					<a href="../#contact">Contact</a>
+				</nav>
+			</div>
+			<div class="footer-column">
+				<h2 class="footer-heading">Connect</h2>
+				<nav class="footer-socials" aria-label="Social links">
+					<a href="mailto:saghafiarvin@gmail.com">Email me
+						<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
+							<path d="M0 0h24v24H0z" fill="none" />
+							<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+								stroke-width="2" d="M18 6L6 18M8 6h10v10" />
+						</svg>
+					</a>
+					<a href="https://github.com/eros-codes" target="_blank" rel="noreferrer">GitHub
+						<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
+							<path d="M0 0h24v24H0z" fill="none" />
+							<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+								stroke-width="2" d="M18 6L6 18M8 6h10v10" />
+						</svg>
+					</a>
+				</nav>
+			</div>
+		</div>
+		<div class="footer-bottom">
+			<p>© 2026 Arvin Saghafi. Crafted with intent.</p>
+		</div>
+	</footer>
+
+	<script type="module" src="../assets/js/project/index.js"></script>
+</body>
+
+</html>

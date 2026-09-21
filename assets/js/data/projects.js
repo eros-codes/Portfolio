@@ -4,6 +4,7 @@ export const projects = [
 		altText:
 			"Rivo web application built by Arvin Saghafi using Node.js, PostgreSQL, Socket.IO and HashiCorp Vault",
 		folderName: "Rivo",
+		pageUrl : "rivo/",
 		description:
 			"Rivo is a real-time web application developed by Arvin Saghafi featuring Socket.IO communication, secure messaging, and encryption using HashiCorp Vault.",
 		category: "Web Application",
