@@ -17,7 +17,7 @@
    are animated.
    ========================================================= */
 
-import { prefersReduced, root } from "../animations/core.js";
+import { prefersReduced, root } from "../../animations/core.js";
 
 const EASE = "cubic-bezier(0.22, 1, 0.36, 1)";
 

@@ -1,0 +1,948 @@
+/* =========================================================
+   WA BANK — replicas of the real JavaFX screens
+
+   Every replica is built at the app's true size, 900×700 (plus a
+   31px window title bar), using the coordinates from the FXML
+   files, then scaled down as one unit. Colours and gradients are
+   copied from login.css in the Bank project.
+
+   Fonts: the app uses Azonix and Akira Expanded, which are not
+   free for the web. These open-licence (OFL) stand-ins were
+   matched against the real screenshots:
+     Azonix          -> Orbitron 500/600, tracked +0.12em
+     Akira Expanded  -> Syncopate Bold
+     Calibri Bold    -> Carlito Bold (metric-compatible)
+   ========================================================= */
+
+@font-face {
+	font-family: "WA Display";
+	src: url("../../../fonts/Orbitron/orbitron-500.woff2") format("woff2");
+	font-weight: 500;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "WA Display";
+	src: url("../../../fonts/Orbitron/orbitron-600.woff2") format("woff2");
+	font-weight: 600;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "WA Wide";
+	src: url("../../../fonts/Syncopate/syncopate-700.woff2") format("woff2");
+	font-weight: 700;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "WA Receipt";
+	src: url("../../../fonts/Carlito/carlito-700.woff2") format("woff2");
+	font-weight: 700;
+	font-display: swap;
+}
+
+/* ---------------------------------------------------------
+   stage: a 900×731 world, scaled to whatever width it gets
+   --------------------------------------------------------- */
+
+.wa-frame {
+	--s: 0.59;
+	position: relative;
+	width: 100%;
+	aspect-ratio: 900 / 731;
+	margin: 0;
+	border-radius: calc(10px * var(--s) + 4px);
+	overflow: hidden;
+	box-shadow:
+		0 0 0 1px rgba(0, 0, 0, 0.12),
+		0 2rem 4rem rgba(0, 0, 0, 0.28);
+	user-select: none;
+	-webkit-user-select: none;
+}
+
+.wa-scale {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 900px;
+	height: 731px;
+	transform: scale(var(--s));
+	transform-origin: 0 0;
+	font-family: "WA Display", "Orbitron", sans-serif;
+	font-weight: 600;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+	color: #fff;
+}
+
+/* ---- Windows title bar ---- */
+
+.wa-titlebar {
+	position: absolute;
+	inset: 0 0 auto 0;
+	height: 31px;
+	display: flex;
+	align-items: center;
+	gap: 9px;
+	padding-left: 9px;
+	background: #eff4f9;
+	color: #000;
+	font: 400 12px/1 "Segoe UI", system-ui, sans-serif;
+	letter-spacing: 0;
+	text-transform: none;
+
+	.wa-appicon {
+		width: 14px;
+		height: 12px;
+		border: 1.5px solid #5a6b7a;
+		border-radius: 2px;
+		background: linear-gradient(90deg, #5a6b7a 35%, #fff 35%);
+	}
+
+	.wa-controls {
+		margin-left: auto;
+		display: flex;
+		height: 100%;
+
+		i {
+			width: 46px;
+			display: grid;
+			place-items: center;
+			font-style: normal;
+			font-size: 13px;
+			color: #1a1a1a;
+		}
+
+		i.is-off {
+			color: #b9bec4;
+		}
+	}
+}
+
+/* ---- screens: each is a full 900×700 pane ---- */
+
+.wa-screen {
+	position: absolute;
+	left: 0;
+	top: 31px;
+	width: 900px;
+	height: 700px;
+	transition: opacity 0.35s ease, visibility 0.35s;
+}
+
+.wa-screen.is-away {
+	opacity: 0;
+	visibility: hidden;
+}
+
+.wa-dark {
+	background: linear-gradient(to bottom right, #1f2f33, #4e5b69);
+}
+
+.wa-light {
+	background: linear-gradient(to bottom right, #a3b4c4, #fff);
+}
+
+.wa-pattern {
+	background: #1f2f33 url("../../../images/projects/bank/wa-pattern.webp") 0 0 / 900px 700px no-repeat;
+}
+
+.wa-abs {
+	position: absolute;
+}
+
+/* JavaFX dropshadow(gaussian, rgba(0,0,0,.5), 10, .5, 0, 5) */
+.wa-shadow {
+	box-shadow: 0 5px 7px rgba(0, 0, 0, 0.45);
+}
+
+.wa-title {
+	position: absolute;
+	left: 0;
+	right: 0;
+	text-align: center;
+	font-size: 24px;
+	line-height: 28px;
+}
+
+/* .firstpage */
+.wa-panel {
+	position: absolute;
+	border-radius: 20px;
+	background: linear-gradient(to bottom right, #a3b4c4, #fff);
+}
+
+/* .logintextfield2 — the dark fields */
+.wa-field {
+	position: absolute;
+	height: 40px;
+	padding: 0 10px;
+	display: flex;
+	align-items: center;
+	border-radius: 15px;
+	background: #1f2f33;
+	color: #f6f6f6;
+	font-size: 14px;
+	font-weight: 500;
+	letter-spacing: 0.1em;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+/* the source field is a TextFlow: its text sits at the top */
+.wa-field.is-flow {
+	align-items: flex-start;
+	padding-top: 7px;
+}
+
+.wa-field .ghost,
+.wa-field .prompt {
+	color: #a3b4c4;
+}
+
+/* the prompt disappears by collapsing, never with display:none */
+.wa-field .prompt.is-gone {
+	width: 0;
+	opacity: 0;
+	overflow: hidden;
+}
+
+/* the OTP field shows dots, which Orbitron has no glyph for */
+.wa-field[data-f="otp"] .typed {
+	font-family: system-ui, sans-serif;
+	font-size: 17px;
+	letter-spacing: 0.3em;
+}
+
+.wa-field .caret {
+	display: inline-block;
+	width: 1px;
+	height: 16px;
+	margin-left: 1px;
+	background: #f6f6f6;
+	vertical-align: -2px;
+	opacity: 0;
+}
+
+.wa-field.is-focus .caret {
+	animation: wa-caret 1s steps(1) infinite;
+}
+
+@keyframes wa-caret {
+	0% {
+		opacity: 1;
+	}
+
+	50% {
+		opacity: 0;
+	}
+}
+
+/* .logintextfield — the light fields on the sign-up screens */
+.wa-field.is-light {
+	background: #a3b4c4;
+	color: #1f2f33;
+}
+
+/* .donebtn and .menubtn */
+.wa-btn {
+	position: absolute;
+	height: 40px;
+	display: grid;
+	place-items: center;
+	border-radius: 20px;
+	font-size: 14px;
+	transition: scale 0.18s ease, opacity 0.25s ease, background 0.2s ease;
+}
+
+.wa-btn.is-done {
+	background: linear-gradient(to bottom right, #f5f6f7, #b0b9c2);
+	color: #1f2f33;
+}
+
+.wa-btn.is-menu {
+	background: #1f2f33;
+	color: #fff;
+}
+
+.wa-btn.is-press {
+	scale: 0.94;
+}
+
+.wa-btn.is-disabled {
+	opacity: 0.4;
+}
+
+.wa-label {
+	position: absolute;
+	font-size: 18px;
+	line-height: 22px;
+	/* Orbitron runs wider than Azonix at the same size, so labels get
+	   slightly less tracking than headings to keep the FXML positions
+	   from colliding */
+	letter-spacing: 0.02em;
+	white-space: nowrap;
+}
+
+.wa-label.is-ink {
+	color: #333;
+}
+
+/* ---------------------------------------------------------
+   the bank card (300×200, bankcardd.png + logo)
+   --------------------------------------------------------- */
+
+.wa-card {
+	position: absolute;
+	width: 300px;
+	height: 200px;
+	border-radius: 20px;
+	background: url("../../../images/projects/bank/card.webp") 0 0 / 300px 200px;
+	font-family: "WA Wide", "Syncopate", sans-serif;
+	font-weight: 700;
+	font-size: 12px;
+	letter-spacing: 0.02em;
+	/* the outline is drawn as an inset ring, so it never shifts
+	   the card's layout while it thickens */
+	box-shadow:
+		inset 0 0 0 var(--ring, 0px) #2ecc40,
+		0 5px 7px rgba(0, 0, 0, 0.45);
+	touch-action: none;
+}
+
+.wa-card.is-ready {
+	box-shadow:
+		inset 0 0 0 4px #2ecc40,
+		0 0 18px rgba(46, 204, 64, 0.55),
+		0 5px 7px rgba(0, 0, 0, 0.45);
+}
+
+.wa-card .logo {
+	position: absolute;
+	left: 9px;
+	top: 26px;
+	width: 86px;
+	height: auto;
+}
+
+.wa-card .cap {
+	position: absolute;
+	left: 24px;
+	top: 0;
+	width: 250px;
+	height: 40px;
+	display: grid;
+	place-items: center;
+	color: #333;
+	font-size: 14px;
+}
+
+.wa-card .num,
+.wa-card .name {
+	position: absolute;
+	left: 2px;
+	width: 294px;
+	text-align: center;
+	line-height: 14px;
+}
+
+.wa-card .num {
+	top: 93px;
+}
+
+.wa-card .name {
+	top: 179px;
+}
+
+.wa-card.is-drag {
+	cursor: grabbing;
+	z-index: 5;
+	transition: none;
+}
+
+.wa-card.is-grab {
+	cursor: grab;
+}
+
+.wa-card.is-snap {
+	transition: left 0.25s cubic-bezier(0.22, 1, 0.36, 1), top 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.wa-card:focus-visible {
+	outline: 3px solid #fff;
+	outline-offset: 4px;
+}
+
+.wa-card.is-hidden {
+	opacity: 0;
+	translate: 0 16px;
+}
+
+.wa-card.is-shown {
+	transition: opacity 0.5s ease, translate 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ---------------------------------------------------------
+   receipt (.anchorpane2 + .whitepane)
+   --------------------------------------------------------- */
+
+.wa-paper {
+	position: absolute;
+	left: 200px;
+	top: 50px;
+	width: 500px;
+	height: 600px;
+	border-radius: 10px;
+	background: linear-gradient(to bottom right, #fff, #b0b9c2);
+	color: #323232;
+	font-family: "WA Receipt", Calibri, Carlito, sans-serif;
+	font-weight: 700;
+	font-size: 18px;
+	letter-spacing: 0;
+	text-transform: none;
+
+	.dash {
+		position: absolute;
+		left: 72px;
+		width: 358px;
+		border-top: 2px dashed #000;
+	}
+
+	.ok {
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 57px;
+		text-align: center;
+		font-size: 24px;
+		color: #008000;
+	}
+
+	.row {
+		position: absolute;
+		left: 61px;
+		right: 20px;
+		white-space: nowrap;
+	}
+
+	.row b {
+		font-weight: 700;
+		margin-left: 8px;
+	}
+}
+
+.wa-paper.is-in {
+	animation: wa-paper-in 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes wa-paper-in {
+	from {
+		translate: 0 24px;
+		opacity: 0;
+	}
+}
+
+/* ---------------------------------------------------------
+   the demo pointer
+   --------------------------------------------------------- */
+
+.wa-cursor {
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: 20;
+	width: 26px;
+	height: 26px;
+	pointer-events: none;
+	opacity: 0;
+	transform: translate(var(--cx, 450px), var(--cy, 400px));
+	transition: opacity 0.3s ease, transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+	filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.45));
+}
+
+.wa-cursor.is-on {
+	opacity: 1;
+}
+
+.wa-cursor svg {
+	width: 100%;
+	height: 100%;
+	transition: scale 0.12s ease;
+	transform-origin: 3px 3px;
+}
+
+.wa-cursor.is-down svg {
+	scale: 0.86;
+}
+
+/* ---------------------------------------------------------
+   JavaFX Alert (ERROR) and small windows
+   --------------------------------------------------------- */
+
+.wa-dim {
+	position: absolute;
+	inset: 0;
+	z-index: 10;
+	background: rgba(10, 20, 24, 0.35);
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity 0.2s ease, visibility 0.2s;
+}
+
+.wa-dim.is-open {
+	opacity: 1;
+	visibility: visible;
+}
+
+.wa-alert {
+	position: absolute;
+	left: 250px;
+	top: 250px;
+	width: 400px;
+	background: #f4f4f4;
+	border: 1px solid #b0b0b0;
+	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+	color: #1a1a1a;
+	font: 400 13px/1.4 "Segoe UI", system-ui, sans-serif;
+	letter-spacing: 0;
+	text-transform: none;
+	scale: 0.96;
+	transition: scale 0.2s ease;
+
+	.bar {
+		height: 28px;
+		padding-left: 10px;
+		display: flex;
+		align-items: center;
+		background: #fff;
+		border-bottom: 1px solid #ddd;
+		font-size: 12px;
+	}
+
+	.head {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 14px 16px;
+		background: linear-gradient(#ececec, #dcdcdc);
+		border-bottom: 1px solid #c8c8c8;
+		font-size: 15px;
+	}
+
+	.x {
+		width: 30px;
+		height: 30px;
+		border-radius: 50%;
+		display: grid;
+		place-items: center;
+		background: #d32f2f;
+		color: #fff;
+		font-weight: 700;
+	}
+
+	.msg {
+		padding: 16px 16px 8px;
+	}
+
+	.ok {
+		margin: 8px 16px 14px auto;
+		width: 70px;
+		padding: 4px 0;
+		text-align: center;
+		border: 1px solid #9a9a9a;
+		border-radius: 3px;
+		background: linear-gradient(#fdfdfd, #e3e3e3);
+		transition: scale 0.15s ease;
+	}
+
+	.ok.is-press {
+		scale: 0.94;
+	}
+}
+
+.wa-dim.is-open .wa-alert {
+	scale: 1;
+}
+
+.wa-window {
+	position: absolute;
+	left: 150px;
+	top: 110px;
+	width: 600px;
+	height: 497px;
+	z-index: 11;
+	border: 1px solid #9aa4ad;
+	background: #1f2f33 url("../../../images/projects/bank/terms.webp") 0 -24px / 600px 467px no-repeat;
+	box-shadow: 0 14px 40px rgba(0, 0, 0, 0.45);
+	opacity: 0;
+	visibility: hidden;
+	scale: 0.97;
+	transition: opacity 0.25s ease, visibility 0.25s, scale 0.25s ease;
+
+	.bar {
+		height: 30px;
+		padding-left: 10px;
+		display: flex;
+		align-items: center;
+		background: #eff4f9;
+		color: #000;
+		font: 400 12px/1 "Segoe UI", system-ui, sans-serif;
+		letter-spacing: 0;
+		text-transform: none;
+	}
+}
+
+.wa-window.is-open {
+	opacity: 1;
+	visibility: visible;
+	scale: 1;
+}
+
+/* ---------------------------------------------------------
+   sign-up step 6 details
+   --------------------------------------------------------- */
+
+.wa-link {
+	position: absolute;
+	color: #0096c9;
+	font-size: 18px;
+	line-height: 22px;
+	white-space: nowrap;
+	text-decoration: none;
+}
+
+.wa-link.is-visited {
+	color: #7b4fb0;
+}
+
+.wa-check {
+	position: absolute;
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	font-size: 18px;
+	line-height: 22px;
+	white-space: nowrap;
+
+	i {
+		width: 17px;
+		height: 17px;
+		border-radius: 3px;
+		border: 1px solid #b5b5b5;
+		background: linear-gradient(#fff, #e8e8e8);
+		display: grid;
+		place-items: center;
+		color: #1f2f33;
+		font: 700 13px/1 system-ui, sans-serif;
+		font-style: normal;
+	}
+}
+
+.wa-sign {
+	position: absolute;
+	left: 52px;
+	top: 269px;
+	width: 310px;
+	height: 314px;
+	overflow: visible;
+
+	path {
+		fill: none;
+		stroke: #fff;
+		stroke-width: 1.8;
+		stroke-linecap: round;
+		stroke-linejoin: round;
+	}
+}
+
+/* .anchorpane4 */
+.wa-darkpanel {
+	position: absolute;
+	border-radius: 10px;
+	background: linear-gradient(to bottom right, #1f2f33, #4e5b69);
+}
+
+.wa-mini-card {
+	position: absolute;
+	border-radius: 20px;
+	background: linear-gradient(to bottom right, #a3b4c4, #fff);
+	color: #333;
+	font: 400 12px/14px "Segoe UI", system-ui, sans-serif;
+	letter-spacing: 0;
+	text-transform: none;
+
+	.logo {
+		position: absolute;
+		left: 10px;
+		top: 30px;
+		width: 96px;
+	}
+
+	span {
+		position: absolute;
+		white-space: nowrap;
+	}
+}
+
+/* ---------------------------------------------------------
+   captions and controls under each replica
+   --------------------------------------------------------- */
+
+.wa-under {
+	margin-top: 1.2rem;
+	min-height: 2.6rem;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+	gap: 0.8rem 1.2rem;
+	font-family: "Poppins", sans-serif;
+	font-size: 0.85rem;
+	color: var(--ink-soft);
+}
+
+.wa-hint {
+	visibility: hidden;
+	opacity: 0;
+	transition: opacity 0.4s ease;
+}
+
+.wa-hint.is-on {
+	visibility: visible;
+	opacity: 1;
+}
+
+.wa-replay {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
+	padding: 0.55rem 1rem;
+	border: 1px solid rgba(0, 0, 0, 0.18);
+	border-radius: 999px;
+	background: transparent;
+	font: inherit;
+	color: var(--ink-soft);
+	cursor: pointer;
+	visibility: hidden;
+	opacity: 0;
+	transition: opacity 0.4s ease, background-color 0.2s ease;
+}
+
+.wa-replay.is-ready {
+	visibility: visible;
+	opacity: 1;
+}
+
+.wa-replay:hover {
+	background: rgba(0, 0, 0, 0.05);
+}
+
+.wa-replay:focus-visible {
+	outline: 2px solid var(--ink);
+	outline-offset: 4px;
+}
+
+/* ---------------------------------------------------------
+   page sections specific to the Bank case study
+   --------------------------------------------------------- */
+
+.bank-hero-stage {
+	width: min(46rem, 100%);
+}
+
+/* keep every replica the same size on the page */
+.case-bank .wa-frame {
+	max-width: 46rem;
+	margin-inline: auto;
+}
+
+/* the title is far wider than Rivo's, so the kicker clears it */
+.case-bank .case-kicker {
+	top: -2.3rem;
+}
+
+/* the notes only float beside the window when there is room for
+   them outside it; otherwise they sit underneath */
+@media screen and (min-width: 1200px) {
+	.case-bank .note-a {
+		top: 13rem;
+		right: calc(50% + 24rem);
+	}
+
+	.case-bank .note-b {
+		top: 23rem;
+		left: calc(50% + 24rem);
+	}
+}
+
+@media screen and (max-width: 1199px) {
+	.case-bank .note {
+		position: static;
+		width: auto;
+	}
+
+	.case-bank .case-stage {
+		grid-template-columns: repeat(2, minmax(0, 17rem));
+		justify-content: center;
+	}
+
+	.case-bank .bank-hero-stage {
+		grid-column: 1 / -1;
+	}
+}
+
+@media screen and (max-width: 767px) {
+	.case-bank .case-stage {
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	.case-bank .note {
+		width: min(21rem, 100%);
+		justify-self: center;
+	}
+}
+
+.case-bank .case-stage {
+	margin-top: -2.4rem;
+}
+
+.case-feature {
+	display: grid;
+	grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+	gap: 2rem 4.5rem;
+	align-items: center;
+}
+
+.case-feature.is-flipped .feature-copy {
+	order: 2;
+}
+
+/* flipping the order must flip the column widths too, or the
+   replica lands in the narrow column */
+.case-feature.is-flipped {
+	grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+}
+
+.feature-copy p {
+	max-width: 30rem;
+	font-size: 1.05rem;
+	line-height: 1.85;
+	color: var(--ink-soft);
+}
+
+.feature-copy p+p {
+	margin-top: 1rem;
+}
+
+.feature-stage {
+	display: grid;
+	justify-items: center;
+}
+
+.roles-intro {
+	max-width: 40rem;
+	font-size: 1.05rem;
+	line-height: 1.85;
+	color: var(--ink-soft);
+}
+
+.role-list {
+	margin-top: 2.6rem;
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: 2rem 3rem;
+}
+
+.role {
+	padding-top: 1rem;
+	border-top: 2px solid var(--ink);
+
+	h3 {
+		font-size: 2rem;
+		font-weight: 400;
+		line-height: 1.05;
+		margin-bottom: 0.5rem;
+	}
+
+	p {
+		font-size: 0.95rem;
+		line-height: 1.75;
+		color: var(--ink-soft);
+	}
+}
+
+.palette {
+	margin-top: 2.4rem;
+	display: grid;
+	grid-template-columns: repeat(5, minmax(0, 1fr));
+	gap: 1rem;
+}
+
+.swatch {
+	display: grid;
+	gap: 0.6rem;
+	font-family: "Poppins", sans-serif;
+	font-size: 0.8rem;
+	color: var(--ink-mute);
+
+	i {
+		display: block;
+		aspect-ratio: 5 / 4;
+		border-radius: 1rem;
+		background: var(--sw);
+		box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.06);
+	}
+}
+
+.design-copy p {
+	max-width: 40rem;
+	font-size: 1.05rem;
+	line-height: 1.85;
+	color: var(--ink-soft);
+}
+
+.design-copy p+p {
+	margin-top: 1rem;
+}
+
+@media screen and (max-width: 1024px) {
+
+	.case-feature,
+	.case-feature.is-flipped {
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	.case-feature.is-flipped .feature-copy {
+		order: 0;
+	}
+
+	.role-list {
+		gap: 2rem 1.6rem;
+	}
+}
+
+@media screen and (max-width: 767px) {
+	.wa-frame {
+		--s: 0.4;
+	}
+
+	.role-list {
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	.palette {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+	.wa-screen,
+	.wa-card.is-shown,
+	.wa-card.is-snap,
+	.wa-paper.is-in {
+		transition: none !important;
+		animation: none !important;
+	}
+}

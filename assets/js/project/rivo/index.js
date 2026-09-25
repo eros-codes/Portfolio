@@ -2,8 +2,8 @@
    CASE STUDY — entry point, shared by every project page
    ========================================================= */
 
-import { initHeader } from "./header.js";
-import { initReveal } from "./reveal.js";
+import { initHeader } from "../header.js";
+import { initReveal } from "../reveal.js";
 import { initChatDemo } from "./chat-demo.js";
 import { initSortDemo } from "./sort-demo.js";
 import { initHeroPointer } from "./hero-pointer.js";

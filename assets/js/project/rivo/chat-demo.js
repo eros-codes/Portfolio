@@ -8,7 +8,7 @@
    in its finished state.
    ========================================================= */
 
-import { prefersReduced, root } from "../animations/core.js";
+import { prefersReduced, root } from "../../animations/core.js";
 
 const COUNTDOWN = 3;
 

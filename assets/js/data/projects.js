@@ -4,7 +4,7 @@ export const projects = [
 		altText:
 			"Rivo web application built by Arvin Saghafi using Node.js, PostgreSQL, Socket.IO and HashiCorp Vault",
 		folderName: "Rivo",
-		pageUrl : "rivo/",
+		pageUrl: "rivo/",
 		description:
 			"Rivo is a real-time web application developed by Arvin Saghafi featuring Socket.IO communication, secure messaging, and encryption using HashiCorp Vault.",
 		category: "Web Application",
@@ -41,6 +41,7 @@ export const projects = [
 		altText:
 			"Bank management desktop application built by Arvin Saghafi using Java JavaFX and MySQL",
 		folderName: "Bank",
+		pageUrl: "bank/",
 		description:
 			"Bank is a desktop banking management system developed using Java, JavaFX and MySQL.",
 		category: "Desktop Application",

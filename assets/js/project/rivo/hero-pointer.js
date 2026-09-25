@@ -11,7 +11,7 @@ import {
 	setVar,
 	hasFinePointer,
 	startPointerTracking,
-} from "../animations/core.js";
+} from "../../animations/core.js";
 
 const TILT_Y = 5; // deg
 const TILT_X = 4; // deg

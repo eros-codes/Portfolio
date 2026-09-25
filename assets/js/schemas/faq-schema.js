@@ -2,7 +2,7 @@ export function generateFAQSchema() {
 	return {
 		"@context": "https://schema.org",
 		"@type": "FAQPage",
-		"@id": "https://aboutarvin.ir/#faq",
+		"@id": "https://www.aboutarvin.ir/#faq",
 		mainEntity: [
 			{
 				"@type": "Question",

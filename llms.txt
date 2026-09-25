@@ -3,6 +3,7 @@
 ## Identity
 
 Arvin Saghafi is a backend-focused software developer and Computer Engineering student specializing in backend systems, API development, database design, and scalable software solutions.
+Alternative name: آروین ثقفی
 
 Website:
 https://aboutarvin.ir/
@@ -86,6 +87,8 @@ Features:
 ## Bank
 
 Bank is a desktop banking management system developed by Arvin Saghafi.
+Case study:
+https://aboutarvin.ir/bank/
 
 Technologies:
 - Java

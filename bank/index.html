@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>WA Bank — Desktop banking system | Arvin Saghafi</title>
+	<meta name="description"
+		content="WA Bank is a Java, JavaFX and MySQL banking system with separate apps for customers, employees and the bank manager. Sign-up needs an ID, terms and a signature, and you transfer money by dragging one card onto another.">
+	<meta name="author" content="Arvin Saghafi">
+	<meta name="robots" content="index, follow">
+	<meta name="theme-color" content="#000000">
+
+	<link rel="canonical" href="https://www.aboutarvin.ir/bank/">
+
+	<meta property="og:type" content="article">
+	<meta property="og:site_name" content="Arvin Saghafi">
+	<meta property="og:title" content="WA Bank — Desktop banking system">
+	<meta property="og:description"
+		content="A Java and JavaFX banking system where signing up feels like visiting a branch and you pay by dragging your card onto theirs.">
+	<meta property="og:url" content="https://www.aboutarvin.ir/bank/">
+	<meta property="og:image" content="https://www.aboutarvin.ir/assets/images/projects/bank/screen-dashboard.webp">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="WA Bank — Desktop banking system">
+	<meta name="twitter:description"
+		content="A Java and JavaFX banking system where signing up feels like visiting a branch and you pay by dragging your card onto theirs.">
+	<meta name="twitter:image" content="https://www.aboutarvin.ir/assets/images/projects/bank/screen-dashboard.webp">
+
+	<script type="application/ld+json">
+		{
+			"@context": "https://schema.org",
+			"@graph": [
+				{
+					"@type": "SoftwareSourceCode",
+					"@id": "https://www.aboutarvin.ir/bank/#project",
+					"name": "WA Bank",
+					"description": "A desktop banking system built with Java, JavaFX and MySQL, with separate applications for customers, employees and the bank manager. Registration requires an ID photo, accepted terms and a signature, and is approved by an employee before the account can be used.",
+					"url": "https://www.aboutarvin.ir/bank/",
+					"image": "https://www.aboutarvin.ir/assets/images/projects/bank/screen-dashboard.webp",
+					"codeRepository": "https://github.com/eros-codes",
+					"programmingLanguage": ["Java", "SQL"],
+					"runtimePlatform": "Java, JavaFX",
+					"keywords": ["banking system", "JavaFX", "MySQL", "JDBC", "desktop application", "drag and drop"],
+					"author": { "@id": "https://www.aboutarvin.ir/#person" }
+				},
+				{
+					"@type": "WebPage",
+					"@id": "https://www.aboutarvin.ir/bank/#webpage",
+					"url": "https://www.aboutarvin.ir/bank/",
+					"name": "WA Bank — Desktop banking system",
+					"isPartOf": { "@id": "https://www.aboutarvin.ir/#website" },
+					"about": { "@id": "https://www.aboutarvin.ir/bank/#project" },
+					"breadcrumb": { "@id": "https://www.aboutarvin.ir/bank/#breadcrumb" }
+				},
+				{
+					"@type": "BreadcrumbList",
+					"@id": "https://www.aboutarvin.ir/bank/#breadcrumb",
+					"itemListElement": [
+						{ "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.aboutarvin.ir/" },
+						{ "@type": "ListItem", "position": 2, "name": "WA Bank", "item": "https://www.aboutarvin.ir/bank/" }
+					]
+				}
+			]
+		}
+	</script>
+
+	<!-- Motion gate — identical to the homepage -->
+	<script>
+		(function () {
+			try {
+				var d = document.documentElement;
+				if (window.matchMedia &&
+					window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+				d.classList.add("js-motion");
+				if (document.visibilityState === "hidden") {
+					d.classList.add("motion-hold");
+					var release = function () { d.classList.remove("motion-hold"); };
+					document.addEventListener("visibilitychange", release, { once: true });
+					setTimeout(release, 8000);
+				}
+			} catch (e) { }
+		})();
+	</script>
+
+	<!-- TODO: copy the Roah preload line from rivo/index.html here, so this
+	     page preloads the same converted font file -->
+	<link rel="preload" as="font" type="font/woff2" href="../assets/fonts/Poppins/Poppins-Regular.woff2" crossorigin>
+	<link rel="preload" as="font" type="font/woff2" href="../assets/fonts/Orbitron/orbitron-600.woff2" crossorigin>
+
+	<link rel="stylesheet" href="../assets/stylesheets/settings.css">
+	<link rel="stylesheet" href="../assets/stylesheets/laptop/header.css" media="screen and (min-width: 1025px)">
+	<link rel="stylesheet" href="../assets/stylesheets/laptop/footer.css" media="screen and (min-width: 1025px)">
+	<link rel="stylesheet" href="../assets/stylesheets/tablet/header.css"
+		media="screen and (min-width: 768px) and (max-width: 1024px)">
+	<link rel="stylesheet" href="../assets/stylesheets/tablet/footer.css"
+		media="screen and (min-width: 768px) and (max-width: 1024px)">
+	<link rel="stylesheet" href="../assets/stylesheets/mobile/header.css"
+		media="screen and (min-width: 320px) and (max-width: 767px)">
+	<link rel="stylesheet" href="../assets/stylesheets/mobile/footer.css"
+		media="screen and (min-width: 320px) and (max-width: 767px)">
+
+	<link rel="stylesheet" href="../assets/stylesheets/project/project.css">
+	<link rel="stylesheet" href="../assets/stylesheets/project/bank/bank.css">
+</head>
+
+<body class="project-page case-bank" style="--accent: #87b7c4; --accent-ink: #12252b;">
+
+	<header class="header header-deactive" id="header">
+		<a class="site-logo" href="../" aria-label="Arvin home">PORTFOLIO<span>.</span></a>
+		<nav class="desktop-nav" aria-label="Primary navigation">
+			<a href="../#home">Home</a>
+			<a href="../#about">About</a>
+			<a href="../#projects">Projects</a>
+			<a href="../#contact">Contact</a>
+		</nav>
+		<button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false"
+			aria-controls="mobile-menu">
+			<span></span>
+			<span></span>
+			<span></span>
+		</button>
+		<nav class="mobile-nav" id="mobile-menu" aria-label="Mobile navigation" aria-hidden="true">
+			<a href="../#home">Home</a>
+			<a href="../#about">About</a>
+			<a href="../#projects">Projects</a>
+			<a href="../#contact">Contact</a>
+		</nav>
+	</header>
+
+	<main class="case">
+
+		<!-- ============ HERO ============ -->
+		<section class="case-hero" aria-labelledby="case-title">
+			<a class="case-back" href="../#projects">
+				<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true">
+					<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+						stroke-width="2" d="M19 12H5m6-6l-6 6l6 6" />
+				</svg>
+				All projects
+			</a>
+
+			<div class="case-title-wrap">
+				<p class="case-kicker">Case study</p>
+				<h1 class="case-title" id="case-title">WA Bank</h1>
+			</div>
+
+			<div class="case-stage">
+				<div class="bank-hero-stage">
+					<figure class="wa-frame" id="transfer-stage"
+						aria-label="The internal transfer screen of WA Bank. Account numbers and an amount are entered, a one-time code is sent, and then the source card is dragged onto the destination card to make the transfer. You can drag the card yourself.">
+						<div class="wa-scale">
+							<div class="wa-titlebar">
+								<span class="wa-appicon"></span>account payment
+								<span class="wa-controls" aria-hidden="true"><i>&#9472;</i><i
+										class="is-off">&#9723;</i><i>&#10005;</i></span>
+							</div>
+
+							<!-- ---------- transfer screen ---------- -->
+							<div class="wa-screen wa-dark" data-screen="transfer" aria-hidden="true">
+								<span class="wa-btn is-done wa-shadow" style="left:14px; top:14px; width:70px">back</span>
+								<p class="wa-title" style="top:47px">internal transfer</p>
+
+								<div class="wa-panel wa-shadow" style="left:50px; top:90px; width:800px; height:211px">
+									<div class="wa-field is-flow wa-shadow" data-f="src"
+										style="left:251px; top:26px; width:300px"><span class="typed"></span><span class="caret"></span><span
+											class="ghost">5596409736</span></div>
+									<div class="wa-field wa-shadow" data-f="dst" style="left:249px; top:86px; width:300px">
+										<span class="typed"></span><span class="caret"></span><span class="prompt">destination account
+											number</span>
+									</div>
+									<div class="wa-field wa-shadow" data-f="amt" style="left:274px; top:145px; width:250px">
+										<span class="typed"></span><span class="caret"></span><span class="prompt">transfer amount</span>
+									</div>
+								</div>
+
+								<div class="wa-panel wa-shadow" style="left:151px; top:327px; width:598px; height:88px">
+									<span class="wa-btn is-menu wa-shadow" data-f="sendotp"
+										style="left:14px; top:26px; width:131px; height:28px; border-radius:20px">send
+										otp</span>
+									<span class="wa-label is-ink" style="left:286px; top:32px">otp</span>
+									<div class="wa-field wa-shadow" data-f="otp" style="left:340px; top:24px; width:185px">
+										<span class="typed"></span><span class="caret"></span>
+									</div>
+									<span class="wa-label is-ink" data-f="timer" style="left:537px; top:32px">2:00</span>
+								</div>
+
+								<div class="wa-card is-hidden" data-f="card2" style="left:550px; top:443px">
+									<img class="logo" src="../assets/images/projects/bank/wa-logo.webp" alt=""
+										width="220" height="80">
+									<span class="cap">destination card</span>
+									<span class="num"></span>
+									<span class="name"></span>
+								</div>
+								<div class="wa-card is-hidden" data-f="card1" style="left:50px; top:443px" tabindex="0"
+									role="button"
+									aria-label="Source card. Press Enter to send it to the destination card.">
+									<img class="logo" src="../assets/images/projects/bank/wa-logo.webp" alt=""
+										width="220" height="80">
+									<span class="cap">source card</span>
+									<span class="num"></span>
+									<span class="name"></span>
+								</div>
+							</div>
+
+							<!-- ---------- receipt screen ---------- -->
+							<div class="wa-screen wa-light is-away" data-screen="receipt" aria-hidden="true">
+								<span class="wa-btn is-menu wa-shadow" data-f="receipt-back"
+									style="left:14px; top:14px; width:55px; height:26px; font-size:13px">back</span>
+								<div class="wa-paper wa-shadow">
+									<span class="dash" style="top:43px"></span>
+									<span class="ok">SUCCESSFUL</span>
+									<span class="row" style="top:166px">Source account number's owner:<b>ARVIN
+											SAGHAFI</b></span>
+									<span class="row" style="top:216px">Source bank:<b>WA Bank</b></span>
+									<span class="row" style="top:266px">Destination account number's owner:<b>SARA
+											KARIMI</b></span>
+									<span class="row" style="top:320px">Destination bank:<b>WA Bank</b></span>
+									<span class="row" style="top:372px">Transfer Amount:<b>20000.0</b></span>
+									<span class="row" style="top:426px">Transaction Code :<b data-f="code">878028</b></span>
+									<span class="dash" style="top:506px"></span>
+									<span class="row" style="top:526px">Date and time :<b data-f="time">2026-09-21
+											17:22</b></span>
+									<span class="wa-btn is-done wa-shadow"
+										style="left:226px; top:556px; width:57px; height:26px; font-size:13px">print</span>
+								</div>
+							</div>
+
+							<svg class="wa-cursor" viewBox="0 0 24 24" aria-hidden="true">
+								<path d="M3 2l16 7-6.5 2.2L9.8 18z" fill="#fff" stroke="#1b1b1b" stroke-width="1.2"
+									stroke-linejoin="round" />
+							</svg>
+						</div>
+					</figure>
+
+					<div class="wa-under">
+						<span class="wa-hint" data-f="hint">Your turn: drag the source card onto the destination
+							card.</span>
+						<button class="wa-replay" type="button" data-f="replay">
+							<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"
+								aria-hidden="true">
+								<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+									stroke-width="2" d="M20 11A8 8 0 1 0 17.7 17M20 4v7h-7" />
+							</svg>
+							Replay
+						</button>
+					</div>
+				</div>
+
+				<aside class="note pane note-a">
+					<p class="note-title">Drag to pay</p>
+					<p>Pull your card onto theirs. The closer it gets, the thicker the outline.</p>
+				</aside>
+				<aside class="note pane note-b">
+					<p class="note-title">A code with a clock</p>
+					<p>Every transfer needs a one-time code, and it expires in two minutes.</p>
+				</aside>
+			</div>
+		</section>
+
+		<!-- ============ OVERVIEW ============ -->
+		<section class="case-section case-overview" aria-labelledby="overview-title">
+			<div class="overview-copy">
+				<h2 class="case-h2" id="overview-title" data-reveal="wipe">What it is</h2>
+				<p data-reveal>
+					WA Bank is a desktop banking system written in Java and JavaFX on top of MySQL. It is really
+					three applications — one for customers, one for employees and one for the bank's manager —
+					working on the same data.
+				</p>
+				<p data-reveal>
+					It started as a university project. We decided to treat it as a product rather than something
+					to hand in, and one idea shaped the rest: online banking should feel like walking into a
+					branch.
+				</p>
+				<p data-reveal>
+					It was built by three people. Two teammates built the JavaFX screens for the customer, the
+					employee and the manager. I wrote all of the Java behind them: the application logic, the
+					database layer, the validation, and every interaction you can try on this page.
+				</p>
+
+				<ul class="problems">
+					<li data-reveal>
+						<a href="#branch">
+							<span class="problem-q">Signing up online feels like nothing.</span>
+							<span class="problem-a">WA Bank asks for an ID, terms and a signature, then a teller's
+								approval.</span>
+						</a>
+					</li>
+					<li data-reveal>
+						<a href="#transfers">
+							<span class="problem-q">Transfers are forms to fill in.</span>
+							<span class="problem-a">Here the card writes itself, and you pay by dragging it.</span>
+						</a>
+					</li>
+					<li data-reveal>
+						<a href="#roles">
+							<span class="problem-q">One app has to serve everyone.</span>
+							<span class="problem-a">Customer, employee and manager each get their own.</span>
+						</a>
+					</li>
+					<li data-reveal>
+						<a href="#design">
+							<span class="problem-q">Banking software feels cold.</span>
+							<span class="problem-a">Formal enough to trust, friendly enough to enjoy.</span>
+						</a>
+					</li>
+				</ul>
+			</div>
+
+			<div class="overview-side">
+				<dl class="overview-facts" data-reveal>
+					<div>
+						<dt>Role</dt>
+						<dd>All the Java: logic, data, interactions</dd>
+					</div>
+					<div>
+						<dt>Team</dt>
+						<dd>Three developers</dd>
+					</div>
+					<div>
+						<dt>Type</dt>
+						<dd>Desktop banking system</dd>
+					</div>
+					<div>
+						<dt>Stack</dt>
+						<dd>Java, JavaFX, MySQL</dd>
+					</div>
+				</dl>
+
+				<div class="overview-links" data-reveal>
+					<!-- TODO: point this at the Bank repository -->
+					<a class="btn btn-solid" href="https://github.com/eros-codes" target="_blank" rel="noreferrer">
+						View the code on GitHub
+						<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"
+							aria-hidden="true">
+							<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+								stroke-width="2" d="M18 6L6 18M8 6h10v10" />
+						</svg>
+					</a>
+				</div>
+			</div>
+		</section>
+
+		<!-- ============ A BRANCH, NOT A FORM ============ -->
+		<section class="case-section case-feature" id="branch" aria-labelledby="branch-title">
+			<div class="feature-copy">
+				<h2 class="case-h2" id="branch-title" data-reveal="wipe">A branch, not a form</h2>
+				<p data-reveal>
+					Most online banks let you in with an email and a password. Opening an account at a real bank
+					takes more, so WA Bank asks for more: personal details, a photo of your national ID card,
+					account preferences, and finally a declaration you have to sign with the mouse.
+				</p>
+				<p data-reveal>
+					None of it is decoration. You cannot finish without a signature. Ticking "I accept" is not
+					enough either, because the app checks that you actually opened the terms. And even then the
+					account is only created as Pending: signing in tells you to wait for the moderator, until an
+					employee has seen your ID and approved you.
+				</p>
+			</div>
+
+			<div class="feature-stage" data-reveal>
+				<figure class="wa-frame" id="signup-stage"
+					aria-label="The last step of WA Bank's sign-up. Pressing finish without a signature shows an error, the signature is drawn by hand, the terms must be opened as well as accepted, and only then is the account created.">
+					<div class="wa-scale">
+						<div class="wa-titlebar">
+							<span class="wa-appicon"></span>WA Bank
+							<span class="wa-controls" aria-hidden="true"><i>&#9472;</i><i class="is-off">&#9723;</i><i>&#10005;</i></span>
+						</div>
+
+						<div class="wa-screen wa-pattern" data-screen="signup" aria-hidden="true">
+							<span class="wa-btn is-done wa-shadow" style="left:14px; top:14px; width:66px">back</span>
+							<span class="wa-label" style="left:68px; top:79px">6. declarations and signatures</span>
+							<span class="wa-label" style="left:68px; top:125px">terms and conditions</span>
+							<!-- FXML puts this at x=330; nudged right because the stand-in font is wider than Azonix -->
+							<span class="wa-link" data-f="terms" style="left:344px; top:122px">Read terms and
+								conditions</span>
+							<span class="wa-check" data-f="accept" style="left:68px; top:174px"><i></i>i accept terms and
+								conditions</span>
+							<span class="wa-label" style="left:68px; top:246px">signature:</span>
+
+							<svg class="wa-sign" viewBox="0 0 310 314" aria-hidden="true">
+								<path data-f="sign"
+									d="M40 176 C56 120, 78 108, 82 152 C85 186, 70 204, 60 188 C50 172, 86 140, 106 152 C121 161, 110 188, 126 183 C141 178, 140 142, 151 147 C159 151, 150 188, 166 185 C179 182, 183 151, 191 153 C199 155, 193 185, 206 183 C221 180, 226 146, 241 151 C256 156, 246 188, 263 180 C276 174, 286 161, 293 150" />
+								<path data-f="sign2" d="M58 208 C122 196, 204 200, 282 190" />
+							</svg>
+
+							<span class="wa-label" style="left:68px; top:623px">date and time :</span>
+							<div class="wa-field is-light wa-shadow" style="left:263px; top:620px; width:170px">
+								<span data-f="now">2026-09-21 17:20</span>
+							</div>
+							<span class="wa-btn is-done wa-shadow" data-f="finished"
+								style="left:639px; top:615px; width:204px">finished</span>
+
+							<div class="wa-window" data-f="termswin">
+								<div class="bar">terms</div>
+							</div>
+
+							<div class="wa-dim" data-f="dim">
+								<div class="wa-alert">
+									<div class="bar"></div>
+									<div class="head"><span data-f="alerthead">Error</span><span class="x">&#10005;</span>
+									</div>
+									<p class="msg" data-f="alertmsg">Give your signature</p>
+									<div class="ok" data-f="alertok">OK</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- ---------- account created ---------- -->
+						<div class="wa-screen wa-light is-away" data-screen="signdone" aria-hidden="true">
+							<div class="wa-darkpanel wa-shadow"
+								style="left:81px; top:100px; width:700px; height:500px">
+								<span class="wa-label" style="left:36px; top:29px">dear</span>
+								<span class="wa-label" style="left:117px; top:29px">Arvin Saghafi</span>
+								<span class="wa-label" style="left:36px; top:71px">thank you for trusting our
+									bank</span>
+								<span class="wa-label" style="left:36px; top:109px">your username :</span>
+								<span class="wa-label" style="left:266px; top:109px">arvin</span>
+								<span class="wa-label" style="left:36px; top:148px">your account's information:</span>
+
+								<div class="wa-mini-card wa-shadow"
+									style="left:200px; top:191px; width:300px; height:200px">
+									<img class="logo" src="../assets/images/projects/bank/wa-logo.webp" alt=""
+										width="220" height="80">
+									<span style="left:8px; top:69px">5596409736</span>
+									<span style="left:8px; top:92px">2370 2712 9248 4928</span>
+									<span style="left:8px; top:112px">IR62 0170 0000 0055 9640 9736</span>
+									<span style="left:14px; top:171px">600</span>
+									<span style="left:171px; top:171px">2030.10</span>
+								</div>
+
+								<span class="wa-btn is-done wa-shadow"
+									style="left:297px; top:446px; width:105px">done</span>
+							</div>
+							<span class="wa-label" style="left:97px; top:619px; font-size:12px">your debit card is going
+								to reach you next week</span>
+						</div>
+
+						<svg class="wa-cursor" viewBox="0 0 24 24" aria-hidden="true">
+							<path d="M3 2l16 7-6.5 2.2L9.8 18z" fill="#fff" stroke="#1b1b1b" stroke-width="1.2"
+								stroke-linejoin="round" />
+						</svg>
+					</div>
+				</figure>
+
+				<div class="wa-under">
+					<button class="wa-replay" type="button" data-f="replay">
+						<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"
+							aria-hidden="true">
+							<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+								stroke-width="2" d="M20 11A8 8 0 1 0 17.7 17M20 4v7h-7" />
+						</svg>
+						Replay
+					</button>
+				</div>
+			</div>
+		</section>
+
+		<!-- ============ TRANSFERS ============ -->
+		<section class="case-section case-feature is-flipped" id="transfers" aria-labelledby="transfers-title">
+			<div class="feature-copy">
+				<h2 class="case-h2" id="transfers-title" data-reveal="wipe">Transfers you can feel</h2>
+				<p data-reveal>
+					Moving money is usually a form. In WA Bank the card is the interface. On the card-to-card
+					screen the card at the top fills in as you type: start your own card number and the rest
+					appears as a suggestion, press Enter and the number and expiry date complete themselves.
+				</p>
+				<p data-reveal>
+					The internal transfer at the top of this page goes further. Once both account numbers are in,
+					the two cards appear and you pay by dragging yours onto theirs. Every transfer also needs a
+					one-time code that expires in two minutes, and the first six digits of a card number tell the
+					app which bank it belongs to.
+				</p>
+			</div>
+
+			<div class="feature-stage" data-reveal>
+				<figure class="wa-frame" id="card-stage"
+					aria-label="WA Bank's card-to-card screen. As the card number is typed, the card at the top fills in; pressing Enter completes the number and the expiry date.">
+					<div class="wa-scale">
+						<div class="wa-titlebar">
+							<span class="wa-appicon"></span>card payment
+							<span class="wa-controls" aria-hidden="true"><i>&#9472;</i><i class="is-off">&#9723;</i><i>&#10005;</i></span>
+						</div>
+
+						<div class="wa-screen wa-dark" data-screen="card" aria-hidden="true">
+							<span class="wa-btn is-done wa-shadow" style="left:14px; top:14px; width:70px">back</span>
+							<p class="wa-title" style="top:38px">card to card transfer</p>
+
+							<div class="wa-card" style="left:300px; top:110px">
+								<img class="logo" src="../assets/images/projects/bank/wa-logo.webp" alt="" width="220"
+									height="80">
+								<span class="num" data-f="c-num"></span>
+								<span class="num" data-f="c-year" style="top:170px; left:15px; width:60px"></span>
+								<span class="num" data-f="c-month" style="top:170px; left:74px; width:40px"></span>
+								<span class="num" data-f="c-cvv" style="top:170px; left:225px; width:50px"></span>
+							</div>
+
+							<div class="wa-panel wa-shadow" style="left:50px; top:350px; width:800px; height:312px">
+								<div class="wa-field is-flow wa-shadow" data-f="c-src"
+									style="left:250px; top:25px; width:300px"><span class="typed"></span><span class="caret"></span><span
+										class="ghost">2370271292484928</span></div>
+								<div class="wa-field wa-shadow" data-f="c-dst" style="left:250px; top:83px; width:300px">
+									<span class="typed"></span><span class="caret"></span><span class="prompt">destination card number</span>
+								</div>
+								<div class="wa-field wa-shadow" data-f="c-amt" style="left:275px; top:144px; width:250px">
+									<span class="typed"></span><span class="caret"></span><span class="prompt">transfer amount</span>
+								</div>
+								<div class="wa-field wa-shadow" data-f="c-y" style="left:64px; top:191px; width:88px">
+									<span class="typed"></span><span class="caret"></span><span class="prompt">year</span>
+								</div>
+								<div class="wa-field wa-shadow" data-f="c-m" style="left:161px; top:191px; width:88px">
+									<span class="typed"></span><span class="caret"></span><span class="prompt">month</span>
+								</div>
+								<div class="wa-field wa-shadow" data-f="c-c" style="left:571px; top:191px; width:80px">
+									<span class="typed"></span><span class="caret"></span><span class="prompt">cvv2</span>
+								</div>
+								<span class="wa-btn is-done wa-shadow" data-f="c-confirm"
+									style="left:376px; top:258px; width:150px">confirm</span>
+							</div>
+						</div>
+
+						<svg class="wa-cursor" viewBox="0 0 24 24" aria-hidden="true">
+							<path d="M3 2l16 7-6.5 2.2L9.8 18z" fill="#fff" stroke="#1b1b1b" stroke-width="1.2"
+								stroke-linejoin="round" />
+						</svg>
+					</div>
+				</figure>
+
+				<div class="wa-under">
+					<span class="wa-hint" data-f="hint">Destination bank recognised from 622106: Parsian Bank.</span>
+					<button class="wa-replay" type="button" data-f="replay">
+						<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"
+							aria-hidden="true">
+							<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+								stroke-width="2" d="M20 11A8 8 0 1 0 17.7 17M20 4v7h-7" />
+						</svg>
+						Replay
+					</button>
+				</div>
+			</div>
+		</section>
+
+		<!-- ============ ROLES ============ -->
+		<section class="case-section case-roles" id="roles" aria-labelledby="roles-title">
+			<h2 class="case-h2" id="roles-title" data-reveal="wipe">Three apps, one bank</h2>
+			<p class="roles-intro" data-reveal>
+				WA Bank is not one program with an admin page bolted on. Each role has its own application, and a
+				request moves between them the way it moves between desks in a branch.
+			</p>
+
+			<ol class="pipeline" data-reveal="pipeline">
+				<li class="pipe-step" data-reveal="step">
+					<span class="pipe-num" aria-hidden="true">1</span>
+					<h3>A customer applies</h3>
+					<p>Details, a national ID photo, terms and a signature. The account and its card numbers are
+						created, but the account is marked Pending.</p>
+				</li>
+				<li class="pipe-step" data-reveal="step">
+					<span class="pipe-num" aria-hidden="true">2</span>
+					<h3>An employee reviews it</h3>
+					<p>The employee app loads the next pending application with its ID photo, and the employee
+						verifies or denies it.</p>
+				</li>
+				<li class="pipe-step" data-reveal="step">
+					<span class="pipe-num" aria-hidden="true">3</span>
+					<h3>The account goes live</h3>
+					<p>Until then, signing in only says to wait for the moderator. Once accepted, the customer can
+						sign in and bank.</p>
+				</li>
+				<li class="pipe-step" data-reveal="step">
+					<span class="pipe-num" aria-hidden="true">4</span>
+					<h3>The manager oversees</h3>
+					<p>The manager's app does everything the employee's does, and also manages employees and
+						accounts.</p>
+				</li>
+			</ol>
+
+			<div class="role-list">
+				<article class="role" data-reveal>
+					<h3>Customer</h3>
+					<p>Transfers by card, account and IBAN, deposits, loans, cheque books, bill payments and mobile
+						top-ups.</p>
+				</article>
+				<article class="role" data-reveal>
+					<h3>Employee</h3>
+					<p>Verifying new customers, reviewing cheques and loan requests, transactions, deposits and
+						financial reports.</p>
+				</article>
+				<article class="role" data-reveal>
+					<h3>Manager</h3>
+					<p>Everything an employee can do, plus managing employees and the accounts themselves.</p>
+				</article>
+			</div>
+		</section>
+
+		<!-- ============ DESIGN ============ -->
+		<section class="case-section case-design" id="design" aria-labelledby="design-title">
+			<div class="design-copy">
+				<h2 class="case-h2" id="design-title" data-reveal="wipe">Formal, but friendly</h2>
+				<p data-reveal>
+					A bank has to look trustworthy, which usually ends up meaning cold. WA Bank aims for the
+					middle. A deep slate background and soft steel blues keep it serious; rounded corners, a
+					futuristic display face and the layered waves on the card keep it human.
+				</p>
+				<p data-reveal>
+					Headings are set in Azonix and the cards in Akira Expanded — wide faces that feel closer to a
+					product than to paperwork. Neither is licensed for the web, so the replicas on this page use
+					close open-licence stand-ins.
+				</p>
+			</div>
+
+			<div class="palette" data-reveal>
+				<div class="swatch"><i style="--sw:#1f2f33"></i>#1f2f33</div>
+				<div class="swatch"><i style="--sw:#30494f"></i>#30494f</div>
+				<div class="swatch"><i style="--sw:#4e7883"></i>#4e7883</div>
+				<div class="swatch"><i style="--sw:#87b7c4"></i>#87b7c4</div>
+				<div class="swatch"><i style="--sw:#a3b4c4"></i>#a3b4c4</div>
+			</div>
+		</section>
+
+		<!-- ============ STACK ============ -->
+		<section class="case-section case-stack" aria-labelledby="stack-title">
+			<h2 class="case-h2" id="stack-title" data-reveal="wipe">Built with</h2>
+			<div class="stack-groups">
+				<div class="stack-group" data-reveal>
+					<span>APPLICATION</span>
+					<ul class="stack-icons">
+						<li><img src="../assets/SVGs/skills/java.svg" alt="" width="40" height="40">Java</li>
+						<li><span class="stack-mark" aria-hidden="true">fx</span>JavaFX</li>
+						<li><span class="stack-mark" aria-hidden="true">mvn</span>Maven</li>
+					</ul>
+				</div>
+				<div class="stack-group" data-reveal>
+					<span>DATA</span>
+					<ul class="stack-icons">
+						<li><img src="../assets/SVGs/skills/mysql.svg" alt="" width="40" height="40">MySQL</li>
+						<li><span class="stack-mark" aria-hidden="true">jdbc</span>JDBC</li>
+					</ul>
+				</div>
+				<div class="stack-group" data-reveal>
+					<span>INTERFACE</span>
+					<ul class="stack-icons">
+						<li><span class="stack-mark" aria-hidden="true">fxml</span>FXML</li>
+						<li><img src="../assets/SVGs/skills/css.svg" alt="" width="40" height="40">CSS</li>
+					</ul>
+				</div>
+			</div>
+		</section>
+
+		<!-- ============ GALLERY ============ -->
+		<section class="case-section case-gallery" aria-labelledby="gallery-title">
+			<h2 class="case-h2" id="gallery-title" data-reveal="wipe">Screens</h2>
+			<div class="shots">
+				<figure class="shot" data-reveal>
+					<img src="../assets/images/projects/bank/screen-dashboard.webp" alt="WA Bank customer dashboard"
+						loading="lazy" width="1127" height="914">
+					<figcaption>Customer dashboard</figcaption>
+				</figure>
+				<figure class="shot" data-reveal>
+					<img src="../assets/images/projects/bank/screen-card-to-card.webp"
+						alt="WA Bank card to card transfer screen" loading="lazy" width="1127" height="914">
+					<figcaption>Card to card</figcaption>
+				</figure>
+				<figure class="shot" data-reveal>
+					<img src="../assets/images/projects/bank/screen-internal-transfer.webp"
+						alt="WA Bank internal transfer screen with source and destination cards" loading="lazy"
+						width="1127" height="914">
+					<figcaption>Internal transfer</figcaption>
+				</figure>
+			</div>
+		</section>
+
+		<!-- ============ NEXT ============ -->
+		<section class="case-next pane" aria-label="Keep exploring">
+			<a class="next-link" href="../rivo/">
+				<span>Next project</span>
+				<strong>Rivo</strong>
+			</a>
+			<a class="btn btn-mint" href="mailto:saghafiarvin@gmail.com">
+				Start a conversation
+				<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true">
+					<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+						stroke-width="2" d="M18 6L6 18M8 6h10v10" />
+				</svg>
+			</a>
+		</section>
+	</main>
+
+	<footer class="site-footer">
+		<div class="footer-main">
+			<div class="footer-brand">
+				<a class="site-logo" href="../" aria-label="Back to Arvin's home">ARVIN<span>.</span></a>
+				<p>Building thoughtful products with logic, creativity, and a never-settling mindset.</p>
+			</div>
+			<div class="footer-column">
+				<h2 class="footer-heading">Explore</h2>
+				<nav class="footer-links" aria-label="Footer navigation">
+					<a href="../#home">Home</a>
+					<a href="../#about">About</a>
+					<a href="../#projects">Projects</a>
+					<a href="../#contact">Contact</a>
+				</nav>
+			</div>
+			<div class="footer-column">
+				<h2 class="footer-heading">Connect</h2>
+				<nav class="footer-socials" aria-label="Social links">
+					<a href="mailto:saghafiarvin@gmail.com">Email me
+						<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
+							<path d="M0 0h24v24H0z" fill="none" />
+							<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+								stroke-width="2" d="M18 6L6 18M8 6h10v10" />
+						</svg>
+					</a>
+					<a href="https://github.com/eros-codes" target="_blank" rel="noreferrer">GitHub
+						<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
+							<path d="M0 0h24v24H0z" fill="none" />
+							<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+								stroke-width="2" d="M18 6L6 18M8 6h10v10" />
+						</svg>
+					</a>
+				</nav>
+			</div>
+		</div>
+		<div class="footer-bottom">
+			<p>© 2026 Arvin Saghafi. Crafted with intent.</p>
+		</div>
+	</footer>
+
+	<script type="module" src="../assets/js/project/bank/bank.js"></script>
+</body>
+
+</html>
