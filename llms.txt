@@ -1,7 +1,6 @@
 # Arvin Saghafi
 
-> Arvin Saghafi (آروین ثقفی) is a backend-focused software developer and Computer Engineering student at the University of Tabriz, Iran. This site is his portfolio, with in-depth case studies of Rivo, a real-time encrypted chat application, and WA Bank, a Java and JavaFX banking system.
-
+> Arvin Saghafi (آروین ثقفی) is a backend-focused software developer and Computer Engineering student at the University of Tabriz, Iran. This site is his portfolio, with in-depth case studies of Rivo, a real-time encrypted chat application; WA Bank, a Java and JavaFX banking system; and Reservation, a table booking system.
 Arvin builds backend systems, REST APIs, real-time applications and database-driven software, with a particular interest in security and in interfaces that make complex systems feel simple.
 
 ## Pages
@@ -85,11 +84,14 @@ Shop is an e-commerce web application developed by Arvin Saghafi, with product m
 
 Technologies: React, NestJS, TypeScript, PostgreSQL.
 
-### Reservation
+### Side projects
 
-Reservation is a web application for managing reservations, developed by Arvin Saghafi, with a backend API and database integration.
-
-Technologies: HTML, CSS, JavaScript, Node.js, Express.js, PostgreSQL.
+- Cafe: a web application project
+- PassVault: a password management application
+- IG Downloader: a media downloading application
+- Task Manager: a productivity application for managing tasks
+- InfiniTic: a software project
+- To Do List: a task management application
 
 ## Frequently asked questions
 
@@ -103,7 +105,7 @@ Java, JavaScript, TypeScript, Python, C#, C++ and SQL; Node.js, Express.js, Nest
 
 ### What projects has Arvin Saghafi built?
 
-His main projects are Rivo, a real-time encrypted chat application; WA Bank, a Java and JavaFX banking system; Shop, an e-commerce application; and Reservation, a reservation management application.
+His main projects are Rivo, a real-time encrypted chat application; WA Bank, a Java and JavaFX banking system; Reservation, a table booking system where guests pick their exact table on a floor plan; and Shop, an e-commerce application.
 
 ### What is Rivo?
 
