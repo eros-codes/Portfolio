@@ -91,15 +91,6 @@ Reservation is a web application for managing reservations, developed by Arvin S
 
 Technologies: HTML, CSS, JavaScript, Node.js, Express.js, PostgreSQL.
 
-### Side projects
-
-- Cafe: a web application project
-- PassVault: a password management application
-- IG Downloader: a media downloading application
-- Task Manager: a productivity application for managing tasks
-- InfiniTic: a software project
-- To Do List: a task management application
-
 ## Frequently asked questions
 
 ### Who is Arvin Saghafi?
