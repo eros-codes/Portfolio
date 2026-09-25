@@ -1,123 +1,119 @@
 # Arvin Saghafi
 
+> Arvin Saghafi (آروین ثقفی) is a backend-focused software developer and Computer Engineering student at the University of Tabriz, Iran. This site is his portfolio, with in-depth case studies of Rivo, a real-time encrypted chat application, and WA Bank, a Java and JavaFX banking system.
+
+Arvin builds backend systems, REST APIs, real-time applications and database-driven software, with a particular interest in security and in interfaces that make complex systems feel simple.
+
+## Pages
+
+- [Home](https://www.aboutarvin.ir/): About Arvin, his skills, education and all of his projects
+- [Rivo case study](https://www.aboutarvin.ir/rivo/): A real-time chat app that sorts conversations by whether they are still alive, with one-time messages, time capsules and Vault-backed encryption
+- [WA Bank case study](https://www.aboutarvin.ir/bank/): A desktop banking system with separate apps for customers, employees and the bank manager, built to feel like visiting a real branch
+
 ## Identity
 
-Arvin Saghafi is a backend-focused software developer and Computer Engineering student specializing in backend systems, API development, database design, and scalable software solutions.
-Alternative name: آروین ثقفی
-
-Website:
-https://aboutarvin.ir/
-
-GitHub:
-https://github.com/eros-codes
-
-
-## Professional Focus
-
-Arvin focuses on building backend systems, web applications, REST APIs, real-time applications, database-driven software, and secure software architectures.
-
+- Name: Arvin Saghafi
+- Alternative name: آروین ثقفی
+- Role: Backend-focused software developer
+- Education: B.Sc. Computer Engineering, University of Tabriz, 2024 to present
+- Website: https://www.aboutarvin.ir/
+- GitHub: https://github.com/eros-codes
+- Email: saghafiarvin@gmail.com
 
 ## Skills
 
-- Backend Development
-- Software Engineering
-- REST API Development
-- Real-time Application Development
-- Database Design
-- PostgreSQL
-- SQL
-- Node.js
-- NestJS
-- JavaScript
-- React
-- Java
-- C#
-- C++
-- Python
-- Git
-
-
-## Education
-
-Computer Engineering student at Tabriz University.
-
+- Languages: Java, JavaScript, TypeScript, Python, C#, C++, SQL
+- Backend: Node.js, Express.js, NestJS, REST APIs, Socket.IO, real-time applications
+- Frontend: HTML, CSS, React
+- Databases: PostgreSQL, MySQL, Prisma
+- Desktop: JavaFX
+- Security: HashiCorp Vault, envelope encryption
+- Tools: Git
 
 ## Projects
 
-Arvin Saghafi has developed software projects including web applications, backend systems, desktop applications, APIs, and developer tools.
+### Rivo
 
+Rivo is a real-time chat application developed by Arvin Saghafi. Case study: https://www.aboutarvin.ir/rivo/
 
-## Rivo
+It was built to fix three things ordinary messengers get wrong:
 
-Rivo is a real-time web application developed by Arvin Saghafi.
-Case study:
-https://aboutarvin.ir/rivo/
+- Every chat is treated the same. Rivo separates conversations automatically: a chat stays in "Active chats" as long as its last message has not been seen, by either side. Once the last message is seen and nobody replies, the conversation is over and it moves to "Contacts" on its own. A new message brings it back.
+- Messages are permanent and instant. Rivo adds one-time messages, which can be opened only once, and time capsules, which are delivered locked and open at a moment the sender chooses.
+- Archived chats never really leave. In most messengers an archived chat still sits on the main screen inside a folder. In Rivo, an archived chat disappears from the main screen entirely and is reachable only from Settings.
 
-Technologies:
-- Node.js
-- Express.js
-- PostgreSQL
-- Socket.IO
-- WebSocket
-- HashiCorp Vault
+Security: Rivo uses envelope encryption. Each message is encrypted with a data key, and that data key is encrypted by a master key that never leaves HashiCorp Vault. The database stores only the ciphertext and the wrapped key, so a copy of the database on its own reveals nothing.
 
-Features:
-- Real-time communication
-- Secure messaging
-- Envelope Encryption
-- Key management using HashiCorp Vault
-- Backend API architecture
+Technologies: Node.js, Express.js, Socket.IO, Prisma, PostgreSQL, HashiCorp Vault, JavaScript (ES modules), HTML, CSS.
 
+### WA Bank
 
-## Shop
+WA Bank is a desktop banking system built with Java, JavaFX and MySQL. Case study: https://www.aboutarvin.ir/bank/
 
-Shop is an e-commerce web application developed by Arvin Saghafi.
+It began as a university project that the team treated as a real product. It was built by three developers: two teammates built the JavaFX screens, and Arvin Saghafi wrote all of the Java behind them, including the application logic, the database layer, the validation and the interactive features.
 
-Technologies:
-- React
-- NestJS
-- PostgreSQL
+WA Bank is three separate applications working on the same data: one for customers, one for employees and one for the bank manager. Its central idea is that online banking should feel like walking into a branch:
 
-Features:
-- E-commerce functionality
-- Backend API system
-- Database management
+- Registration asks for personal details, a photo of the national ID card and a hand-drawn signature. Ticking "I accept" is not enough: the terms must actually be opened.
+- A new account is created as Pending. Signing in is blocked until an employee reviews the ID photo and approves the account.
+- Money is transferred between accounts by dragging your card onto the recipient's card. The closer it gets, the thicker the outline; letting go completes the transfer.
+- On the card-to-card screen, the card fills in as you type, your own card number is suggested, and Enter completes the number and expiry date. The first six digits of a card number identify its bank.
 
+Customer features: card, account and IBAN transfers (Paya, Satna and instant), deposits, loans, cheque books, bill payments and mobile top-ups. Employee features: verifying new customers, reviewing cheques and loan requests, transactions, deposits and financial reports. The manager's app includes everything an employee can do, plus managing employees and accounts.
 
-## Bank
+Technologies: Java, JavaFX, FXML, CSS, MySQL, JDBC, Maven.
 
-Bank is a desktop banking management system developed by Arvin Saghafi.
-Case study:
-https://aboutarvin.ir/bank/
+### Shop
 
-Technologies:
-- Java
-- JavaFX
-- MySQL
+Shop is an e-commerce web application developed by Arvin Saghafi, with product management and a REST API.
 
-Features:
-- Desktop application interface
-- Database-driven banking management
+Technologies: React, NestJS, TypeScript, PostgreSQL.
 
+### Reservation
 
-## Reservation
+Reservation is a web application for managing reservations, developed by Arvin Saghafi, with a backend API and database integration.
 
-Reservation is a reservation management web application developed by Arvin Saghafi.
+Technologies: HTML, CSS, JavaScript, Node.js, Express.js, PostgreSQL.
 
-Technologies:
-- HTML
-- CSS
-- JavaScript
-- Node.js
-- PostgreSQL
+### Side projects
 
-Features:
-- Reservation management
-- Backend API development
-- Database integration
+- Cafe: a web application project
+- PassVault: a password management application
+- IG Downloader: a media downloading application
+- Task Manager: a productivity application for managing tasks
+- InfiniTic: a software project
+- To Do List: a task management application
 
+## Frequently asked questions
 
-## Contact
+### Who is Arvin Saghafi?
 
-GitHub:
-https://github.com/eros-codes
+Arvin Saghafi is a backend-focused software developer and Computer Engineering student at the University of Tabriz. He builds backend systems, REST APIs, real-time applications and database-driven software.
+
+### What technologies does Arvin Saghafi use?
+
+Java, JavaScript, TypeScript, Python, C#, C++ and SQL; Node.js, Express.js, NestJS and Socket.IO on the backend; React, HTML and CSS on the frontend; PostgreSQL, MySQL and Prisma for data; JavaFX for desktop applications; and HashiCorp Vault for key management.
+
+### What projects has Arvin Saghafi built?
+
+His main projects are Rivo, a real-time encrypted chat application; WA Bank, a Java and JavaFX banking system; Shop, an e-commerce application; and Reservation, a reservation management application.
+
+### What is Rivo?
+
+Rivo is a real-time chat application by Arvin Saghafi. It sorts chats automatically into Active chats and Contacts, supports one-time and time capsule messages, hides archived chats from the main screen, and encrypts every message with envelope encryption backed by HashiCorp Vault.
+
+### How does Rivo decide which chats are active?
+
+A chat stays in Active chats as long as its last message has not been seen. When the last message is seen and nobody replies, the conversation moves to Contacts. A new message moves it back.
+
+### What is WA Bank?
+
+WA Bank is a desktop banking system built with Java, JavaFX and MySQL, with separate applications for customers, employees and the bank manager. New accounts must be signed and approved by an employee before they can be used, and money is transferred by dragging one card onto another.
+
+### What was Arvin Saghafi's role in WA Bank?
+
+WA Bank was built by a team of three. Arvin Saghafi wrote all of the Java: the application logic, the database layer, the validation and the interactive features. His two teammates built the JavaFX screens.
+
+### How can I contact Arvin Saghafi?
+
+By email at saghafiarvin@gmail.com, or through GitHub at https://github.com/eros-codes.

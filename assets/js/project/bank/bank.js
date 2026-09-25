@@ -7,9 +7,11 @@ import { initReveal } from "../reveal.js";
 import { initBankTransfer } from "./bank-transfer.js";
 import { initBankCard } from "./bank-card.js";
 import { initBankSignup } from "./bank-signup.js";
+import { initBankNotes } from "./bank-notes.js";
 
 initHeader();
 initReveal(); // first: it may drop .js-motion, which the replicas check
 initBankTransfer();
 initBankCard();
 initBankSignup();
+initBankNotes();

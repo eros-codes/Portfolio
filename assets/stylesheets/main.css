@@ -1,8 +1,0 @@
-@import url(settings.css);
-@import url(laptop/laptop.css) screen and (min-width: 1025px);
-@import url(tablet/tablet.css) screen and (min-width: 768px) and (max-width: 1024px);
-@import url(mobile/mobile.css) screen and (min-width: 320px) and (max-width: 767px);
-
-@import url(../../components/glass-folders/glass-folder.css);
-
-@import url(animations.css);
