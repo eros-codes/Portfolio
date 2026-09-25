@@ -1,0 +1,669 @@
+/* =========================================================
+   RESERVATION — case study styles
+
+   The map itself is drawn by the project's own renderer and styled
+   by roof-map.css. This file adds only a light frame around it:
+   the app's colours and fonts, but far fewer controls, so the page
+   shows the idea rather than every screen.
+   ========================================================= */
+
+@font-face {
+	font-family: "Baloo Bhaijaan 2";
+	src: url("../../../fonts/BalooBhaijaan2/baloo-400.woff2") format("woff2");
+	font-weight: 400;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Baloo Bhaijaan 2";
+	src: url("../../../fonts/BalooBhaijaan2/baloo-600.woff2") format("woff2");
+	font-weight: 600;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Baloo Bhaijaan 2";
+	src: url("../../../fonts/BalooBhaijaan2/baloo-700.woff2") format("woff2");
+	font-weight: 700;
+	font-display: swap;
+}
+
+/* ---------- the app frame ---------- */
+
+.rz-frame {
+	position: relative;
+	width: 100%;
+	margin: 0;
+	border-radius: 1.4rem;
+	overflow: hidden;
+	background: linear-gradient(180deg, #ece4da 0%, #dccdbd 100%);
+	border: 1px solid rgba(66, 46, 47, 0.12);
+	box-shadow: 0 2rem 4rem rgba(40, 28, 20, 0.22);
+	color: #422e2f;
+	font-family: "Baloo Bhaijaan 2", Tahoma, sans-serif;
+	text-align: right;
+}
+
+.rz-top {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 0.8rem;
+	padding: 0.8rem 1rem 0.6rem;
+}
+
+.rz-logo {
+	font-family: "Lora", Georgia, serif;
+	font-style: italic;
+	font-size: 1.35rem;
+	color: #5b4a3f;
+	direction: ltr;
+}
+
+.rz-controls {
+	display: flex;
+	align-items: center;
+	gap: 0.6rem;
+}
+
+.rz-guests {
+	display: flex;
+	align-items: center;
+	gap: 0.15rem;
+	padding: 0.2rem;
+	border-radius: 0.8rem;
+	background: rgba(255, 255, 255, 0.45);
+	border: 1px solid rgba(66, 46, 47, 0.12);
+}
+
+.rz-step {
+	width: 1.9rem;
+	height: 1.9rem;
+	border: 0;
+	border-radius: 0.6rem;
+	background: transparent;
+	color: #3b3229;
+	font: 700 1.05rem/1 system-ui, sans-serif;
+	cursor: pointer;
+	transition: background-color 0.2s ease, scale 0.15s ease;
+}
+
+.rz-step:hover {
+	background: rgba(59, 50, 41, 0.08);
+}
+
+.rz-count {
+	min-width: 2.6rem;
+	text-align: center;
+	font-weight: 700;
+	font-size: 1rem;
+}
+
+.rz-btn {
+	border: 0;
+	border-radius: 0.8rem;
+	padding: 0.55rem 1rem;
+	background: #3b3229;
+	color: #fff;
+	font: 600 0.88rem/1.2 "Baloo Bhaijaan 2", Tahoma, sans-serif;
+	cursor: pointer;
+	transition: background-color 0.2s ease, scale 0.15s ease;
+}
+
+.rz-btn:hover {
+	background: #4d4136;
+}
+
+.rz-btn.is-press,
+.rz-step.is-press,
+.rz-combo.is-press {
+	scale: 0.94;
+}
+
+.rz-btn:focus-visible,
+.rz-step:focus-visible,
+.rz-combo:focus-visible {
+	outline: 2px solid #3b3229;
+	outline-offset: 2px;
+}
+
+.rz-mapwrap {
+	position: relative;
+	margin: 0 0.7rem;
+	border-radius: 1rem;
+	overflow: hidden;
+	background: rgba(255, 255, 255, 0.35);
+	border: 1px solid rgba(66, 46, 47, 0.1);
+}
+
+.rz-mapwrap .map-zone-tabs {
+	display: flex;
+	gap: 0.35rem;
+	padding: 0.5rem 0.5rem 0.2rem;
+	/* four halls do not fit a phone: the row scrolls sideways */
+	overflow-x: auto;
+	scrollbar-width: none;
+
+	button {
+		flex: none;
+	}
+}
+
+.rz-map {
+	display: block;
+	width: 100%;
+	aspect-ratio: 2 / 1;
+	height: auto;
+	touch-action: none;
+}
+
+.rz-foot {
+	min-height: 5.2rem;
+	padding: 0.7rem 1rem 0.9rem;
+	display: grid;
+	gap: 0.5rem;
+	align-content: start;
+}
+
+.rz-status {
+	font-size: 0.85rem;
+	color: #6b5a4d;
+}
+
+.rz-combos {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.4rem;
+}
+
+.rz-combo {
+	border: 1px solid rgba(66, 46, 47, 0.16);
+	border-radius: 0.7rem;
+	padding: 0.35rem 0.75rem;
+	background: rgba(255, 255, 255, 0.5);
+	color: #422e2f;
+	font: 600 0.8rem/1.3 "Baloo Bhaijaan 2", Tahoma, sans-serif;
+	cursor: pointer;
+	transition: background-color 0.2s ease, border-color 0.2s ease, scale 0.15s ease;
+}
+
+.rz-combo.is-perfect {
+	border-color: rgba(110, 129, 81, 0.55);
+}
+
+.rz-combo.is-on {
+	background: #3b3229;
+	border-color: #3b3229;
+	color: #fff;
+}
+
+.rz-pick {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 0.8rem;
+	font-size: 0.88rem;
+	visibility: hidden;
+	opacity: 0;
+	transition: opacity 0.3s ease;
+}
+
+.rz-pick.is-on {
+	visibility: visible;
+	opacity: 1;
+}
+
+.rz-hold {
+	display: flex;
+	align-items: center;
+	gap: 0.6rem;
+	font-size: 0.85rem;
+}
+
+.rz-clock {
+	width: 3.1rem;
+	height: 3.1rem;
+	flex: none;
+	display: grid;
+	place-items: center;
+	border-radius: 50%;
+	border: 2px solid #3b3229;
+	font-weight: 700;
+	font-size: 0.85rem;
+	direction: ltr;
+}
+
+/* the demo pointer */
+.rz-cursor {
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: 20;
+	width: 22px;
+	height: 22px;
+	pointer-events: none;
+	opacity: 0;
+	transform: translate(var(--cx, 50%), var(--cy, 50%));
+	transition: opacity 0.3s ease, transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+	filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.4));
+
+	&.is-on {
+		opacity: 1;
+	}
+
+	svg {
+		width: 100%;
+		height: 100%;
+		transition: scale 0.12s ease;
+		transform-origin: 3px 3px;
+	}
+
+	&.is-down svg {
+		scale: 0.85;
+	}
+}
+
+.rz-under {
+	margin-top: 1.1rem;
+	min-height: 2.6rem;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+	gap: 0.8rem 1.2rem;
+	font-family: "Poppins", sans-serif;
+	font-size: 0.85rem;
+	color: var(--ink-soft);
+}
+
+.rz-hint {
+	visibility: hidden;
+	opacity: 0;
+	transition: opacity 0.4s ease;
+
+	&.is-on {
+		visibility: visible;
+		opacity: 1;
+	}
+}
+
+.rz-replay {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
+	padding: 0.55rem 1rem;
+	border: 1px solid rgba(0, 0, 0, 0.18);
+	border-radius: 999px;
+	background: transparent;
+	font: inherit;
+	color: var(--ink-soft);
+	cursor: pointer;
+	visibility: hidden;
+	opacity: 0;
+	transition: opacity 0.4s ease, background-color 0.2s ease;
+
+	&.is-ready {
+		visibility: visible;
+		opacity: 1;
+	}
+
+	&:hover {
+		background: rgba(0, 0, 0, 0.05);
+	}
+
+	&:focus-visible {
+		outline: 2px solid var(--ink);
+		outline-offset: 4px;
+	}
+}
+
+/* ---------- hero layout ---------- */
+
+.resv-hero-stage {
+	width: min(46rem, 100%);
+}
+
+.case-resv .case-stage {
+	margin-top: -2.2rem;
+}
+
+.case-resv .case-title {
+	font-size: clamp(3.6rem, 11.5vw, 11rem);
+}
+
+@media screen and (min-width: 1200px) {
+	.case-resv .note-a {
+		top: 10rem;
+		right: calc(50% + 24rem);
+	}
+
+	.case-resv .note-b {
+		top: 21rem;
+		left: calc(50% + 24rem);
+	}
+}
+
+@media screen and (max-width: 1199px) {
+	.case-resv .note {
+		position: static;
+		width: auto;
+	}
+
+	.case-resv .case-stage {
+		grid-template-columns: repeat(2, minmax(0, 17rem));
+		justify-content: center;
+	}
+
+	.case-resv .resv-hero-stage {
+		grid-column: 1 / -1;
+	}
+}
+
+@media screen and (max-width: 767px) {
+	.case-resv .case-stage {
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	.case-resv .note {
+		width: min(21rem, 100%);
+		justify-self: center;
+	}
+
+	.rz-top {
+		flex-wrap: wrap;
+	}
+}
+
+/* ---------- feature sections ---------- */
+
+.resv-feature {
+	display: grid;
+	grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+	gap: 2rem 4.5rem;
+	align-items: center;
+
+	&.is-flipped {
+		grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+	}
+
+	&.is-flipped .resv-copy {
+		order: 2;
+	}
+}
+
+.resv-copy p {
+	max-width: 30rem;
+	font-size: 1.05rem;
+	line-height: 1.85;
+	color: var(--ink-soft);
+}
+
+.resv-copy p+p {
+	margin-top: 1rem;
+}
+
+.resv-stage {
+	display: grid;
+	justify-items: center;
+	width: 100%;
+}
+
+/* legend of table states, in the app's own colours */
+.legend-row {
+	margin-top: 1.6rem;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.6rem 1.4rem;
+	font-family: "Poppins", sans-serif;
+	font-size: 0.85rem;
+	color: var(--ink-soft);
+
+	span {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+	}
+
+	i {
+		width: 0.9rem;
+		height: 0.9rem;
+		border-radius: 0.25rem;
+		background: var(--c);
+	}
+}
+
+/* ---------- editor demo ---------- */
+
+.ed-frame .rz-mapwrap {
+	margin: 0.7rem;
+}
+
+/* the roof garden is a tall hall: a squarer frame fits it */
+.ed-frame .rz-map {
+	aspect-ratio: 1.15 / 1;
+}
+
+.ed-card {
+	position: absolute;
+	left: 1.2rem;
+	bottom: 1.2rem;
+	z-index: 3;
+	width: 11.5rem;
+	padding: 0.7rem 0.8rem;
+	border-radius: 0.9rem;
+	background: rgba(250, 246, 241, 0.94);
+	border: 1px solid rgba(66, 46, 47, 0.14);
+	box-shadow: 0 0.8rem 1.8rem rgba(40, 28, 20, 0.18);
+	font-size: 0.8rem;
+	visibility: hidden;
+	opacity: 0;
+	translate: 0 0.5rem;
+	transition: opacity 0.35s ease, translate 0.35s ease;
+
+	&.is-on {
+		visibility: visible;
+		opacity: 1;
+		translate: 0 0;
+	}
+
+	h4 {
+		font-size: 0.88rem;
+		margin-bottom: 0.35rem;
+	}
+
+	dl {
+		display: grid;
+		grid-template-columns: 1fr auto;
+		gap: 0.15rem 0.6rem;
+	}
+
+	dt {
+		color: #7a685a;
+	}
+
+	dd {
+		min-width: 2.2rem;
+		padding: 0 0.35rem;
+		border: 1px solid transparent;
+		border-radius: 0.35rem;
+		font-weight: 700;
+		text-align: center;
+		transition: color 0.3s ease, background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+	}
+
+	/* the value turns into a field while it is being edited */
+	dd.is-editing {
+		background: #fff;
+		border-color: rgba(66, 46, 47, 0.35);
+		box-shadow: 0 0 0 3px rgba(110, 129, 81, 0.2);
+	}
+
+	.sel {
+		background: #bcd0ea;
+		border-radius: 2px;
+	}
+
+	.caret {
+		display: inline-block;
+		width: 1px;
+		height: 1em;
+		margin-inline-start: 1px;
+		vertical-align: -0.15em;
+		background: #422e2f;
+		animation: rz-caret 1s steps(1) infinite;
+	}
+
+	dd.is-changed {
+		color: #6e8151;
+	}
+}
+
+/* ---------- race demo ---------- */
+
+.race {
+	width: 100%;
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) minmax(0, 0.8fr) minmax(0, 1fr);
+	gap: 0.9rem;
+	align-items: center;
+	font-family: "Poppins", sans-serif;
+}
+
+.race-guest,
+.race-server {
+	position: relative;
+	padding: 1rem;
+	border-radius: 1.1rem;
+	background: linear-gradient(180deg, #ece4da, #dccdbd);
+	border: 1px solid rgba(66, 46, 47, 0.12);
+	color: #422e2f;
+	box-shadow: 0 1rem 2rem rgba(40, 28, 20, 0.14);
+}
+
+.race-guest {
+	display: grid;
+	gap: 0.6rem;
+	min-height: 11rem;
+	align-content: start;
+
+	.who {
+		font-size: 0.75rem;
+		letter-spacing: 1.5px;
+		color: #7a685a;
+	}
+
+	.what {
+		font-family: "Baloo Bhaijaan 2", Tahoma, sans-serif;
+		font-weight: 700;
+		font-size: 1rem;
+	}
+
+	.rz-btn {
+		justify-self: start;
+	}
+
+	.result {
+		min-height: 3.4rem;
+		font-size: 0.82rem;
+		line-height: 1.45;
+		opacity: 0;
+		transition: opacity 0.35s ease;
+	}
+
+	.result.is-on {
+		opacity: 1;
+	}
+
+	.fa {
+		display: block;
+		font-family: "Baloo Bhaijaan 2", Tahoma, sans-serif;
+		font-weight: 600;
+		direction: rtl;
+	}
+
+	.ok {
+		color: #56693c;
+	}
+
+	.no {
+		color: #9a3b2f;
+	}
+}
+
+.race-server {
+	display: grid;
+	justify-items: center;
+	gap: 0.4rem;
+	text-align: center;
+	font-size: 0.78rem;
+
+	.lock {
+		width: 2.4rem;
+		height: 2.4rem;
+		border-radius: 50%;
+		display: grid;
+		place-items: center;
+		background: #3b3229;
+		color: #fff;
+		transition: scale 0.25s ease;
+	}
+
+	&.is-busy .lock {
+		scale: 1.12;
+	}
+
+	code {
+		font-size: 0.72rem;
+		padding: 0.1rem 0.4rem;
+		border-radius: 0.3rem;
+		background: rgba(59, 50, 41, 0.08);
+	}
+}
+
+.race-dot {
+	position: absolute;
+	top: 50%;
+	width: 0.7rem;
+	height: 0.7rem;
+	margin-top: -0.35rem;
+	border-radius: 50%;
+	background: #6e8151;
+	opacity: 0;
+}
+
+@keyframes rz-caret {
+	50% {
+		opacity: 0;
+	}
+}
+
+@media screen and (max-width: 1024px) {
+
+	.resv-feature,
+	.resv-feature.is-flipped {
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	.resv-feature.is-flipped .resv-copy {
+		order: 0;
+	}
+}
+
+@media screen and (max-width: 767px) {
+	.race {
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	.race-guest {
+		min-height: 0;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+	.rz-cursor,
+	.ed-card,
+	.rz-pick {
+		transition: none !important;
+	}
+}

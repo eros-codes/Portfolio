@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Reservation — Table booking system | Arvin Saghafi</title>
+	<meta name="description"
+		content="A table reservation system where guests pick their exact table on a café's real floor plan, groups get tables combined automatically, and no table can ever be booked twice. Back end by Arvin Saghafi.">
+	<meta name="author" content="Arvin Saghafi">
+	<meta name="robots" content="index, follow">
+	<meta name="theme-color" content="#000000">
+	<link rel="shortcut icon" href="../assets/images/me/fav.ico" type="image/x-icon">
+	<link rel="canonical" href="https://www.aboutarvin.ir/reservation/">
+
+	<meta property="og:type" content="article">
+	<meta property="og:site_name" content="Arvin Saghafi">
+	<meta property="og:title" content="Reservation — Table booking system">
+	<meta property="og:description"
+		content="Pick your exact table on the real floor plan. Groups get tables combined for them, and no table can be booked twice.">
+	<meta property="og:url" content="https://www.aboutarvin.ir/reservation/">
+	<meta property="og:image" content="https://www.aboutarvin.ir/assets/images/projects/reservation/screen-map.webp">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="Reservation — Table booking system">
+	<meta name="twitter:description"
+		content="Pick your exact table on the real floor plan. Groups get tables combined for them, and no table can be booked twice.">
+	<meta name="twitter:image" content="https://www.aboutarvin.ir/assets/images/projects/reservation/screen-map.webp">
+
+	<script type="application/ld+json">
+		{
+			"@context": "https://schema.org",
+			"@graph": [
+				{
+					"@type": "SoftwareSourceCode",
+					"@id": "https://www.aboutarvin.ir/reservation/#project",
+					"name": "Reservation",
+					"description": "A table reservation system built for a café called Roof. Guests choose their exact table on an interactive floor plan, connected tables are combined automatically for larger groups, and each booking is held for ten minutes inside a serializable transaction so a table can never be booked twice. Arvin Saghafi built the back end: the API, data model, availability and booking engine, payments, SMS one-time codes and admin roles.",
+					"url": "https://www.aboutarvin.ir/reservation/",
+					"image": "https://www.aboutarvin.ir/assets/images/projects/reservation/screen-map.webp",
+					"codeRepository": "https://github.com/eros-codes",
+					"programmingLanguage": ["JavaScript", "SQL"],
+					"runtimePlatform": "Node.js",
+					"keywords": ["table reservation", "booking system", "Express", "Prisma", "PostgreSQL", "serializable transactions", "floor plan"],
+					"author": { "@id": "https://www.aboutarvin.ir/#person" }
+				},
+				{
+					"@type": "WebPage",
+					"@id": "https://www.aboutarvin.ir/reservation/#webpage",
+					"url": "https://www.aboutarvin.ir/reservation/",
+					"name": "Reservation — Table booking system",
+					"isPartOf": { "@id": "https://www.aboutarvin.ir/#website" },
+					"about": { "@id": "https://www.aboutarvin.ir/reservation/#project" },
+					"breadcrumb": { "@id": "https://www.aboutarvin.ir/reservation/#breadcrumb" }
+				},
+				{
+					"@type": "BreadcrumbList",
+					"@id": "https://www.aboutarvin.ir/reservation/#breadcrumb",
+					"itemListElement": [
+						{ "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.aboutarvin.ir/" },
+						{ "@type": "ListItem", "position": 2, "name": "Reservation", "item": "https://www.aboutarvin.ir/reservation/" }
+					]
+				}
+			]
+		}
+	</script>
+
+	<!-- Motion gate — identical to the homepage -->
+	<script>
+		(function () {
+			try {
+				var d = document.documentElement;
+				if (window.matchMedia &&
+					window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+				d.classList.add("js-motion");
+				if (document.visibilityState === "hidden") {
+					d.classList.add("motion-hold");
+					var release = function () { d.classList.remove("motion-hold"); };
+					document.addEventListener("visibilitychange", release, { once: true });
+					setTimeout(release, 8000);
+				}
+			} catch (e) { }
+		})();
+	</script>
+
+	<link rel="preload" as="font" type="font/woff2" href="../assets/fonts/Roah/roaheregular-maoan.woff2" crossorigin>
+	<link rel="preload" as="font" type="font/woff2" href="../assets/fonts/Poppins/Poppins-Regular.woff2" crossorigin>
+	<link rel="preload" as="font" type="font/woff2" href="../assets/fonts/BalooBhaijaan2/baloo-600.woff2" crossorigin>
+
+	<link rel="stylesheet" href="../assets/stylesheets/settings.css">
+	<link rel="stylesheet" href="../assets/stylesheets/laptop/header.css" media="screen and (min-width: 1025px)">
+	<link rel="stylesheet" href="../assets/stylesheets/laptop/footer.css" media="screen and (min-width: 1025px)">
+	<link rel="stylesheet" href="../assets/stylesheets/tablet/header.css"
+		media="screen and (min-width: 768px) and (max-width: 1024px)">
+	<link rel="stylesheet" href="../assets/stylesheets/tablet/footer.css"
+		media="screen and (min-width: 768px) and (max-width: 1024px)">
+	<link rel="stylesheet" href="../assets/stylesheets/mobile/header.css"
+		media="screen and (min-width: 320px) and (max-width: 767px)">
+	<link rel="stylesheet" href="../assets/stylesheets/mobile/footer.css"
+		media="screen and (min-width: 320px) and (max-width: 767px)">
+
+	<link rel="stylesheet" href="../assets/stylesheets/project/project.css">
+	<link rel="stylesheet" href="../assets/stylesheets/project/reservation/roof-map.css">
+	<link rel="stylesheet" href="../assets/stylesheets/project/reservation/reservation.css">
+</head>
+
+<body class="project-page case-resv" style="--accent: #8fa471; --accent-ink: #1f2a14;">
+
+	<header class="header header-deactive" id="header">
+		<a class="site-logo" href="../" aria-label="Arvin home">PORTFOLIO<span>.</span></a>
+		<nav class="desktop-nav" aria-label="Primary navigation">
+			<a href="../#home">Home</a>
+			<a href="../#about">About</a>
+			<a href="../#projects">Projects</a>
+			<a href="../#contact">Contact</a>
+		</nav>
+		<button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false"
+			aria-controls="mobile-menu">
+			<span></span>
+			<span></span>
+			<span></span>
+		</button>
+		<nav class="mobile-nav" id="mobile-menu" aria-label="Mobile navigation" aria-hidden="true">
+			<a href="../#home">Home</a>
+			<a href="../#about">About</a>
+			<a href="../#projects">Projects</a>
+			<a href="../#contact">Contact</a>
+		</nav>
+	</header>
+
+	<main class="case">
+
+		<!-- ============ HERO ============ -->
+		<section class="case-hero" aria-labelledby="case-title">
+			<a class="case-back" href="../#projects">
+				<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true">
+					<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+						stroke-width="2" d="M19 12H5m6-6l-6 6l6 6" />
+				</svg>
+				All projects
+			</a>
+
+			<div class="case-title-wrap">
+				<p class="case-kicker">Case study</p>
+				<h1 class="case-title" id="case-title">Reservation</h1>
+			</div>
+
+			<div class="case-stage">
+				<div class="resv-hero-stage">
+					<figure class="rz-frame rz-app" id="resv-stage" dir="rtl" lang="fa"
+						aria-label="The booking screen: choose the number of guests, see free tables light up on the café's floor plan, pick a table or a suggested combination, and it is held for ten minutes.">
+						<div class="rz-top">
+							<span class="rz-logo">Roof</span>
+							<div class="rz-controls">
+								<div class="rz-guests" role="group" aria-label="Guests">
+									<button class="rz-step" type="button" data-step="1" aria-label="More guests">+</button>
+									<output class="rz-count">۲</output>
+									<button class="rz-step" type="button" data-step="-1" aria-label="Fewer guests">−</button>
+								</div>
+								<button class="rz-btn rz-search" type="button">بررسی میزهای آزاد</button>
+							</div>
+						</div>
+						<div class="rz-mapwrap">
+							<div class="map-zone-tabs" aria-label="انتخاب سالن"></div>
+							<svg class="rz-map" role="img" aria-label="Floor plan of the café"></svg>
+						</div>
+						<div class="rz-foot">
+							<p class="rz-status">تعداد نفرات رو انتخاب کن و میزهای آزاد رو ببین.</p>
+							<div class="rz-combos"></div>
+							<div class="rz-pick"></div>
+						</div>
+						<svg class="rz-cursor" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 2l16 7-6.5 2.2L9.8 18z" fill="#fff" stroke="#1b1b1b" stroke-width="1.2" stroke-linejoin="round" /></svg>
+					</figure>
+					<div class="rz-under">
+						<span class="rz-hint">Your turn: change the guests, search, and pick a table.</span>
+						<button class="rz-replay" type="button"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 11A8 8 0 1 0 17.7 17M20 4v7h-7" /></svg> Replay</button>
+					</div>
+				</div>
+
+				<aside class="note pane note-a">
+					<p class="note-title">Pick the table</p>
+					<p>Not just a time. Choose your exact seat on the café's real floor plan.</p>
+				</aside>
+				<aside class="note pane note-b">
+					<p class="note-title">Groups, combined</p>
+					<p>Too many for one table? It suggests neighbouring tables that can be joined.</p>
+				</aside>
+			</div>
+		</section>
+
+		<!-- ============ OVERVIEW ============ -->
+		<section class="case-section case-overview" aria-labelledby="overview-title">
+			<div class="overview-copy">
+				<h2 class="case-h2" id="overview-title" data-reveal="wipe">What it is</h2>
+				<p data-reveal>
+					Reservation is a table booking system. It was built for a café called Roof, but nothing in it
+					is tied to one venue: the halls, the tables and the rules all come from data.
+				</p>
+				<p data-reveal>
+					It was built by two people. A teammate built the front end, including the floor plan. I built
+					the back end: the API, the data model, the availability and booking engine, payments, SMS
+					codes and admin roles.
+				</p>
+
+				<ul class="problems">
+					<li data-reveal>
+						<a href="#seat">
+							<span class="problem-q">You book a time, not a seat.</span>
+							<span class="problem-a">Here you pick your exact table on the real floor plan.</span>
+						</a>
+					</li>
+					<li data-reveal>
+						<a href="#editor">
+							<span class="problem-q">Changing the layout means changing code.</span>
+							<span class="problem-a">Every table and every chair is edited from the admin panel.</span>
+						</a>
+					</li>
+					<li data-reveal>
+						<a href="#race">
+							<span class="problem-q">Two people can book the same table.</span>
+							<span class="problem-a">One transaction at a time makes that impossible.</span>
+						</a>
+					</li>
+				</ul>
+			</div>
+
+			<div class="overview-side">
+				<dl class="overview-facts" data-reveal>
+					<div>
+						<dt>Role</dt>
+						<dd>Back end: API, data, booking engine</dd>
+					</div>
+					<div>
+						<dt>Team</dt>
+						<dd>Two developers</dd>
+					</div>
+					<div>
+						<dt>Type</dt>
+						<dd>Table reservation system</dd>
+					</div>
+					<div>
+						<dt>Stack</dt>
+						<dd>Node.js, Express, Prisma, PostgreSQL</dd>
+					</div>
+				</dl>
+				<div class="overview-links" data-reveal>
+					<a class="btn btn-solid" href="https://github.com/eros-codes" target="_blank" rel="noreferrer">
+						View the code on GitHub
+						<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true">
+							<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+								stroke-width="2" d="M18 6L6 18M8 6h10v10" />
+						</svg>
+					</a>
+				</div>
+			</div>
+		</section>
+
+		<!-- ============ A SEAT, NOT A SLOT ============ -->
+		<section class="case-section" id="seat" aria-labelledby="seat-title">
+			<div class="resv-copy">
+				<h2 class="case-h2" id="seat-title" data-reveal="wipe">A seat, not a slot</h2>
+				<p data-reveal>
+					Pick a day, a party size and a time, and the tables that fit light up on the floor plan. Each
+					table has its own range: a six-seat table can also take a group of five, but not two. A table
+					that fits exactly glows darker than one with seats to spare.
+				</p>
+				<p data-reveal>
+					If no single table is right, connected tables are combined for you. Whatever you choose is held
+					for ten minutes while you pay, and every booking leaves fifteen minutes free for the table to be
+					cleared.
+				</p>
+			</div>
+			<div class="legend-row" data-reveal>
+				<span><i style="--c:#6e8151"></i>Exact fit</span>
+				<span><i style="--c:#a9b98f"></i>Seats to spare</span>
+				<span><i style="--c:#b9ada1"></i>Not available</span>
+				<span><i style="--c:#3b3229"></i>Selected</span>
+			</div>
+		</section>
+
+		<!-- ============ THE CAFÉ IS DATA ============ -->
+		<section class="case-section resv-feature" id="editor" aria-labelledby="editor-title">
+			<div class="resv-copy">
+				<h2 class="case-h2" id="editor-title" data-reveal="wipe">The café is data</h2>
+				<p data-reveal>
+					Nothing about the layout is written in code. From the admin panel, every table can be moved,
+					turned and resized, its chairs added or removed one by one, its shape changed, and its seats,
+					minimum and maximum set by hand. Which tables may be joined is set there too.
+				</p>
+				<p data-reveal>
+					Access follows roles: owners and managers can change the floor, while reception can only
+					look at it.
+				</p>
+			</div>
+			<div class="resv-stage" data-reveal>
+				<figure class="rz-frame rz-app ed-frame" id="editor-stage" dir="rtl" lang="fa"
+					aria-label="A table in the roof garden is moved, turned, and loses two chairs, and its capacity and guest range update.">
+					<div class="rz-mapwrap">
+						<svg class="rz-map" role="img" aria-label="Roof garden floor plan"></svg>
+					</div>
+					<div class="ed-card">
+						<h4>ویرایش میز ۲۷</h4>
+						<dl>
+							<dt>چرخش</dt>
+							<dd data-f="rot">۰ درجه</dd>
+							<dt>ظرفیت</dt>
+							<dd data-f="cap">۶</dd>
+							<dt>حداقل نفرات</dt>
+							<dd data-f="min">۵</dd>
+							<dt>حداکثر نفرات</dt>
+							<dd data-f="max">۶</dd>
+						</dl>
+					</div>
+					<svg class="rz-cursor" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 2l16 7-6.5 2.2L9.8 18z" fill="#fff" stroke="#1b1b1b" stroke-width="1.2" stroke-linejoin="round" /></svg>
+				</figure>
+				<div class="rz-under">
+					<button class="rz-replay" type="button"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 11A8 8 0 1 0 17.7 17M20 4v7h-7" /></svg> Replay</button>
+				</div>
+			</div>
+		</section>
+
+		<!-- ============ NO TABLE TWICE ============ -->
+		<section class="case-section resv-feature is-flipped" id="race" aria-labelledby="race-title">
+			<div class="resv-copy">
+				<h2 class="case-h2" id="race-title" data-reveal="wipe">No table twice</h2>
+				<p data-reveal>
+					When two guests tap the same table at the same moment, both requests reach the server
+					together. Checking that the table is free and creating the hold happen inside one
+					serializable transaction, so only one can win. The other is told plainly and asked to pick
+					again.
+				</p>
+				<p data-reveal>
+					The price is never taken from the request. It is read from the server's settings, so it
+					cannot be changed on the way.
+				</p>
+			</div>
+			<div class="resv-stage" data-reveal>
+				<div class="race" id="race-stage">
+					<div class="race-guest">
+						<span class="who">GUEST A</span>
+						<span class="what" lang="fa" dir="rtl">میز ۷ · ساعت ۱۵:۰۰</span>
+						<button class="rz-btn" type="button" tabindex="-1" lang="fa">رزرو</button>
+						<p class="result"><span class="fa ok" lang="fa">میز برات نگه داشته شد</span>Held for ten minutes.</p>
+					</div>
+					<div class="race-server">
+						<span class="lock" aria-hidden="true">
+							<svg xmlns="http://www.w3.org/2000/svg" width="1.1em" height="1.1em" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 11h12v10H6zM8 11V7a4 4 0 0 1 8 0v4"/></svg>
+						</span>
+						<strong>One at a time</strong>
+						<code>Serializable</code>
+					</div>
+					<div class="race-guest">
+						<span class="who">GUEST B</span>
+						<span class="what" lang="fa" dir="rtl">میز ۷ · ساعت ۱۵:۰۰</span>
+						<button class="rz-btn" type="button" tabindex="-1" lang="fa">رزرو</button>
+						<p class="result"><span class="fa no" lang="fa">این میز همین الان توسط شخص دیگری رزرو شد؛ یک گزینه‌ی دیگر انتخاب کن.</span>409: someone else just took it.</p>
+					</div>
+				</div>
+				<div class="rz-under">
+					<button class="rz-replay" type="button"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 11A8 8 0 1 0 17.7 17M20 4v7h-7" /></svg> Replay</button>
+				</div>
+			</div>
+		</section>
+
+		<!-- ============ STACK ============ -->
+		<section class="case-section case-stack" aria-labelledby="stack-title">
+			<h2 class="case-h2" id="stack-title" data-reveal="wipe">Built with</h2>
+			<div class="stack-groups">
+				<div class="stack-group" data-reveal>
+					<span>SERVER</span>
+					<ul class="stack-icons">
+						<li><img src="../assets/SVGs/skills/nodejs.svg" alt="" width="40" height="40">Node.js</li>
+						<li><span class="stack-mark" aria-hidden="true">ex</span>Express</li>
+						<li><span class="stack-mark" aria-hidden="true">zod</span>Zod</li>
+					</ul>
+				</div>
+				<div class="stack-group" data-reveal>
+					<span>DATA</span>
+					<ul class="stack-icons">
+						<li><img src="../assets/SVGs/skills/psql.svg" alt="" width="40" height="40">PostgreSQL</li>
+						<li><span class="stack-mark" aria-hidden="true">P</span>Prisma</li>
+					</ul>
+				</div>
+				<div class="stack-group" data-reveal>
+					<span>SECURITY</span>
+					<ul class="stack-icons">
+						<li><span class="stack-mark" aria-hidden="true">jwt</span>JWT</li>
+						<li><span class="stack-mark" aria-hidden="true">bc</span>bcrypt</li>
+						<li><span class="stack-mark" aria-hidden="true">H</span>Helmet</li>
+					</ul>
+				</div>
+			</div>
+		</section>
+
+		<!-- ============ GALLERY ============ -->
+		<section class="case-section case-gallery" aria-labelledby="gallery-title">
+			<h2 class="case-h2" id="gallery-title" data-reveal="wipe">Screens</h2>
+			<div class="shots">
+				<figure class="shot" data-reveal>
+					<img src="../assets/images/projects/reservation/screen-map.webp"
+						alt="Reservation booking screen with the floor plan and booking details" loading="lazy" width="1400" height="932">
+					<figcaption>Booking</figcaption>
+				</figure>
+				<figure class="shot" data-reveal>
+					<img src="../assets/images/projects/reservation/screen-range.webp"
+						alt="Floor plan showing when each table becomes free" loading="lazy" width="1400" height="939">
+					<figcaption>Free from, per table</figcaption>
+				</figure>
+				<figure class="shot" data-reveal>
+					<img src="../assets/images/projects/reservation/screen-hold.webp"
+						alt="Payment screen with the ten minute table hold" loading="lazy" width="1400" height="663">
+					<figcaption>The ten-minute hold</figcaption>
+				</figure>
+			</div>
+		</section>
+
+		<!-- ============ NEXT ============ -->
+		<section class="case-next pane" aria-label="Keep exploring">
+			<a class="next-link" href="../rivo/">
+				<span>Next project</span>
+				<strong>Rivo</strong>
+			</a>
+			<a class="btn btn-mint" href="mailto:saghafiarvin@gmail.com">
+				Start a conversation
+				<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true">
+					<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+						stroke-width="2" d="M18 6L6 18M8 6h10v10" />
+				</svg>
+			</a>
+		</section>
+	</main>
+
+	<footer class="site-footer">
+		<div class="footer-main">
+			<div class="footer-brand">
+				<a class="site-logo" href="../" aria-label="Back to Arvin's home">ARVIN<span>.</span></a>
+				<p>Building thoughtful products with logic, creativity, and a never-settling mindset.</p>
+			</div>
+			<div class="footer-column">
+				<h2 class="footer-heading">Explore</h2>
+				<nav class="footer-links" aria-label="Footer navigation">
+					<a href="../#home">Home</a>
+					<a href="../#about">About</a>
+					<a href="../#projects">Projects</a>
+					<a href="../#contact">Contact</a>
+				</nav>
+			</div>
+			<div class="footer-column">
+				<h2 class="footer-heading">Connect</h2>
+				<nav class="footer-socials" aria-label="Social links">
+					<a href="mailto:saghafiarvin@gmail.com">Email me
+						<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
+							<path d="M0 0h24v24H0z" fill="none" />
+							<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+								stroke-width="2" d="M18 6L6 18M8 6h10v10" />
+						</svg>
+					</a>
+					<a href="https://github.com/eros-codes" target="_blank" rel="noreferrer">GitHub
+						<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
+							<path d="M0 0h24v24H0z" fill="none" />
+							<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+								stroke-width="2" d="M18 6L6 18M8 6h10v10" />
+						</svg>
+					</a>
+				</nav>
+			</div>
+		</div>
+		<div class="footer-bottom">
+			<p>© 2026 Arvin Saghafi. Crafted with intent.</p>
+		</div>
+	</footer>
+
+	<script type="module" src="../assets/js/project/reservation/reservation.js"></script>
+</body>
+
+</html>

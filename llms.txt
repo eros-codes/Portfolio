@@ -9,6 +9,7 @@ Arvin builds backend systems, REST APIs, real-time applications and database-dri
 - [Home](https://www.aboutarvin.ir/): About Arvin, his skills, education and all of his projects
 - [Rivo case study](https://www.aboutarvin.ir/rivo/): A real-time chat app that sorts conversations by whether they are still alive, with one-time messages, time capsules and Vault-backed encryption
 - [WA Bank case study](https://www.aboutarvin.ir/bank/): A desktop banking system with separate apps for customers, employees and the bank manager, built to feel like visiting a real branch
+- [Reservation case study](https://www.aboutarvin.ir/reservation/): A table booking system where guests pick their exact table on the real floor plan, with automatic table combinations and no double bookings
 
 ## Identity
 
@@ -62,6 +63,21 @@ WA Bank is three separate applications working on the same data: one for custome
 Customer features: card, account and IBAN transfers (Paya, Satna and instant), deposits, loans, cheque books, bill payments and mobile top-ups. Employee features: verifying new customers, reviewing cheques and loan requests, transactions, deposits and financial reports. The manager's app includes everything an employee can do, plus managing employees and accounts.
 
 Technologies: Java, JavaFX, FXML, CSS, MySQL, JDBC, Maven.
+
+### Reservation
+
+Reservation is a table reservation system, built for a café called Roof but not tied to any one venue. Case study: https://www.aboutarvin.ir/reservation/
+
+It was built by two developers: a teammate built the front end, including the interactive floor plan, and Arvin Saghafi built the back end: the API, the data model, the availability and booking engine, payments, SMS one-time codes and admin roles.
+
+- Guests choose their exact table on the café's real floor plan, not just a time slot. Tables that fit the group exactly are shown darker than tables with seats to spare.
+- Each table has its own seat count and guest range; a six-seat table can also take a group of five.
+- When no single table fits, connected tables are combined automatically, up to four tables.
+- The layout is data: from the admin panel, tables can be moved, rotated and resized, chairs added or removed one by one, and seat counts and guest ranges set by hand. Owners and managers can edit; reception can only view.
+- A booking is held for ten minutes while the guest pays. Checking availability and creating the hold happen in one serializable transaction, so a table can never be booked twice, and each booking keeps a fifteen-minute cleaning buffer.
+- Guests sign in with SMS one-time codes, stored hashed with limited attempts. Prices come from server settings, never from the request. Payments go through Zarinpal.
+
+Technologies: Node.js, Express.js, Prisma, PostgreSQL, Zod, JWT, bcrypt, Helmet.
 
 ### Shop
 

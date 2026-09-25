@@ -42,7 +42,7 @@
 	<!-- Styles -->
 	<!-- Preload the two things that were stuck at the end of the CSS chain -->
 	<link rel="preload" as="image" href="assets/images/me/Me.webp" fetchpriority="high">
-	<link rel="preload" as="font" type="font/otf" href="assets/fonts/Roah/roaheregular-maoan.woff2" crossorigin>
+	<link rel="preload" as="font" type="font/woff2" href="assets/fonts/Roah/roaheregular-maoan.woff2" crossorigin>
 	<link rel="preload" as="font" type="font/woff2" href="assets/fonts/Poppins/Poppins-Regular.woff2" crossorigin>
 	
 	<link rel="stylesheet" href="assets/stylesheets/settings.css">
@@ -230,11 +230,12 @@
 					]
 				},
 				{
+					"@id": "https://www.aboutarvin.ir/reservation/#project",
 					"@type": "SoftwareApplication",
 					"name": "Reservation",
 					"description": "Reservation is a web application for managing reservations developed using Node.js and PostgreSQL.",
 					"image": "https://www.aboutarvin.ir/assets/images/projects/reservasion.webp",
-					"url": "https://www.aboutarvin.ir/#projects",
+					"url": "https://www.aboutarvin.ir/reservation",
 					"applicationCategory": "Web Application",
 					"operatingSystem": "Web",
 					"featureList": [
@@ -842,14 +843,14 @@
 						<div class="main-folder-title">Bank</div>
 					</div>
 				</a>
-				<div class="folder" role="article">
+				<a class="folder" href="reservation/" aria-label="Reservation case study">
 					<div class="folder-back"></div>
 					<img class="folder-image" src="assets/images/projects/reservasion.webp" loading="lazy" decoding="async"
 						alt="Reservation management web application built by Arvin Saghafi using Node.js and PostgreSQL" title="Reservation">
 					<div class="folder-front">
 						<div class="main-folder-title">Reservation</div>
 					</div>
-				</div>
+				</a>
 				<div class="folder" role="article">
 					<div class="folder-back"></div>
 					<img class="folder-image" src="assets/images/projects/shop.webp" loading="lazy" decoding="async"
