@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>OS — A mini operating system in C++ and Qt | Arvin Saghafi</title>
+	<meta name="description"
+		content="OS, a mini operating system shell in C++ and Qt by Arvin Saghafi: apps that keep running, an encrypted vault, installable apps with permissions, all in dots.">
+	<meta name="author" content="Arvin Saghafi">
+	<meta name="robots" content="index, follow">
+	<meta name="theme-color" content="#000000">
+	<link rel="shortcut icon" href="../assets/images/me/fav.ico" type="image/x-icon">
+	<link rel="canonical" href="https://www.aboutarvin.ir/os/">
+
+	<meta property="og:type" content="article">
+	<meta property="og:site_name" content="Arvin Saghafi">
+	<meta property="og:title" content="OS — A mini operating system in C++ and Qt">
+	<meta property="og:description"
+		content="Apps that keep running in the background, an encrypted vault, apps installed from a file with permissions, and everything drawn in dots.">
+	<meta property="og:url" content="https://www.aboutarvin.ir/os/">
+	<meta property="og:image" content="https://www.aboutarvin.ir/assets/images/og/os.jpg">
+	<meta property="og:image:width" content="1200">
+	<meta property="og:image:height" content="630">
+	<meta property="og:image:alt" content="The OS case study: the dot-matrix home screen of a mini operating system">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="OS — A mini operating system in C++ and Qt">
+	<meta name="twitter:description"
+		content="Apps that keep running in the background, an encrypted vault, apps installed from a file with permissions, and everything drawn in dots.">
+	<meta name="twitter:image" content="https://www.aboutarvin.ir/assets/images/og/os.jpg">
+	<meta name="twitter:image:alt" content="The OS case study: the dot-matrix home screen of a mini operating system">
+
+	<script type="application/ld+json">
+	{
+		"@context": "https://schema.org",
+		"@graph": [
+			{
+				"@type": "SoftwareSourceCode",
+				"@id": "https://www.aboutarvin.ir/os/#project",
+				"name": "OS",
+				"description": "A mini operating system shell for the desktop, written in C++20 with Qt 6. Apps have a lifecycle and can keep working in the background; alarms and timers ring through the OS; each app keeps its data in its own folder; apps can be installed from a plugin file and are granted permissions; a password vault encrypts everything with Argon2id and XChaCha20-Poly1305; the interface is drawn in dots.",
+				"url": "https://www.aboutarvin.ir/os/",
+				"image": "https://www.aboutarvin.ir/assets/images/projects/os/home.webp",
+				"codeRepository": "https://github.com/eros-codes/OS",
+				"programmingLanguage": ["C++"],
+				"runtimePlatform": "Qt 6",
+				"license": "https://opensource.org/licenses/MIT",
+				"keywords": ["C++20", "Qt 6", "operating system shell", "plugin architecture", "Argon2id", "XChaCha20-Poly1305", "FFT", "AddressSanitizer"],
+				"author": { "@id": "https://www.aboutarvin.ir/#person" }
+			},
+			{
+				"@type": "WebPage",
+				"@id": "https://www.aboutarvin.ir/os/#webpage",
+				"url": "https://www.aboutarvin.ir/os/",
+				"name": "OS — A mini operating system in C++ and Qt",
+				"description": "A mini operating system shell in C++20 and Qt 6 by Arvin Saghafi: apps with a real lifecycle that keep running in the background, a password vault encrypted with Argon2id and XChaCha20-Poly1305, a real audio spectrum, apps installed from a file with permissions, and a dot-matrix interface.",
+				"isPartOf": { "@id": "https://www.aboutarvin.ir/#website" },
+				"about": { "@id": "https://www.aboutarvin.ir/os/#project" },
+				"primaryImageOfPage": "https://www.aboutarvin.ir/assets/images/projects/os/home.webp",
+				"breadcrumb": { "@id": "https://www.aboutarvin.ir/os/#breadcrumb" }
+			},
+			{
+				"@type": "BreadcrumbList",
+				"@id": "https://www.aboutarvin.ir/os/#breadcrumb",
+				"itemListElement": [
+					{ "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.aboutarvin.ir/" },
+					{ "@type": "ListItem", "position": 2, "name": "OS", "item": "https://www.aboutarvin.ir/os/" }
+				]
+			}
+		]
+	}
+	</script>
+
+	<script>
+		(function () {
+			try {
+				var d = document.documentElement;
+				if (window.matchMedia &&
+					window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+				d.classList.add("js-motion");
+				if (document.visibilityState === "hidden") {
+					d.classList.add("motion-hold");
+					var release = function () { d.classList.remove("motion-hold"); };
+					document.addEventListener("visibilitychange", release, { once: true });
+					setTimeout(release, 8000);
+				}
+			} catch (e) { }
+		})();
+	</script>
+
+	<link rel="preload" as="font" type="font/woff2" href="../assets/fonts/Roah/roaheregular-maoan.woff2" crossorigin>
+	<link rel="preload" as="font" type="font/woff2" href="../assets/fonts/Poppins/Poppins-Regular.woff2" crossorigin>
+
+	<link rel="stylesheet" href="../assets/stylesheets/base/settings.css">
+	<link rel="stylesheet" href="../assets/stylesheets/layout/header.css">
+	<link rel="stylesheet" href="../assets/stylesheets/layout/footer.css">
+	<link rel="stylesheet" href="../assets/stylesheets/case-study/case-study.css">
+	<link rel="stylesheet" href="../assets/stylesheets/os/os.css">
+</head>
+
+<body class="project-page case-os" style="--accent: #e8322b; --accent-ink: #ffffff;">
+
+
+	<header class="header header-deactive" id="header">
+		<a class="site-logo" href="../" aria-label="Arvin home">PORTFOLIO<span>.</span></a>
+		<nav class="desktop-nav" aria-label="Primary navigation">
+			<a href="../#home">Home</a>
+			<a href="../#about">About</a>
+			<a href="../#projects">Projects</a>
+			<a href="../#contact">Contact</a>
+		</nav>
+		<button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false"
+			aria-controls="mobile-menu">
+			<span></span>
+			<span></span>
+			<span></span>
+		</button>
+		<nav class="mobile-nav" id="mobile-menu" aria-label="Mobile navigation" aria-hidden="true">
+			<a href="../#home">Home</a>
+			<a href="../#about">About</a>
+			<a href="../#projects">Projects</a>
+			<a href="../#contact">Contact</a>
+		</nav>
+	</header>
+
+	<main class="case">
+
+		<!-- ============ HERO ============ -->
+		<section class="case-hero" aria-labelledby="case-title">
+			<a class="case-back" href="../#projects">
+				<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true">
+					<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+						stroke-width="2" d="M19 12H5m6-6l-6 6l6 6" />
+				</svg>
+				All projects
+			</a>
+			<div class="case-title-wrap">
+				<p class="case-kicker">Case study</p>
+				<h1 class="case-title" id="case-title">OS</h1>
+			</div>
+			<div class="case-stage">
+				<figure class="os-device" id="os-device"
+					aria-label="The OS on screen: the home screen, the music player, the vault and the notification centre">
+					<div class="os-screens">
+						<img class="os-screen" src="../assets/images/projects/os/home.webp" alt="The OS home screen: an analog clock, the date, what is running in the background, notifications and the app grid, all drawn in dots" width="800" height="1640" fetchpriority="high">
+						<img class="os-screen" src="../assets/images/projects/os/music.webp" alt="" width="800" height="1640" loading="lazy">
+						<img class="os-screen" src="../assets/images/projects/os/vault.webp" alt="" width="800" height="1640" loading="lazy">
+						<img class="os-screen" src="../assets/images/projects/os/notification-centre.webp" alt="" width="800" height="1640" loading="lazy">
+					</div>
+				</figure>
+				<aside class="note pane note-a">
+					<p class="note-title">Apps keep running</p>
+					<p>A timer ends while you play Snake, and the OS rings over the game.</p>
+				</aside>
+				<aside class="note pane note-b">
+					<p class="note-title">Everything is dots</p>
+					<p>One renderer draws every icon, ring and letter.</p>
+				</aside>
+			</div>
+		</section>
+
+		<!-- ============ OVERVIEW ============ -->
+		<section class="case-section case-overview" aria-labelledby="overview-title">
+			<div class="overview-copy">
+				<h2 class="case-h2" id="overview-title" data-reveal="wipe">What it is</h2>
+				<p data-reveal>
+					OS is a small operating system shell for the desktop, written in C++20 with Qt 6. It is not a
+					kernel: it is the part you see and use. Apps open, pause, keep working in the background and
+					get closed; they post notifications, keep their data in their own folder, and ask before they
+					use anything that is not theirs.
+				</p>
+				<p data-reveal>
+					It started as my first C++ project, a menu with a clock in it. I rebuilt it around a real app
+					model, then added the parts that make it an operating system rather than a launcher.
+				</p>
+				<ul class="problems">
+					<li data-reveal>
+						<a href="#lifecycle">
+							<span class="problem-q">An app stops when you leave it.</span>
+							<span class="problem-a">Here a timer keeps counting and rings over whatever is open.</span>
+						</a>
+					</li>
+					<li data-reveal>
+						<a href="#vault">
+							<span class="problem-q">A stolen password file gives everything away.</span>
+							<span class="problem-a">The vault file is unreadable without the master password.</span>
+						</a>
+					</li>
+					<li data-reveal>
+						<a href="#plugins">
+							<span class="problem-q">New apps mean rebuilding the OS.</span>
+							<span class="problem-a">Apps install from a file, and ask for permissions.</span>
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="overview-side">
+				<dl class="overview-facts" data-reveal>
+					<div>
+						<dt>Role</dt>
+						<dd>Solo: design and code</dd>
+					</div>
+					<div>
+						<dt>Type</dt>
+						<dd>Desktop OS shell, 10 apps</dd>
+					</div>
+					<div>
+						<dt>Stack</dt>
+						<dd>C++20, Qt 6, CMake, Monocypher</dd>
+					</div>
+					<div>
+						<dt>Platforms</dt>
+						<dd>Windows and Linux</dd>
+					</div>
+				</dl>
+				<div class="overview-links" data-reveal>
+					<a class="btn btn-solid" href="https://github.com/eros-codes/OS" target="_blank" rel="noreferrer">
+						View the code on GitHub
+						<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 6L6 18M8 6h10v10" /></svg>
+					</a>
+				</div>
+			</div>
+		</section>
+
+		<!-- ============ LIFECYCLE ============ -->
+		<section class="case-section os-feature" id="lifecycle" aria-labelledby="lifecycle-title">
+			<div class="os-copy">
+				<h2 class="case-h2" id="lifecycle-title" data-reveal="wipe">Apps that keep running</h2>
+				<p data-reveal>
+					Every app follows the same contract. The OS creates it when it opens, tells it when it moves
+					to the background or comes back, and destroys it when it is closed. Leaving an app does not
+					close it: a game pauses, a timer keeps counting, music keeps playing.
+				</p>
+				<p data-reveal>
+					That is what makes the rest possible. When a timer ends while you are in another app, the
+					OS rings and shows the notification over whatever is on screen. Alarm is a service that
+					starts with the OS, so alarms ring even if the app was never opened. The home screen shows
+					what is working right now, and Recents shows every app still open.
+				</p>
+			</div>
+			<figure class="os-pair" data-reveal>
+				<img src="../assets/images/projects/os/live.webp" alt="The home screen while a timer counts down in the background" width="800" height="1640" loading="lazy">
+				<img src="../assets/images/projects/os/ringing.webp" alt="The timer's notification on top of the home screen" width="800" height="1640" loading="lazy">
+			</figure>
+		</section>
+
+		<!-- ============ DOTS ============ -->
+		<section class="case-section os-feature is-flipped" id="dots" aria-labelledby="dots-title">
+			<div class="os-copy">
+				<h2 class="case-h2" id="dots-title" data-reveal="wipe">Everything is dots</h2>
+				<p data-reveal>
+					The look comes from Nothing's phones, but nothing in it is borrowed. Every icon is an
+					11 by 11 grid with exactly one red dot, and one renderer draws them, along with the clock
+					rings, the spectrum and the transitions between screens.
+				</p>
+				<p data-reveal>
+					Because everything goes through that one renderer, one setting can change all of it at once.
+					The icons here are the OS's own, taken from its source. Try its two settings.
+				</p>
+			</div>
+			<figure class="os-dots" data-reveal>
+				<div class="os-dots-grid" id="os-dots-grid">
+					<img src="../assets/images/projects/os.webp" alt="The OS's app icons, each drawn as a grid of dots" width="360" height="360" loading="lazy">
+				</div>
+				<div class="os-dots-controls" id="os-dots-controls" hidden>
+					<div class="os-seg" role="group" aria-label="Dot shape">
+						<button type="button" data-shape="round" aria-pressed="true">ROUND</button>
+						<button type="button" data-shape="square" aria-pressed="false">SQUARE</button>
+					</div>
+					<div class="os-swatches" role="group" aria-label="Accent colour">
+						<button class="os-swatch" type="button" data-accent="#e8322b" style="--c: #e8322b" aria-pressed="true" aria-label="Red"></button>
+						<button class="os-swatch" type="button" data-accent="#ffb020" style="--c: #ffb020" aria-pressed="false" aria-label="Amber"></button>
+						<button class="os-swatch" type="button" data-accent="#f1f1f1" style="--c: #f1f1f1" aria-pressed="false" aria-label="White"></button>
+						<button class="os-swatch" type="button" data-accent="#3fd0e0" style="--c: #3fd0e0" aria-pressed="false" aria-label="Cyan"></button>
+					</div>
+				</div>
+			</figure>
+		</section>
+
+		<!-- ============ VAULT ============ -->
+		<section class="case-section" id="vault" aria-labelledby="vault-title">
+			<div class="os-copy">
+				<h2 class="case-h2" id="vault-title" data-reveal="wipe">A vault that cannot read itself</h2>
+				<p data-reveal>
+					Vault keeps passwords in one file, and the master password is never stored anywhere. A key is
+					derived from it with Argon2id, deliberately slow and memory-hungry: each guess costs 64 MB and
+					a fifth of a second, so trying passwords against a stolen file is impractical. Everything is
+					then encrypted with XChaCha20-Poly1305, with a fresh nonce on every save.
+				</p>
+				<p data-reveal>
+					A wrong password, or a single changed byte anywhere in the file, makes it refuse to open. That
+					is also how a wrong password is noticed: there is no password hash to attack. The key lives in
+					memory only while the vault is open, and it locks the moment you leave it.
+				</p>
+			</div>
+			<figure class="os-bytes" data-reveal>
+				<div class="os-bytes-row" aria-label="The vault file, from its first byte to its last">
+					<span class="is-header" style="--w: 3">OSVT<small>4</small></span>
+					<span class="is-header" style="--w: 2">version<small>1</small></span>
+					<span class="is-header" style="--w: 3">memory<small>4</small></span>
+					<span class="is-header" style="--w: 3">passes<small>4</small></span>
+					<span class="is-header" style="--w: 5">salt<small>16</small></span>
+					<span class="is-header" style="--w: 6">nonce<small>24</small></span>
+					<span class="is-secret" style="--w: 5">tag<small>16</small></span>
+					<span class="is-secret" style="--w: 12">encrypted items<small>the rest</small></span>
+				</div>
+				<p class="os-bytes-legend">
+					<span><i style="--k: #2b2b2b"></i>readable, but protected by the tag</span>
+					<span><i style="--k: #e8322b"></i>checked and encrypted</span>
+					<span>Numbers are sizes in bytes.</span>
+				</p>
+			</figure>
+			<ul class="os-proofs">
+				<li data-reveal>Argon2id matches the official RFC 9106 test vector, bit for bit.</li>
+				<li data-reveal>A wrong password, a flipped bit in the data, or one in the header: all refused.</li>
+				<li data-reveal>No name, username or password appears anywhere in the file.</li>
+				<li data-reveal>Changing the master key replaces the file only after the new one is safely written.</li>
+			</ul>
+		</section>
+
+		<!-- ============ SPECTRUM ============ -->
+		<section class="case-section os-feature" id="spectrum" aria-labelledby="spectrum-title">
+			<div class="os-copy">
+				<h2 class="case-h2" id="spectrum-title" data-reveal="wipe">A spectrum that is real</h2>
+				<p data-reveal>
+					The bars under the music player are not an animation. When a track loads, it is decoded in the
+					background, faster than it plays; every 40 ms of sound goes through an FFT, and the energy in
+					20 bands from 40 Hz to 16 kHz is kept. The player shows the slice at the playing position.
+				</p>
+				<p data-reveal>
+					To prove it, a test file plays three pure tones. Each lands in the band the formula predicts.
+				</p>
+			</div>
+			<figure class="os-spectrum" data-reveal>
+					<div class="os-tone"><b>220 Hz<small>band 5</small></b><div class="os-bands" aria-hidden="true"><span><i class="is-off"></i></span><span><i class="is-off"></i></span><span><i class="is-off"></i></span><span><i class="is-off"></i></span><span><i class="is-off"></i></span><span><i class="is-peak"></i><i class="is-peak"></i><i class="is-peak"></i><i class="is-peak"></i><i class="is-peak"></i></span><span><i></i><i></i><i></i></span><span><i class="is-off"></i></span><span><i class="is-off"></i></span><span><i class="is-off"></i></span><span><i class="is-off"></i></span><span><i class="is-off"></i></span><span><i class="is-off"></i></span><span><i class="is-off"></i></span><span><i class="is-off"></i></span><span><i class="is-off"></i></span><span><i class="is-off"></i></span><span><i class="is-off"></i></span><span><i class="is-off"></i></span><span><i class="is-off"></i></span></div></div>
+					<div class="os-tone"><b>1 kHz<small>band 10</small></b><div class="os-bands" aria-hidden="true"><span><i class="is-off"></i></span><span><i class="is-off"></i></span><span><i class="is-off"></i></span><span><i class="is-off"></i></span><span><i class="is-off"></i></span><span><i class="is-off"></i></span><span><i class="is-off"></i></span><span><i class="is-off"></i></span><span><i class="is-off"></i></span><span><i class="is-off"></i></span><span><i class="is-peak"></i><i class="is-peak"></i><i class="is-peak"></i><i class="is-peak"></i><i class="is-peak"></i></span><span><i class="is-off"></i></span><span><i class="is-off"></i></span><span><i class="is-off"></i></span><span><i class="is-off"></i></span><span><i class="is-off"></i></span><span><i class="is-off"></i></span><span><i class="is-off"></i></span><span><i class="is-off"></i></span><span><i class="is-off"></i></span></div></div>
+					<div class="os-tone"><b>5 kHz<small>band 16</small></b><div class="os-bands" aria-hidden="true"><span><i class="is-off"></i></span><span><i class="is-off"></i></span><span><i class="is-off"></i></span><span><i class="is-off"></i></span><span><i class="is-off"></i></span><span><i class="is-off"></i></span><span><i class="is-off"></i></span><span><i class="is-off"></i></span><span><i class="is-off"></i></span><span><i class="is-off"></i></span><span><i class="is-off"></i></span><span><i class="is-off"></i></span><span><i class="is-off"></i></span><span><i class="is-off"></i></span><span><i class="is-off"></i></span><span><i class="is-off"></i></span><span><i class="is-peak"></i><i class="is-peak"></i><i class="is-peak"></i><i class="is-peak"></i><i class="is-peak"></i></span><span><i class="is-off"></i></span><span><i class="is-off"></i></span><span><i class="is-off"></i></span></div></div>
+				<figcaption>Measured by the analyser: 20 bands, low to high. The red dot is the loudest band.</figcaption>
+			</figure>
+		</section>
+
+		<!-- ============ PLUGINS ============ -->
+		<section class="case-section os-feature is-flipped" id="plugins" aria-labelledby="plugins-title">
+			<div class="os-copy">
+				<h2 class="case-h2" id="plugins-title" data-reveal="wipe">Apps from a file</h2>
+				<p data-reveal>
+					The OS's core is a shared library, oskit, and an app can be built against it on its own. Install
+					it from Settings: the OS reads the file's description without running any of its code, checks
+					that it is an app for this OS, copies it into its own folder and puts it on the home screen.
+					Uninstalling closes it, unloads it and removes its files, data and permissions.
+				</p>
+				<p data-reveal>
+					An app lists what it may ask for. Built-in apps come with theirs; an installed app asks the
+					first time, and every answer can be changed in App Info. One honest limit: an installed app is
+					native code in the same process, so the permissions govern the OS's services, not the machine.
+					Real operating systems run each app in its own process for that reason.
+				</p>
+			</div>
+			<figure class="os-pair" data-reveal>
+				<img src="../assets/images/projects/os/permission.webp" alt="An installed app asking for permission to show notifications" width="800" height="1640" loading="lazy">
+				<img src="../assets/images/projects/os/app-info.webp" alt="App Info: the app's state, its storage and a permission that can be switched off" width="800" height="1640" loading="lazy">
+			</figure>
+		</section>
+
+		<!-- ============ BUGS ============ -->
+		<section class="case-section" id="bugs" aria-labelledby="bugs-title">
+			<h2 class="case-h2" id="bugs-title" data-reveal="wipe">Two bugs worth telling</h2>
+			<div class="os-bugs">
+				<article class="os-bug pane" data-reveal>
+					<h3>Enter pressed once, counted twice</h3>
+					<dl>
+						<div><dt>What happened</dt><dd>Creating a vault with Enter locked it straight away, and saving an item copied its password.</dd></div>
+						<div><dt>Why</dt><dd>A text field ignores Enter, so Qt passes the same key on to its parents, where it counted again. Qt stops passing a key only when it is both filtered and marked accepted.</dd></div>
+						<div><dt>Found by</dt><dd>Tracing every key event: two theories were wrong before the third was right.</dd></div>
+					</dl>
+				</article>
+				<article class="os-bug pane" data-reveal>
+					<h3>Signals that failed only on Windows</h3>
+					<dl>
+						<div><dt>What happened</dt><dd>An installed app reached the home screen only after a restart, and some notifications never appeared.</dd></div>
+						<div><dt>Why</dt><dd>Without explicit exports, Windows shows a DLL's functions to the program through stubs at other addresses, and Qt compares addresses to connect a signal. The connections failed without a word.</dd></div>
+						<div><dt>Fix</dt><dd>Every public class is marked <code>OSKIT_EXPORT</code>, and the library is built with hidden symbols everywhere, so a missing mark fails the build on Linux too.</dd></div>
+					</dl>
+				</article>
+			</div>
+			<p class="os-bugs-after" data-reveal>
+				Before calling it done, the whole OS ran through a scripted tour of every screen under
+				AddressSanitizer and UndefinedBehaviorSanitizer: no memory errors, no undefined behaviour and no
+				leaks from its own code.
+			</p>
+		</section>
+
+		<!-- ============ STACK ============ -->
+		<section class="case-section case-stack" aria-labelledby="stack-title">
+			<h2 class="case-h2" id="stack-title" data-reveal="wipe">Built with</h2>
+			<div class="stack-groups">
+				<div class="stack-group" data-reveal>
+					<span>APP</span>
+					<ul class="stack-icons">
+						<li><img src="../assets/SVGs/skills/c++.svg" alt="" width="40" height="40">C++20</li>
+						<li><span class="stack-mark" aria-hidden="true">Qt</span>Qt 6</li>
+						<li><span class="stack-mark" aria-hidden="true">mm</span>Qt Multimedia</li>
+					</ul>
+				</div>
+				<div class="stack-group" data-reveal>
+					<span>SECURITY</span>
+					<ul class="stack-icons">
+						<li><span class="stack-mark" aria-hidden="true">mc</span>Monocypher</li>
+						<li><span class="stack-mark" aria-hidden="true">a2</span>Argon2id</li>
+					</ul>
+				</div>
+				<div class="stack-group" data-reveal>
+					<span>BUILD AND TEST</span>
+					<ul class="stack-icons">
+						<li><span class="stack-mark" aria-hidden="true">cm</span>CMake</li>
+						<li><span class="stack-mark" aria-hidden="true">ct</span>CTest</li>
+						<li><span class="stack-mark" aria-hidden="true">as</span>Sanitizers</li>
+					</ul>
+				</div>
+			</div>
+		</section>
+
+		<!-- ============ GALLERY ============ -->
+		<section class="case-section case-gallery" aria-labelledby="gallery-title">
+			<h2 class="case-h2" id="gallery-title" data-reveal="wipe">Screens</h2>
+			<div class="os-shots">
+				<figure class="shot" data-reveal>
+					<img src="../assets/images/projects/os/home.webp" alt="The home screen" width="800" height="1640" loading="lazy">
+					<figcaption>Home</figcaption>
+				</figure>
+				<figure class="shot" data-reveal>
+					<img src="../assets/images/projects/os/timer.webp" alt="Setting a timer by minutes and seconds inside a ring of dots" width="800" height="1640" loading="lazy">
+					<figcaption>Timer</figcaption>
+				</figure>
+				<figure class="shot" data-reveal>
+					<img src="../assets/images/projects/os/music.webp" alt="The music player with its spectrum under the timeline" width="800" height="1640" loading="lazy">
+					<figcaption>Music</figcaption>
+				</figure>
+				<figure class="shot" data-reveal>
+					<img src="../assets/images/projects/os/vault.webp" alt="A vault item with its password hidden and a copy notice" width="800" height="1640" loading="lazy">
+					<figcaption>Vault</figcaption>
+				</figure>
+				<figure class="shot" data-reveal>
+					<img src="../assets/images/projects/os/recents.webp" alt="Recents: the apps still open, with their state" width="800" height="1640" loading="lazy">
+					<figcaption>Recents</figcaption>
+				</figure>
+				<figure class="shot" data-reveal>
+					<img src="../assets/images/projects/os/notification-centre.webp" alt="The notification centre with quick settings" width="800" height="1640" loading="lazy">
+					<figcaption>Notification centre</figcaption>
+				</figure>
+				<figure class="shot" data-reveal>
+					<img src="../assets/images/projects/os/app-menu.webp" alt="The menu that opens when you hold an app" width="800" height="1640" loading="lazy">
+					<figcaption>Hold an app</figcaption>
+				</figure>
+				<figure class="shot" data-reveal>
+					<img src="../assets/images/projects/os/settings.webp" alt="Settings, applied to the whole OS at once" width="800" height="1640" loading="lazy">
+					<figcaption>Settings</figcaption>
+				</figure>
+			</div>
+		</section>
+
+		<!-- ============ NEXT ============ -->
+		<section class="case-next pane" aria-label="Keep exploring">
+			<a class="next-link" href="../bank/">
+				<span>Next project</span>
+				<strong>Bank</strong>
+			</a>
+			<a class="btn btn-mint" href="mailto:saghafiarvin@gmail.com">
+				Start a conversation
+				<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 6L6 18M8 6h10v10" /></svg>
+			</a>
+		</section>
+	</main>
+
+	<footer class="site-footer">
+		<div class="footer-main">
+			<div class="footer-brand">
+				<a class="site-logo" href="../" aria-label="Back to Arvin's home">ARVIN<span>.</span></a>
+				<p>Building thoughtful products with logic, creativity, and a never-settling mindset.</p>
+			</div>
+			<div class="footer-column">
+				<h2 class="footer-heading">Explore</h2>
+				<nav class="footer-links" aria-label="Footer navigation">
+					<a href="../#home">Home</a>
+					<a href="../#about">About</a>
+					<a href="../#projects">Projects</a>
+					<a href="../#contact">Contact</a>
+				</nav>
+			</div>
+			<div class="footer-column">
+				<h2 class="footer-heading">Connect</h2>
+				<nav class="footer-socials" aria-label="Social links">
+					<a href="mailto:saghafiarvin@gmail.com">Email me
+						<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
+							<path d="M0 0h24v24H0z" fill="none" />
+							<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+								stroke-width="2" d="M18 6L6 18M8 6h10v10" />
+						</svg>
+					</a>
+					<a href="https://github.com/eros-codes" target="_blank" rel="noreferrer">GitHub
+						<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
+							<path d="M0 0h24v24H0z" fill="none" />
+							<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+								stroke-width="2" d="M18 6L6 18M8 6h10v10" />
+						</svg>
+					</a>
+				</nav>
+			</div>
+		</div>
+		<div class="footer-bottom">
+			<p>© 2026 Arvin Saghafi. Crafted with intent.</p>
+		</div>
+	</footer>
+
+	<script type="module" src="../assets/js/os/os.js"></script>
+</body>
+
+</html>

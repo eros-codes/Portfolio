@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Rivo — Real-time encrypted chat | Arvin Saghafi</title>
 	<meta name="description"
-		content="Rivo is a real-time chat app by Arvin Saghafi. A chat stays active until its last message is seen, archived chats disappear from the main screen, messages can open once or open later, and every message is encrypted with HashiCorp Vault before it is stored.">
+		content="Rivo, a real-time chat app by Arvin Saghafi: chats sort themselves, messages can open once or later, and every message is encrypted with HashiCorp Vault.">
 	<meta name="author" content="Arvin Saghafi">
 	<meta name="robots" content="index, follow">
 	<meta name="theme-color" content="#000000">
@@ -20,12 +20,16 @@
 	<meta property="og:description"
 		content="A real-time chat app that sorts itself, hides archived chats for real, and adds one-time messages, time capsules and Vault-backed encryption.">
 	<meta property="og:url" content="https://www.aboutarvin.ir/rivo/">
-	<meta property="og:image" content="https://www.aboutarvin.ir/assets/images/projects/rivo.webp">
+	<meta property="og:image" content="https://www.aboutarvin.ir/assets/images/og/rivo.jpg">
+	<meta property="og:image:width" content="1200">
+	<meta property="og:image:height" content="630">
+	<meta property="og:image:alt" content="The Rivo case study: a chat window with one-time messages and time capsules">
 	<meta name="twitter:card" content="summary_large_image">
 	<meta name="twitter:title" content="Rivo — Real-time encrypted chat">
 	<meta name="twitter:description"
 		content="A real-time chat app that sorts itself, hides archived chats for real, and adds one-time messages, time capsules and Vault-backed encryption.">
-	<meta name="twitter:image" content="https://www.aboutarvin.ir/assets/images/projects/rivo.webp">
+	<meta name="twitter:image" content="https://www.aboutarvin.ir/assets/images/og/rivo.jpg">
+	<meta name="twitter:image:alt" content="The Rivo case study: a chat window with one-time messages and time capsules">
 
 	<script type="application/ld+json">
 		{
@@ -38,7 +42,7 @@
 					"description": "A real-time chat application where a conversation stays active until its last message is seen, archived chats are hidden from the main screen, messages can be one-time or time capsules, and every message is stored with envelope encryption backed by HashiCorp Vault.",
 					"url": "https://www.aboutarvin.ir/rivo/",
 					"image": "https://www.aboutarvin.ir/assets/images/projects/rivo.webp",
-					"codeRepository": "https://github.com/eros-codes",
+					"codeRepository": "https://github.com/eros-codes/Rivo",
 					"programmingLanguage": ["JavaScript", "SQL"],
 					"runtimePlatform": "Node.js",
 					"keywords": ["real-time chat", "Socket.IO", "envelope encryption", "HashiCorp Vault", "Prisma", "PostgreSQL"],
@@ -87,20 +91,13 @@
 	<link rel="preload" as="font" type="font/woff2" href="../assets/fonts/Roah/roaheregular-maoan.woff2" crossorigin>
 
 	<!-- Shared with the homepage so the header and footer are pixel-identical -->
-	<link rel="stylesheet" href="../assets/stylesheets/settings.css">
-	<link rel="stylesheet" href="../assets/stylesheets/laptop/header.css" media="screen and (min-width: 1025px)">
-	<link rel="stylesheet" href="../assets/stylesheets/laptop/footer.css" media="screen and (min-width: 1025px)">
-	<link rel="stylesheet" href="../assets/stylesheets/tablet/header.css"
-		media="screen and (min-width: 768px) and (max-width: 1024px)">
-	<link rel="stylesheet" href="../assets/stylesheets/tablet/footer.css"
-		media="screen and (min-width: 768px) and (max-width: 1024px)">
-	<link rel="stylesheet" href="../assets/stylesheets/mobile/header.css"
-		media="screen and (min-width: 320px) and (max-width: 767px)">
-	<link rel="stylesheet" href="../assets/stylesheets/mobile/footer.css"
-		media="screen and (min-width: 320px) and (max-width: 767px)">
+	<link rel="stylesheet" href="../assets/stylesheets/base/settings.css">
+	<link rel="stylesheet" href="../assets/stylesheets/layout/header.css">
+	<link rel="stylesheet" href="../assets/stylesheets/layout/footer.css">
 
 	<!-- Project template, shared by every case study page -->
-	<link rel="stylesheet" href="../assets/stylesheets/project/project.css">
+	<link rel="stylesheet" href="../assets/stylesheets/case-study/case-study.css">
+	<link rel="stylesheet" href="../assets/stylesheets/rivo/rivo.css">
 </head>
 
 <!-- Each case study sets its own accent; everything else comes from the template -->
@@ -156,7 +153,6 @@
 							<span class="chat-status">online</span>
 						</span>
 					</div>
-
 
 					<ol class="chat-log">
 						<li class="msg msg-them" data-step="0">Did the build pass?</li>
@@ -261,7 +257,7 @@
 
 				<div class="overview-links" data-reveal>
 					<!-- TODO: point this at the Rivo repository -->
-					<a class="btn btn-solid" href="https://github.com/eros-codes" target="_blank" rel="noreferrer">
+					<a class="btn btn-solid" href="https://github.com/eros-codes/rivo" target="_blank" rel="noreferrer">
 						View the code on GitHub
 						<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"
 							aria-hidden="true">
@@ -554,12 +550,12 @@
 
 		<!-- ============ NEXT ============ -->
 		<section class="case-next pane" aria-label="Keep exploring">
-			<a class="next-link" href="../bank/">
+			<a class="next-link" href="../os/">
 				<span>Next project</span>
-				<strong>Bank</strong>
+				<strong>OS</strong>
 			</a>
-			<a class="btn btn-mint" href="../bank/">
-				Next Project
+			<a class="btn btn-mint" href="mailto:saghafiarvin@gmail.com">
+				Start a conversation
 				<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true">
 					<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
 						stroke-width="2" d="M18 6L6 18M8 6h10v10" />
@@ -608,7 +604,7 @@
 		</div>
 	</footer>
 
-	<script type="module" src="../assets/js/project/rivo/index.js"></script>
+	<script type="module" src="../assets/js/rivo/index.js"></script>
 </body>
 
 </html>

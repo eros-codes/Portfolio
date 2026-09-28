@@ -1,30 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-
 	<url>
 		<loc>https://www.aboutarvin.ir/</loc>
-		<lastmod>2026-09-19</lastmod>
+		<lastmod>2026-09-28</lastmod>
 		<changefreq>weekly</changefreq>
 		<priority>1.0</priority>
 	</url>
 	<url>
 		<loc>https://www.aboutarvin.ir/rivo/</loc>
-		<lastmod>2026-09-21</lastmod>
+		<lastmod>2026-09-28</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://www.aboutarvin.ir/os/</loc>
+		<lastmod>2026-09-28</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.8</priority>
 	</url>
 	<url>
 		<loc>https://www.aboutarvin.ir/bank/</loc>
-		<lastmod>2026-09-25</lastmod>
+		<lastmod>2026-09-28</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.8</priority>
 	</url>
 	<url>
-		<loc>https://www.aboutarvin.ir/reservation/</loc>
-		<lastmod>2026-09-26</lastmod>
+		<loc>https://www.aboutarvin.ir/roof/</loc>
+		<lastmod>2026-09-28</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.8</priority>
 	</url>
-
 </urlset>

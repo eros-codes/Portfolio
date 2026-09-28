@@ -1,14 +1,15 @@
 # Arvin Saghafi
 
-> Arvin Saghafi (آروین ثقفی) is a backend-focused software developer and Computer Engineering student at the University of Tabriz, Iran. This site is his portfolio, with in-depth case studies of Rivo, a real-time encrypted chat application; WA Bank, a Java and JavaFX banking system; and Reservation, a table booking system.
+> Arvin Saghafi (آروین ثقفی) is a backend-focused software developer and Computer Engineering student at the University of Tabriz, Iran. This site is his portfolio, with in-depth case studies of Rivo, a real-time encrypted chat application; OS, a mini operating system shell in C++ and Qt; WA Bank, a Java and JavaFX banking system; and Roof, a café's website and table booking system.
 Arvin builds backend systems, REST APIs, real-time applications and database-driven software, with a particular interest in security and in interfaces that make complex systems feel simple.
 
 ## Pages
 
 - [Home](https://www.aboutarvin.ir/): About Arvin, his skills, education and all of his projects
 - [Rivo case study](https://www.aboutarvin.ir/rivo/): A real-time chat app that sorts conversations by whether they are still alive, with one-time messages, time capsules and Vault-backed encryption
+- [OS case study](https://www.aboutarvin.ir/os/): A mini operating system shell in C++ and Qt, with apps that keep running in the background, an encrypted password vault, installable apps with permissions and a dot-matrix interface
 - [WA Bank case study](https://www.aboutarvin.ir/bank/): A desktop banking system with separate apps for customers, employees and the bank manager, built to feel like visiting a real branch
-- [Reservation case study](https://www.aboutarvin.ir/reservation/): A table booking system where guests pick their exact table on the real floor plan, with automatic table combinations and no double bookings
+- [Roof case study](https://www.aboutarvin.ir/roof/): A café's website and menu, run from an admin panel, and a table booking system where guests pick their exact table on the real floor plan
 
 ## Identity
 
@@ -25,9 +26,9 @@ Arvin builds backend systems, REST APIs, real-time applications and database-dri
 - Languages: Java, JavaScript, TypeScript, Python, C#, C++, SQL
 - Backend: Node.js, Express.js, NestJS, REST APIs, Socket.IO, real-time applications
 - Frontend: HTML, CSS, React
-- Databases: PostgreSQL, MySQL, Prisma
-- Desktop: JavaFX
-- Security: HashiCorp Vault, envelope encryption
+- Databases: PostgreSQL, MySQL, Prisma, TypeORM
+- Desktop: JavaFX, C++ with Qt 6
+- Security: HashiCorp Vault, envelope encryption, Argon2id, XChaCha20-Poly1305
 - Tools: Git
 
 ## Projects
@@ -46,6 +47,23 @@ Security: Rivo uses envelope encryption. Each message is encrypted with a data k
 
 Technologies: Node.js, Express.js, Socket.IO, Prisma, PostgreSQL, HashiCorp Vault, JavaScript (ES modules), HTML, CSS.
 
+### OS
+
+OS is a mini operating system shell for the desktop, written by Arvin Saghafi in C++20 with Qt 6. It is not a kernel: it is the part people see and use. Case study: https://www.aboutarvin.ir/os/ Code: https://github.com/eros-codes/OS
+
+He built it alone. It started as his first C++ project, a menu with a clock in it, and he rebuilt it from scratch around a real app model.
+
+- Apps have a lifecycle: the OS creates an app when it opens, tells it when it moves to the background or returns, and destroys it when it is closed. Leaving an app does not close it: a game pauses, a timer keeps counting, music keeps playing.
+- When a timer ends while another app is open, the OS rings and shows the notification over whatever is on screen. Alarm is a service that starts with the OS, so alarms ring even if the app was never opened. Recents lists every open app.
+- Each app keeps its data in its own folder, and the OS shows how much each one uses.
+- Vault stores passwords in one encrypted file. The master password is never stored; a key is derived from it with Argon2id (64 MB, 3 passes), and the data is encrypted with XChaCha20-Poly1305 with a fresh nonce on every save. A wrong password or any changed byte makes the file refuse to open. Its Argon2id implementation matches the RFC 9106 test vector.
+- The music player's spectrum is real: each track is decoded in the background and every 40 ms of sound goes through an FFT into 20 bands.
+- Apps can be installed from a plugin file. The OS's core is a shared library, oskit, that apps are built against. The OS reads a file's metadata without running its code before installing it. Apps must be granted permissions for notifications, the clipboard and files; installed apps ask the first time, and answers can be changed in App Info.
+- The whole interface is drawn in dots: every icon is an 11 by 11 grid with one accent dot, and one renderer draws icons, clock rings, the spectrum and screen transitions.
+- The OS was run under AddressSanitizer and UndefinedBehaviorSanitizer through a scripted tour of every screen, with no memory errors, no undefined behaviour and no leaks from its own code.
+
+Technologies: C++20, Qt 6 (Widgets, Multimedia), CMake, CTest, Monocypher.
+
 ### WA Bank
 
 WA Bank is a desktop banking system built with Java, JavaFX and MySQL. Case study: https://www.aboutarvin.ir/bank/
@@ -63,11 +81,13 @@ Customer features: card, account and IBAN transfers (Paya, Satna and instant), d
 
 Technologies: Java, JavaFX, FXML, CSS, MySQL, JDBC, Maven.
 
-### Reservation
+### Roof
 
-Reservation is a table reservation system, built for a café called Roof but not tied to any one venue. Case study: https://www.aboutarvin.ir/reservation/
+Roof is a café's whole digital side: its website and menu, and a system for booking tables. Case study: https://www.aboutarvin.ir/roof/
 
-It was built by two developers: a teammate built the front end, including the interactive floor plan, and Arvin Saghafi built the back end: the API, the data model, the availability and booking engine, payments, SMS one-time codes and admin roles.
+The website was built entirely by Arvin Saghafi: a landing page, a menu split into café, restaurant and breakfast, and a feedback page, with an admin panel where staff manage products with photos, categories, guest reviews and admin accounts. Admins come in two roles, sign-in is rate-limited, and the dashboard counts each day's visits. Code: https://github.com/eros-codes/Cafe
+
+The booking system was built by two developers: a teammate built the front end, including the interactive floor plan, and Arvin Saghafi built the back end: the API, the data model, the availability and booking engine, payments, SMS one-time codes and admin roles. Code: https://github.com/eros-codes/Restaurant-Reservation
 
 - Guests choose their exact table on the café's real floor plan, not just a time slot. Tables that fit the group exactly are shown darker than tables with seats to spare.
 - Each table has its own seat count and guest range; a six-seat table can also take a group of five.
@@ -80,18 +100,7 @@ Technologies: Node.js, Express.js, Prisma, PostgreSQL, Zod, JWT, bcrypt, Helmet.
 
 ### Shop
 
-Shop is an e-commerce web application developed by Arvin Saghafi, with product management and a REST API.
-
-Technologies: React, NestJS, TypeScript, PostgreSQL.
-
-### Side projects
-
-- Cafe: a web application project
-- PassVault: a password management application
-- IG Downloader: a media downloading application
-- Task Manager: a productivity application for managing tasks
-- InfiniTic: a software project
-- To Do List: a task management application
+Shop is an e-commerce back end with a REST API, built by Arvin Saghafi with NestJS, TypeScript, TypeORM and MySQL. Its front end is in progress.
 
 ## Frequently asked questions
 
@@ -101,11 +110,11 @@ Arvin Saghafi is a backend-focused software developer and Computer Engineering s
 
 ### What technologies does Arvin Saghafi use?
 
-Java, JavaScript, TypeScript, Python, C#, C++ and SQL; Node.js, Express.js, NestJS and Socket.IO on the backend; React, HTML and CSS on the frontend; PostgreSQL, MySQL and Prisma for data; JavaFX for desktop applications; and HashiCorp Vault for key management.
+Java, JavaScript, TypeScript, Python, C#, C++ and SQL; Node.js, Express.js, NestJS and Socket.IO on the backend; React, HTML and CSS on the frontend; PostgreSQL, MySQL, Prisma and TypeORM for data; JavaFX and Qt for desktop applications; and HashiCorp Vault, Argon2id and XChaCha20-Poly1305 for security.
 
 ### What projects has Arvin Saghafi built?
 
-His main projects are Rivo, a real-time encrypted chat application; WA Bank, a Java and JavaFX banking system; Reservation, a table booking system where guests pick their exact table on a floor plan; and Shop, an e-commerce application.
+His selected work is Rivo, a real-time encrypted chat application; OS, a mini operating system shell in C++ and Qt; WA Bank, a Java and JavaFX banking system; Roof, a café's website and table booking system; and Shop, an e-commerce back end in NestJS.
 
 ### What is Rivo?
 
@@ -122,6 +131,14 @@ WA Bank is a desktop banking system built with Java, JavaFX and MySQL, with sepa
 ### What was Arvin Saghafi's role in WA Bank?
 
 WA Bank was built by a team of three. Arvin Saghafi wrote all of the Java: the application logic, the database layer, the validation and the interactive features. His two teammates built the JavaFX screens.
+
+### What is OS?
+
+OS is a mini operating system shell for the desktop that Arvin Saghafi built alone in C++20 with Qt 6. Its apps keep working in the background, alarms and timers ring over whatever is open, a password vault encrypts everything with Argon2id and XChaCha20-Poly1305, apps can be installed from a file and must be granted permissions, and the interface is drawn in dots.
+
+### What is Roof?
+
+Roof is a café's website and table booking system. Arvin Saghafi built the website and its admin panel alone, and the booking system's back end with a teammate who built its front end. Guests pick their exact table on the café's real floor plan, and a serializable transaction makes double booking impossible.
 
 ### How can I contact Arvin Saghafi?
 

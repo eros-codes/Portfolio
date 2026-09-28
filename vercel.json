@@ -1,3 +1,9 @@
 {
-	"trailingSlash": true
+	"trailingSlash": true,
+	"redirects": [
+		{ "source": "/reservation", "destination": "/roof/", "permanent": true },
+		{ "source": "/reservation/", "destination": "/roof/", "permanent": true },
+		{ "source": "/side-projects", "destination": "/", "permanent": true },
+		{ "source": "/side-projects/", "destination": "/", "permanent": true }
+	]
 }

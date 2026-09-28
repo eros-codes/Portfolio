@@ -1,0 +1,500 @@
+/* =========================================================
+   OS case study — what only this page uses. The shared
+   template is case-study/case-study.css.
+   The OS itself is black, white and one red; its screens
+   sit on the site's paper like a device on a desk.
+   ========================================================= */
+
+.case-os {
+	--os-black: #000;
+	--os-surface: #0e0e0e;
+	--os-line: #262626;
+	--os-text: #f1f1f1;
+	--os-muted: #8c8c8c;
+	--os-red: #e8322b;
+}
+
+/* ---- the device: a phone-shaped frame around real screenshots ---- */
+.os-device {
+	position: relative;
+	width: min(16rem, 62vw);
+	aspect-ratio: 800 / 1640;
+	margin-inline: auto;
+	border-radius: 2.4rem;
+	padding: 0.55rem;
+	background: #111;
+	box-shadow:
+		0 0 0 1px #2a2a2a,
+		0 2.5rem 5rem rgba(0, 0, 0, 0.35),
+		0 0.6rem 1.4rem rgba(0, 0, 0, 0.25);
+}
+
+.os-device .os-screens {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	border-radius: 1.95rem;
+	background: var(--os-black);
+}
+
+.os-screen {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	opacity: 0;
+	transition: opacity 0.9s var(--ease-out);
+}
+
+.os-screen.is-on {
+	opacity: 1;
+}
+
+/* without JavaScript, or with reduced motion, only the home screen shows */
+.os-screen:first-child {
+	opacity: 1;
+}
+
+.os-cycling .os-screen:first-child:not(.is-on) {
+	opacity: 0;
+}
+
+/* ---- two-column feature sections ---- */
+.os-feature {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+	gap: 2.5rem 4.5rem;
+	align-items: center;
+}
+
+.os-feature.is-flipped .os-copy {
+	order: 2;
+}
+
+.os-copy p {
+	max-width: 34rem;
+	font-size: 1.05rem;
+	line-height: 1.85;
+	color: var(--ink-soft);
+}
+
+.os-copy p + p {
+	margin-top: 1rem;
+}
+
+.os-copy code,
+.os-bug code {
+	font-size: 0.92em;
+	padding: 0.08em 0.35em;
+	border-radius: 0.35em;
+	background: rgba(0, 0, 0, 0.07);
+}
+
+/* two screenshots side by side, the second slightly lower */
+.os-pair {
+	display: flex;
+	justify-content: center;
+	gap: 1.2rem;
+	margin: 0;
+}
+
+.os-pair img {
+	width: min(12.5rem, 42%);
+	height: auto;
+	border-radius: 1.4rem;
+	border: 0.35rem solid #111;
+	box-shadow: 0 1.4rem 3rem rgba(0, 0, 0, 0.28);
+}
+
+.os-pair img:nth-child(2) {
+	margin-top: 2.2rem;
+}
+
+.os-pair figcaption,
+.os-figure-note {
+	font-size: 0.85rem;
+	color: var(--ink-mute);
+}
+
+/* ---- the dot demo: the OS's real icon bitmaps, drawn here ---- */
+.os-dots {
+	margin: 0;
+	padding: 1.4rem;
+	border-radius: 1.6rem;
+	background: var(--os-black);
+	color: var(--os-text);
+	box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.3);
+}
+
+.os-dots-grid {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: 0.8rem;
+}
+
+.os-dots-grid > img {
+	grid-column: 1 / -1;
+	width: 100%;
+	height: auto;
+	border-radius: 1rem;
+}
+
+.os-tile {
+	display: grid;
+	justify-items: center;
+	gap: 0.5rem;
+	padding: 0.9rem 0.4rem 0.7rem;
+	border-radius: 1.2rem;
+	background: var(--os-surface);
+	border: 1px solid var(--os-line);
+}
+
+.os-tile svg {
+	width: 58%;
+	height: auto;
+}
+
+.os-tile span {
+	font: 600 0.62rem/1 ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+	letter-spacing: 0.12em;
+	color: var(--os-muted);
+}
+
+.os-dots-controls {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	gap: 0.8rem;
+	margin-top: 1.1rem;
+}
+
+.os-seg {
+	display: inline-flex;
+	padding: 0.2rem;
+	border-radius: 999px;
+	border: 1px solid var(--os-line);
+}
+
+.os-seg button,
+.os-swatch {
+	appearance: none;
+	border: 0;
+	cursor: pointer;
+	font: 600 0.7rem/1 ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+	letter-spacing: 0.12em;
+}
+
+.os-seg button {
+	padding: 0.55rem 0.9rem;
+	border-radius: 999px;
+	background: transparent;
+	color: var(--os-muted);
+}
+
+.os-seg button[aria-pressed="true"] {
+	background: var(--os-text);
+	color: var(--os-black);
+}
+
+.os-swatches {
+	display: inline-flex;
+	gap: 0.55rem;
+}
+
+.os-swatch {
+	width: 1.5rem;
+	height: 1.5rem;
+	border-radius: 50%;
+	background: var(--c);
+	outline: 2px solid transparent;
+	outline-offset: 3px;
+}
+
+.os-swatch[aria-pressed="true"] {
+	outline-color: var(--os-text);
+}
+
+.os-seg button:focus-visible,
+.os-swatch:focus-visible {
+	outline: 2px solid var(--os-red);
+	outline-offset: 3px;
+}
+
+/* ---- the vault file, byte by byte ---- */
+.os-bytes {
+	margin: 0;
+}
+
+.os-bytes-row {
+	display: flex;
+	gap: 0.25rem;
+	font: 600 0.72rem/1.2 ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+}
+
+.os-bytes-row > span {
+	flex: var(--w) 1 0;
+	min-width: 0;
+	display: grid;
+	gap: 0.3rem;
+	padding: 0.7rem 0.45rem;
+	border-radius: 0.6rem;
+	background: #1a1a1a;
+	color: var(--os-text);
+	text-align: center;
+	overflow-wrap: anywhere;
+}
+
+.os-bytes-row > span small {
+	font-weight: 400;
+	color: var(--os-muted);
+}
+
+.os-bytes-row > span.is-header {
+	background: #2b2b2b;
+}
+
+.os-bytes-row > span.is-secret {
+	background: var(--os-red);
+	color: #fff;
+}
+
+.os-bytes-row > span.is-secret small {
+	color: rgba(255, 255, 255, 0.8);
+}
+
+.os-bytes-legend {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.6rem 1.4rem;
+	margin-top: 0.9rem;
+	font-size: 0.85rem;
+	color: var(--ink-mute);
+}
+
+.os-bytes-legend i {
+	display: inline-block;
+	width: 0.8em;
+	height: 0.8em;
+	margin-right: 0.4em;
+	border-radius: 0.2em;
+	vertical-align: -0.05em;
+	background: var(--k);
+}
+
+.os-proofs {
+	margin-top: 1.6rem;
+	display: grid;
+	gap: 0.55rem;
+	padding: 0;
+	list-style: none;
+}
+
+.os-proofs li {
+	padding-left: 1.5rem;
+	position: relative;
+	line-height: 1.6;
+	color: var(--ink-soft);
+}
+
+.os-proofs li::before {
+	content: "";
+	position: absolute;
+	left: 0.2rem;
+	top: 0.55em;
+	width: 0.5rem;
+	height: 0.5rem;
+	border-radius: 50%;
+	background: var(--accent);
+}
+
+/* ---- the spectrum test: three tones, three bands ---- */
+.os-spectrum {
+	margin: 0;
+	padding: 1.4rem 1.4rem 1.1rem;
+	border-radius: 1.6rem;
+	background: var(--os-black);
+	color: var(--os-text);
+}
+
+.os-tone {
+	display: grid;
+	grid-template-columns: 6.5rem minmax(0, 1fr);
+	align-items: end;
+	gap: 1rem;
+	padding: 0.7rem 0;
+	border-bottom: 1px solid #1c1c1c;
+}
+
+.os-tone:last-of-type {
+	border-bottom: 0;
+}
+
+.os-tone b {
+	font: 600 0.78rem/1.3 ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+	letter-spacing: 0.06em;
+}
+
+.os-tone b small {
+	display: block;
+	font-weight: 400;
+	color: var(--os-muted);
+}
+
+.os-bands {
+	display: grid;
+	grid-template-columns: repeat(20, minmax(0, 1fr));
+	align-items: end;
+	gap: 0.18rem;
+}
+
+.os-bands > span {
+	display: grid;
+	gap: 0.18rem;
+	justify-items: center;
+}
+
+.os-bands i {
+	width: 0.42rem;
+	height: 0.42rem;
+	border-radius: 50%;
+	background: var(--os-text);
+}
+
+.os-bands i.is-peak {
+	background: var(--os-red);
+}
+
+.os-bands i.is-off {
+	background: #262626;
+}
+
+.os-spectrum figcaption {
+	margin-top: 0.9rem;
+	font-size: 0.8rem;
+	color: var(--os-muted);
+}
+
+/* ---- the two debugging stories ---- */
+.os-bugs {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 1.4rem;
+	margin-top: 2rem;
+}
+
+/* the cards are the template's dark glass (.pane): light text, like its notes */
+.os-bug {
+	padding: 1.6rem 1.7rem;
+	border-radius: 1.4rem;
+	color: #fff;
+}
+
+.os-bug h3 {
+	font-size: 1.2rem;
+	line-height: 1.35;
+	margin-bottom: 0.9rem;
+	color: #fff;
+}
+
+.os-bug dl {
+	display: grid;
+	gap: 0.75rem;
+}
+
+.os-bug dt {
+	font-size: 0.72rem;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	color: rgba(255, 255, 255, 0.55);
+}
+
+.os-bug dd {
+	margin: 0.2rem 0 0;
+	line-height: 1.7;
+	color: rgba(255, 255, 255, 0.82);
+}
+
+.os-bug code {
+	background: rgba(255, 255, 255, 0.12);
+}
+
+.os-bugs-after {
+	margin-top: 1.6rem;
+	max-width: 44rem;
+	line-height: 1.8;
+	color: var(--ink-soft);
+}
+
+/* ---- the gallery: portrait screens, so narrower columns ---- */
+.os-shots {
+	display: grid;
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+	gap: 1.6rem 1.2rem;
+}
+
+/* the template crops shots to 16:10; these are phone screens, so keep their shape */
+.os-shots .shot img {
+	width: 100%;
+	height: auto;
+	aspect-ratio: 800 / 1640;
+	object-fit: cover;
+	border-radius: 1.2rem;
+	border: 0.3rem solid #111;
+}
+
+/* ---- tablet and phone ---- */
+@media screen and (max-width: 1024px) {
+	.os-feature,
+	.os-feature.is-flipped {
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	.os-feature.is-flipped .os-copy {
+		order: 0;
+	}
+
+	.os-bugs {
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	.os-shots {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+	}
+}
+
+@media screen and (max-width: 767px) {
+	.os-shots {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+
+	.os-bytes-row {
+		flex-wrap: wrap;
+	}
+
+	.os-bytes-row > span {
+		flex-basis: 30%;
+	}
+
+	.os-tone {
+		grid-template-columns: minmax(0, 1fr);
+		gap: 0.6rem;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.os-screen {
+		transition: none;
+	}
+}
+
+/* The template sets "Case study" into the title's top right corner. Over a
+   two-letter title it would cover both letters, so here it starts where
+   the title ends, like a superscript. */
+.case-os .case .case-kicker {
+	right: auto;
+	left: calc(100% - 0.2em);
+	white-space: nowrap;
+}

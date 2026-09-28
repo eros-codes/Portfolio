@@ -1,0 +1,951 @@
+/* =========================================================
+   CASE STUDY TEMPLATE
+   Shared by every project page. A page sets only two things
+   on <body>:  --accent  and  --accent-ink.
+   Everything else — glass, type, spacing — comes from here
+   and from the homepage's own settings.css.
+
+   No display:none is used anywhere in this file.
+   ========================================================= */
+
+:root {
+	--paper: #ededed;
+	--ink: #000;
+	--ink-soft: #2a2a2a;
+	--ink-mute: #666;
+	--label: #777;
+	--mint: #a9ffbf;
+	--ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+	--noise: url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.65' numOctaves='4'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+body {
+	gap: 0;
+}
+
+/* fallback if a page forgets to set its own accent: the site's mint */
+
+.project-page {
+	--accent: #a9ffbf;
+	--accent-ink: #0c2414;
+}
+
+/* =========================================================
+   GLASS — the homepage hero-card, as a reusable surface
+   ========================================================= */
+
+.pane {
+	position: relative;
+	overflow: hidden;
+	border-radius: 1.25rem;
+	border: 1px solid rgba(255, 255, 255, 0.14);
+	background: linear-gradient(145deg,
+			rgba(62, 62, 62, 0.62) 3%,
+			rgba(14, 14, 14, 0.9) 35%,
+			rgba(0, 0, 0, 0.78));
+	box-shadow:
+		inset 0 1px 1px rgba(255, 255, 255, 0.18),
+		inset 0 -30px 50px rgba(0, 0, 0, 0.45),
+		0 25px 60px rgba(0, 0, 0, 0.22);
+	color: #fff;
+}
+
+.pane::before,
+.pane::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	pointer-events: none;
+}
+
+.pane::before {
+	background-image: var(--noise);
+	opacity: 0.8;
+	mix-blend-mode: soft-light;
+}
+
+.pane::after {
+	background: linear-gradient(120deg,
+			rgba(255, 255, 255, 0.16),
+			transparent 25%,
+			transparent 70%,
+			rgba(255, 255, 255, 0.04));
+	opacity: 0.9;
+}
+
+.pane>* {
+	position: relative;
+	z-index: 1;
+}
+
+/* =========================================================
+   PAGE FRAME
+   ========================================================= */
+
+.case {
+	gap: clamp(5rem, 9vw, 8rem);
+	padding-bottom: 2rem;
+}
+
+.case-section {
+	width: min(72rem, 88%);
+}
+
+.case [id] {
+	scroll-margin-top: 6rem;
+}
+
+.case-h2 {
+	font-size: 3.8rem;
+	font-weight: 400;
+	line-height: 1;
+	letter-spacing: -0.01em;
+	margin-bottom: 2rem;
+}
+
+.case p,
+.case dd,
+.case figcaption {
+	font-family: "Poppins", sans-serif;
+}
+
+.case code {
+	font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+	font-size: 0.92em;
+}
+
+/* ---- buttons ---- */
+
+.btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.6rem;
+	padding: 0.85rem 1.5rem;
+	border-radius: 999px;
+	font-family: "Roaheregular", serif;
+	font-size: 1.25rem;
+	line-height: 1;
+	transition:
+		scale 0.3s var(--ease-out),
+		background-color 0.3s ease,
+		color 0.3s ease;
+}
+
+.btn:hover {
+	scale: 1.03;
+}
+
+.btn:focus-visible,
+.case-back:focus-visible,
+.next-link:focus-visible {
+	outline: 2px solid var(--ink);
+	outline-offset: 4px;
+}
+
+.btn-solid {
+	background: var(--ink);
+	color: #fff;
+}
+
+.btn-mint {
+	background: var(--mint);
+	color: #000;
+}
+
+/* =========================================================
+   HERO — mirrors the homepage: kicker, huge title, a central
+   object overlapping the title, glass notes floating beside it
+   ========================================================= */
+
+.case-hero {
+	width: min(76rem, 92%);
+	padding-top: 6rem;
+	display: grid;
+	justify-items: center;
+}
+
+.case-back {
+	justify-self: start;
+	display: inline-flex;
+	align-items: center;
+	gap: 0.45rem;
+	font-family: "Poppins", sans-serif;
+	font-size: 0.85rem;
+	color: var(--ink-mute);
+	transition: color 0.2s ease;
+}
+
+.case-back:hover {
+	color: var(--ink);
+}
+
+.case-title-wrap {
+	position: relative;
+	margin-top: 1rem;
+	text-align: center;
+}
+
+.case .case-kicker {
+	position: absolute;
+	top: -1.5rem;
+	right: 0.15em;
+	font-family: "Roaheregular", serif;
+	font-size: 2.4rem;
+	line-height: 1;
+	white-space: nowrap;
+}
+
+.case-title {
+	font-size: clamp(7.5rem, 17vw, 14rem);
+	font-weight: 400;
+	line-height: 0.82;
+	letter-spacing: -0.02em;
+}
+
+.case-stage {
+	position: relative;
+	z-index: 1;
+	width: 100%;
+	margin-top: -3.2rem;
+	display: grid;
+	justify-items: center;
+	gap: 1.25rem;
+}
+
+.msg {
+	max-width: 80%;
+	padding: 0.6rem 0.9rem;
+	border-radius: 1.05rem;
+	font-family: "Poppins", sans-serif;
+	font-size: 0.82rem;
+	line-height: 1.45;
+	transition:
+		opacity 0.45s var(--ease-out),
+		transform 0.45s var(--ease-out),
+		background-color 0.5s ease,
+		border-color 0.5s ease,
+		color 0.5s ease;
+}
+
+@keyframes typing {
+
+	0%,
+	60%,
+	100% {
+		transform: translateY(0);
+		opacity: 0.45;
+	}
+
+	30% {
+		transform: translateY(-0.25rem);
+		opacity: 1;
+	}
+}
+
+/* ---- floating notes ---- */
+
+.note {
+	width: 17rem;
+	padding: 1.1rem 1.6rem;
+	border-radius: 1rem;
+	backdrop-filter: blur(5px);
+	-webkit-backdrop-filter: blur(20px);
+	background: linear-gradient(145deg,
+			rgba(62, 62, 62, 0.5) 3%,
+			rgba(14, 14, 14, 0.8) 35%,
+			rgba(0, 0, 0, 0.5));
+	transform: translate3d(var(--nx, 0px), var(--ny, 0px), 0);
+}
+
+.case .note-title {
+	font-family: "Roaheregular", serif;
+	font-size: 1.7rem;
+	line-height: 1.05;
+	margin-bottom: 0.3rem;
+}
+
+.note p:not(.note-title) {
+	font-size: 0.85rem;
+	line-height: 1.5;
+	color: rgba(255, 255, 255, 0.82);
+}
+
+/* =========================================================
+   OVERVIEW
+   ========================================================= */
+
+.case-overview {
+	display: grid;
+	grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+	gap: 1.5rem 5rem;
+	align-items: start;
+}
+
+.overview-copy p {
+	max-width: 36rem;
+	font-size: 1.05rem;
+	line-height: 1.85;
+	color: var(--ink-soft);
+}
+
+.overview-copy p+p {
+	margin-top: 1rem;
+}
+
+.problems {
+	list-style: none;
+	margin-top: 1.4rem;
+	max-width: 36rem;
+
+	a {
+		display: grid;
+		gap: 0.2rem;
+		padding: 0.95rem 0;
+		border-top: 1px solid rgba(0, 0, 0, 0.12);
+		color: var(--ink);
+	}
+
+	li:last-child a {
+		border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+	}
+
+	a:hover .problem-q,
+	a:focus-visible .problem-q {
+		text-decoration: underline;
+		text-decoration-color: var(--accent);
+		text-decoration-thickness: 2px;
+		text-underline-offset: 0.2em;
+	}
+}
+
+.problem-q {
+	font-size: 1.55rem;
+	line-height: 1.15;
+}
+
+.problem-a {
+	font-family: "Poppins", sans-serif;
+	font-size: 0.92rem;
+	color: var(--ink-soft);
+}
+
+.overview-side {
+	margin-top: 5.8rem;
+}
+
+.overview-facts {
+
+	div {
+		padding: 0.9rem 0;
+		border-top: 1px solid rgba(0, 0, 0, 0.12);
+	}
+
+	div:last-child {
+		border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+	}
+
+	dt {
+		font-family: "Poppins", sans-serif;
+		font-size: 0.75rem;
+		color: var(--label);
+	}
+
+	dd {
+		font-family: "Roaheregular", serif;
+		font-size: 1.55rem;
+		line-height: 1.2;
+	}
+}
+
+.overview-links {
+	margin-top: 1.8rem;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1rem;
+}
+
+.rule {
+	h3 {
+		font-size: 2.1rem;
+		font-weight: 400;
+		line-height: 1.05;
+		margin-bottom: 0.6rem;
+	}
+
+	p {
+		max-width: 30rem;
+		font-size: 1rem;
+		line-height: 1.8;
+		color: var(--ink-soft);
+	}
+}
+
+@media screen and (max-width: 1024px) {
+	.rule h3 {
+		font-size: 1.8rem;
+	}
+}
+
+.pipeline {
+	--gap: 2rem;
+	--dot: 2.8rem;
+	position: relative;
+	list-style: none;
+	margin-top: 3.5rem;
+	display: grid;
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+	gap: var(--gap);
+}
+
+/* rail runs from the first dot's centre to the last dot's centre */
+
+.pipeline::before,
+.pipeline::after {
+	content: "";
+	position: absolute;
+	top: calc(var(--dot) / 2);
+	left: calc(var(--dot) / 2);
+	right: calc((100% - 3 * var(--gap)) / 4 - var(--dot) / 2);
+	height: 2px;
+	transform-origin: left center;
+}
+
+.pipeline::before {
+	background: rgba(0, 0, 0, 0.12);
+}
+
+.pipeline::after {
+	background: var(--ink);
+}
+
+.pipe-num {
+	position: relative;
+	z-index: 1;
+	width: var(--dot);
+	height: var(--dot);
+	display: grid;
+	place-items: center;
+	margin-bottom: 1.2rem;
+	border-radius: 50%;
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	background: var(--paper);
+	font-size: 1.35rem;
+	line-height: 1;
+	transition:
+		background-color 0.45s ease,
+		border-color 0.45s ease,
+		color 0.45s ease,
+		scale 0.45s var(--ease-out);
+}
+
+.pipe-step {
+	h3 {
+		font-size: 1.7rem;
+		font-weight: 400;
+		line-height: 1.1;
+		margin-bottom: 0.5rem;
+	}
+
+	p {
+		font-size: 0.95rem;
+		line-height: 1.75;
+		color: var(--ink-soft);
+	}
+
+	h3,
+	p {
+		transition: opacity 0.5s ease;
+	}
+}
+
+/* lit is the default, so without JS every step reads fully */
+
+.pipe-step .pipe-num {
+	background: var(--accent);
+	border-color: var(--accent-ink);
+	color: var(--accent-ink);
+}
+
+/* =========================================================
+   STACK — same visual language as the homepage skills block
+   ========================================================= */
+
+.stack-groups {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: 2.5rem;
+}
+
+.stack-group>span {
+	display: block;
+	margin-bottom: 1.1rem;
+	font-family: "Poppins", sans-serif;
+	font-size: 0.65rem;
+	letter-spacing: 3px;
+	color: var(--label);
+}
+
+.stack-icons {
+	list-style: none;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1.6rem 2rem;
+
+	li {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 0.5rem;
+		font-family: "Poppins", sans-serif;
+		font-size: 0.7rem;
+	}
+
+	img {
+		width: 2.5rem;
+		height: 2.5rem;
+	}
+}
+
+/* for tools without an icon in the set yet — swap for an <img> later */
+
+.stack-mark {
+	width: 2.5rem;
+	height: 2.5rem;
+	display: grid;
+	place-items: center;
+	border-radius: 0.7rem;
+	background: #151515;
+	color: #fff;
+	font-family: "Roaheregular", serif;
+	font-size: 1.15rem;
+	line-height: 1;
+}
+
+/* =========================================================
+   GALLERY
+   ========================================================= */
+
+.shots {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 2rem;
+}
+
+.shot {
+	margin: 0;
+
+	img {
+		width: 100%;
+		height: auto;
+		aspect-ratio: 16 / 10;
+		object-fit: cover;
+		object-position: top;
+		border-radius: 1.2rem;
+		border: 1px solid rgba(0, 0, 0, 0.1);
+		box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, 0.14);
+		background: #dcdcdc;
+	}
+
+	figcaption {
+		margin-top: 0.8rem;
+		font-size: 0.82rem;
+		color: var(--ink-mute);
+	}
+}
+
+/* =========================================================
+   NEXT
+   ========================================================= */
+
+.case-next {
+	width: min(72rem, 88%);
+	padding: clamp(2rem, 5vw, 3.5rem);
+	display: flex;
+	flex-wrap: wrap;
+	align-items: flex-end;
+	justify-content: space-between;
+	gap: 2rem;
+	background:
+		linear-gradient(135deg, rgba(62, 62, 62, 0.58), rgba(14, 14, 14, 0.92) 55%, rgba(0, 0, 0, 0.72)),
+		radial-gradient(circle at 85% 15%, rgba(169, 255, 191, 0.18), transparent 32%);
+}
+
+.next-link {
+	display: flex;
+	flex-direction: column;
+	color: #fff;
+
+	span {
+		font-family: "Poppins", sans-serif;
+		font-size: 0.8rem;
+		color: rgba(255, 255, 255, 0.6);
+	}
+
+	strong {
+		font-weight: 400;
+		font-size: clamp(3rem, 7vw, 5.5rem);
+		line-height: 1;
+		transition: color 0.3s ease;
+	}
+
+	&:hover strong {
+		color: var(--mint);
+	}
+}
+
+/* =========================================================
+   MOTION — everything below is gated on .js-motion, which the
+   inline <head> script adds only when JS runs and the visitor
+   has not asked for reduced motion.
+   ========================================================= */
+
+/* ---- hero entrance ---- */
+
+.js-motion .case-title {
+	animation: wipe-in 1.1s var(--ease-out) 0.05s both;
+}
+
+.js-motion .case-kicker {
+	animation: fade-in 0.8s var(--ease-out) 0.45s both;
+}
+
+.js-motion .note-a {
+	animation: fade-in 0.9s var(--ease-out) 0.7s both;
+}
+
+.js-motion .note-b {
+	animation: fade-in 0.9s var(--ease-out) 0.9s both;
+}
+
+.js-motion.motion-hold .case-title,
+.js-motion.motion-hold .case-kicker,
+.js-motion.motion-hold .note {
+	animation-play-state: paused;
+}
+
+@keyframes wipe-in {
+	from {
+		opacity: 0;
+		-webkit-mask-size: 100% 0%;
+		mask-size: 100% 0%;
+	}
+
+	to {
+		opacity: 1;
+		-webkit-mask-size: 100% 260%;
+		mask-size: 100% 260%;
+	}
+}
+
+.js-motion .case-title {
+	-webkit-mask-image: linear-gradient(to bottom, #000 62%, transparent);
+	mask-image: linear-gradient(to bottom, #000 62%, transparent);
+	-webkit-mask-repeat: no-repeat;
+	mask-repeat: no-repeat;
+	-webkit-mask-position: top;
+	mask-position: top;
+}
+
+/* `translate` is a separate property from `transform`, so the
+   entrance never fights the pointer tilt that uses `transform` */
+
+@keyframes rise-in {
+	from {
+		opacity: 0;
+		translate: 0 2.5rem;
+	}
+
+	to {
+		opacity: 1;
+		translate: 0 0;
+	}
+}
+
+@keyframes fade-in {
+	from {
+		opacity: 0;
+		translate: 0 1rem;
+	}
+
+	to {
+		opacity: 1;
+		translate: 0 0;
+	}
+}
+
+@keyframes msg-failsafe {
+	to {
+		opacity: 1;
+		transform: none;
+	}
+}
+
+/* ---- scroll reveals ---- */
+
+.js-motion [data-reveal=""] {
+	opacity: 0;
+	transform: translateY(1.6rem);
+	transition:
+		opacity 0.9s var(--ease-out) var(--rv-delay, 0ms),
+		transform 0.9s var(--ease-out) var(--rv-delay, 0ms),
+		filter 0.9s var(--ease-out) var(--rv-delay, 0ms);
+}
+
+/* the blur is only worth its cost where a real GPU is likely */
+
+@media (hover: hover) and (pointer: fine) {
+	.js-motion [data-reveal=""] {
+		filter: blur(5px);
+	}
+}
+
+.js-motion [data-reveal=""].is-inview {
+	opacity: 1;
+	transform: none;
+	filter: none;
+}
+
+/* headings wipe in with a mask — never clip-path, which stops
+   IntersectionObserver from ever reporting the element */
+
+.js-motion [data-reveal="wipe"] {
+	opacity: 0;
+	transform: translateY(0.9rem);
+	-webkit-mask-image: linear-gradient(to bottom, #000 62%, transparent);
+	mask-image: linear-gradient(to bottom, #000 62%, transparent);
+	-webkit-mask-repeat: no-repeat;
+	mask-repeat: no-repeat;
+	-webkit-mask-position: top;
+	mask-position: top;
+	-webkit-mask-size: 100% 0%;
+	mask-size: 100% 0%;
+	transition:
+		opacity 0.8s var(--ease-out),
+		transform 1.05s var(--ease-out),
+		-webkit-mask-size 1.05s var(--ease-out),
+		mask-size 1.05s var(--ease-out);
+}
+
+.js-motion [data-reveal="wipe"].is-inview {
+	opacity: 1;
+	transform: none;
+	-webkit-mask-size: 100% 260%;
+	mask-size: 100% 260%;
+}
+
+/* ---- the pipeline: one orchestrated moment ----
+   Steps are dimmed, never hidden, until the rail reaches them. */
+
+.js-motion .pipeline::after {
+	transform: scaleX(0);
+	transition: transform 2.4s linear 0.2s;
+}
+
+.js-motion .pipe-step .pipe-num {
+	background: var(--paper);
+	border-color: rgba(0, 0, 0, 0.2);
+	color: var(--ink);
+}
+
+.js-motion .pipe-step h3,
+.js-motion .pipe-step p {
+	opacity: 0.35;
+}
+
+@media screen and (min-width: 768px) {
+	.js-motion .pipeline.is-inview::after {
+		transform: scaleX(1);
+	}
+
+	.js-motion .pipeline.is-inview .pipe-step .pipe-num {
+		background: var(--accent);
+		border-color: var(--accent-ink);
+		color: var(--accent-ink);
+		scale: 1.08;
+	}
+
+	.js-motion .pipeline.is-inview .pipe-step h3,
+	.js-motion .pipeline.is-inview .pipe-step p {
+		opacity: 1;
+	}
+
+	.js-motion .pipeline.is-inview .pipe-step:nth-child(1) * {
+		transition-delay: 0.2s;
+	}
+
+	.js-motion .pipeline.is-inview .pipe-step:nth-child(2) * {
+		transition-delay: 1s;
+	}
+
+	.js-motion .pipeline.is-inview .pipe-step:nth-child(3) * {
+		transition-delay: 1.8s;
+	}
+
+	.js-motion .pipeline.is-inview .pipe-step:nth-child(4) * {
+		transition-delay: 2.6s;
+	}
+}
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media screen and (max-width: 1024px) {
+	.case .case-kicker {
+		font-size: 2rem;
+	}
+
+	.case-overview {
+		gap: 1.5rem 3rem;
+	}
+}
+
+/* notes float beside the chat only where there is room */
+
+@media screen and (min-width: 900px) {
+	.note {
+		position: absolute;
+		z-index: 2;
+	}
+
+	/* the left note sits beside the one-time message and may lap
+	   over the chat's empty left side; the right note sits level with
+	   the time capsule and stays clear, because that side is full */
+
+	.note-a {
+		top: 10.5rem;
+		right: calc(50% + 9.5rem);
+	}
+
+	.note-b {
+		top: 18.5rem;
+		left: calc(50% + 14rem);
+	}
+}
+
+@media screen and (max-width: 899px) {
+	.case-stage {
+		grid-template-columns: repeat(2, minmax(0, 17rem));
+		justify-content: center;
+	}
+
+	.note {
+		width: auto;
+	}
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media screen and (max-width: 767px) {
+	.case-hero {
+		padding-top: 5rem;
+	}
+
+	.case .case-kicker {
+		top: -1.2rem;
+		font-size: 1.8rem;
+	}
+
+	.case-title {
+		font-size: clamp(5.5rem, 29vw, 8rem);
+	}
+
+	.case-stage {
+		margin-top: -1.6rem;
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	.note {
+		width: min(21rem, 100%);
+		justify-self: center;
+	}
+
+	.case-h2 {
+		font-size: 2.7rem;
+		margin-bottom: 1.4rem;
+	}
+
+	.case-overview,
+	.stack-groups,
+	.shots {
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	.overview-side {
+		margin-top: 0.8rem;
+	}
+
+	.rule h3 {
+		font-size: 1.8rem;
+	}
+
+	/* vertical pipeline: the rail runs down the left edge and each
+	   step lights as it is scrolled to */
+
+	.pipeline {
+		grid-template-columns: minmax(0, 1fr);
+		gap: 2.2rem;
+		padding-left: calc(var(--dot) + 1.2rem);
+	}
+
+	.pipeline::before,
+	.pipeline::after {
+		top: calc(var(--dot) / 2);
+		bottom: calc(var(--dot) / 2);
+		left: calc(var(--dot) / 2 - 1px);
+		right: auto;
+		width: 2px;
+		height: auto;
+	}
+
+	.pipeline::after {
+		transform: none;
+		background: rgba(0, 0, 0, 0.2);
+	}
+
+	.pipe-num {
+		position: absolute;
+		left: 0;
+		margin: 0;
+	}
+
+	.pipe-step {
+		position: relative;
+		min-height: var(--dot);
+		padding-left: 0;
+	}
+
+	.pipe-step .pipe-num {
+		left: calc(-1 * (var(--dot) + 1.2rem));
+	}
+
+	.js-motion .pipe-step.is-inview .pipe-num {
+		background: var(--accent);
+		border-color: var(--accent-ink);
+		color: var(--accent-ink);
+	}
+
+	.js-motion .pipe-step.is-inview h3,
+	.js-motion .pipe-step.is-inview p {
+		opacity: 1;
+	}
+
+	.btn {
+		font-size: 1.1rem;
+	}
+}
+
+/* =========================================================
+   REDUCED MOTION — second line of defence
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+	.case-title,
+	.case-kicker,
+	.note,
+	.msg {
+		animation: none !important;
+	}
+}

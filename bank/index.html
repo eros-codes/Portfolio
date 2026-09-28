@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>WA Bank — Desktop banking system | Arvin Saghafi</title>
 	<meta name="description"
-		content="WA Bank is a Java, JavaFX and MySQL banking system with separate apps for customers, employees and the bank manager. Sign-up needs an ID, terms and a signature, and you transfer money by dragging one card onto another.">
+		content="WA Bank, a Java, JavaFX and MySQL banking system with apps for customers, employees and the manager, where money moves by dragging one card onto another.">
 	<meta name="author" content="Arvin Saghafi">
 	<meta name="robots" content="index, follow">
 	<meta name="theme-color" content="#000000">
@@ -20,12 +20,16 @@
 	<meta property="og:description"
 		content="A Java and JavaFX banking system where signing up feels like visiting a branch and you pay by dragging your card onto theirs.">
 	<meta property="og:url" content="https://www.aboutarvin.ir/bank/">
-	<meta property="og:image" content="https://www.aboutarvin.ir/assets/images/projects/bank/screen-dashboard.webp">
+	<meta property="og:image" content="https://www.aboutarvin.ir/assets/images/og/bank.jpg">
+	<meta property="og:image:width" content="1200">
+	<meta property="og:image:height" content="630">
+	<meta property="og:image:alt" content="The WA Bank case study: dragging a card onto another to transfer money">
 	<meta name="twitter:card" content="summary_large_image">
 	<meta name="twitter:title" content="WA Bank — Desktop banking system">
 	<meta name="twitter:description"
 		content="A Java and JavaFX banking system where signing up feels like visiting a branch and you pay by dragging your card onto theirs.">
-	<meta name="twitter:image" content="https://www.aboutarvin.ir/assets/images/projects/bank/screen-dashboard.webp">
+	<meta name="twitter:image" content="https://www.aboutarvin.ir/assets/images/og/bank.jpg">
+	<meta name="twitter:image:alt" content="The WA Bank case study: dragging a card onto another to transfer money">
 
 	<script type="application/ld+json">
 		{
@@ -38,7 +42,6 @@
 					"description": "A desktop banking system built with Java, JavaFX and MySQL, with separate applications for customers, employees and the bank manager. Registration requires an ID photo, accepted terms and a signature, and is approved by an employee before the account can be used.",
 					"url": "https://www.aboutarvin.ir/bank/",
 					"image": "https://www.aboutarvin.ir/assets/images/projects/bank/screen-dashboard.webp",
-					"codeRepository": "https://github.com/eros-codes",
 					"programmingLanguage": ["Java", "SQL"],
 					"runtimePlatform": "Java, JavaFX",
 					"keywords": ["banking system", "JavaFX", "MySQL", "JDBC", "desktop application", "drag and drop"],
@@ -88,20 +91,12 @@
 	<link rel="preload" as="font" type="font/woff2" href="../assets/fonts/Poppins/Poppins-Regular.woff2" crossorigin>
 	<link rel="preload" as="font" type="font/woff2" href="../assets/fonts/Orbitron/orbitron-600.woff2" crossorigin>
 
-	<link rel="stylesheet" href="../assets/stylesheets/settings.css">
-	<link rel="stylesheet" href="../assets/stylesheets/laptop/header.css" media="screen and (min-width: 1025px)">
-	<link rel="stylesheet" href="../assets/stylesheets/laptop/footer.css" media="screen and (min-width: 1025px)">
-	<link rel="stylesheet" href="../assets/stylesheets/tablet/header.css"
-		media="screen and (min-width: 768px) and (max-width: 1024px)">
-	<link rel="stylesheet" href="../assets/stylesheets/tablet/footer.css"
-		media="screen and (min-width: 768px) and (max-width: 1024px)">
-	<link rel="stylesheet" href="../assets/stylesheets/mobile/header.css"
-		media="screen and (min-width: 320px) and (max-width: 767px)">
-	<link rel="stylesheet" href="../assets/stylesheets/mobile/footer.css"
-		media="screen and (min-width: 320px) and (max-width: 767px)">
+	<link rel="stylesheet" href="../assets/stylesheets/base/settings.css">
+	<link rel="stylesheet" href="../assets/stylesheets/layout/header.css">
+	<link rel="stylesheet" href="../assets/stylesheets/layout/footer.css">
 
-	<link rel="stylesheet" href="../assets/stylesheets/project/project.css">
-	<link rel="stylesheet" href="../assets/stylesheets/project/bank/bank.css">
+	<link rel="stylesheet" href="../assets/stylesheets/case-study/case-study.css">
+	<link rel="stylesheet" href="../assets/stylesheets/bank/bank.css">
 </head>
 
 <body class="project-page case-bank" style="--accent: #87b7c4; --accent-ink: #12252b;">
@@ -672,12 +667,12 @@
 
 		<!-- ============ NEXT ============ -->
 		<section class="case-next pane" aria-label="Keep exploring">
-			<a class="next-link" href="../reservation/">
+			<a class="next-link" href="../roof/">
 				<span>Next project</span>
-				<strong>Reservation</strong>
+				<strong>Roof</strong>
 			</a>
-			<a class="btn btn-mint" href="../reservation/">
-				Next Project
+			<a class="btn btn-mint" href="mailto:saghafiarvin@gmail.com">
+				Start a conversation
 				<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true">
 					<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
 						stroke-width="2" d="M18 6L6 18M8 6h10v10" />
@@ -726,7 +721,7 @@
 		</div>
 	</footer>
 
-	<script type="module" src="../assets/js/project/bank/bank.js"></script>
+	<script type="module" src="../assets/js/bank/bank.js"></script>
 </body>
 
 </html>
