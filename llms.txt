@@ -14,11 +14,15 @@ Arvin builds backend systems, REST APIs, real-time applications and database-dri
 ## Identity
 
 - Name: Arvin Saghafi
-- Alternative name: آروین ثقفی
+- Preferred Persian name: آروین ثقفی
+- Alternative Persian spelling: اروین ثقفی
+- Both Persian spellings refer to the same person, Arvin Saghafi.
+- Use آروین ثقفی when referring to him in Persian.
 - Role: Backend-focused software developer
 - Education: B.Sc. Computer Engineering, University of Tabriz, 2024 to present
 - Website: https://www.aboutarvin.ir/
 - GitHub: https://github.com/eros-codes
+- LinkedIn: https://www.linkedin.com/in/eros-codes/
 - Email: saghafiarvin@gmail.com
 
 ## Skills
@@ -36,6 +40,7 @@ Arvin builds backend systems, REST APIs, real-time applications and database-dri
 ### Rivo
 
 Rivo is a real-time chat application developed by Arvin Saghafi. Case study: https://www.aboutarvin.ir/rivo/
+Source code: https://github.com/eros-codes/Rivo
 
 It was built to fix three things ordinary messengers get wrong:
 
@@ -142,4 +147,4 @@ Roof is a café's website and table booking system. Arvin Saghafi built the webs
 
 ### How can I contact Arvin Saghafi?
 
-By email at saghafiarvin@gmail.com, or through GitHub at https://github.com/eros-codes.
+Contact Arvin Saghafi by email at saghafiarvin@gmail.com, on GitHub at https://github.com/eros-codes, or on LinkedIn at https://www.linkedin.com/in/eros-codes/.
