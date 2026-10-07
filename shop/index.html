@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Shop — An electronics store, API to admin | Arvin Saghafi</title>
+	<meta name="description"
+		content="Shop by Arvin Saghafi: an electronics store whose NestJS and MySQL API sells the last unit once, takes a payment exactly once and ends stolen sessions.">
+	<meta name="author" content="Arvin Saghafi">
+	<meta name="robots" content="index, follow">
+	<meta name="theme-color" content="#14306b">
+	<link rel="shortcut icon" href="../assets/images/me/fav.ico" type="image/x-icon">
+	<link rel="canonical" href="https://www.aboutarvin.ir/shop/">
+
+	<meta property="og:type" content="article">
+	<meta property="og:site_name" content="Arvin Saghafi">
+	<meta property="og:title" content="Shop — An electronics store, API to admin">
+	<meta property="og:description"
+		content="An electronics store built alone: a NestJS and MySQL API, a React storefront and a React admin panel.">
+	<meta property="og:url" content="https://www.aboutarvin.ir/shop/">
+	<meta property="og:image" content="https://www.aboutarvin.ir/assets/images/og/shop.jpg">
+	<meta property="og:image:width" content="1200">
+	<meta property="og:image:height" content="630">
+	<meta property="og:image:alt" content="The Shop case study: the tellcall storefront, selling its last phone">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="Shop — An electronics store, API to admin">
+	<meta name="twitter:description"
+		content="An electronics store built alone: a NestJS and MySQL API, a React storefront and a React admin panel.">
+	<meta name="twitter:image" content="https://www.aboutarvin.ir/assets/images/og/shop.jpg">
+	<meta name="twitter:image:alt" content="The Shop case study: the tellcall storefront, selling its last phone">
+
+	<script type="application/ld+json">
+	{
+		"@context": "https://schema.org",
+		"@graph": [
+			{
+				"@type": "SoftwareSourceCode",
+				"@id": "https://www.aboutarvin.ir/shop/#project",
+				"name": "Shop",
+				"description": "An online store for electronics built alone by Arvin Saghafi: a NestJS and TypeORM API on MySQL, a React storefront and a React admin panel. Checkouts lock rows in one fixed order and read the current row, so the last unit is sold once; orders take an idempotency key and payment callbacks settle an order exactly once, refunding a payment that arrives after the order closed; refresh tokens rotate and a reused one ends the whole session. Products are sold by variant, and filters match one real variant. Unit and end-to-end tests run in CI against MySQL.",
+				"url": "https://www.aboutarvin.ir/shop/",
+				"image": "https://www.aboutarvin.ir/assets/images/projects/shop/home.webp",
+				"codeRepository": "https://github.com/eros-codes/Shop",
+				"programmingLanguage": ["TypeScript", "JavaScript", "SQL"],
+				"runtimePlatform": "Node.js",
+				"keywords": ["NestJS", "TypeORM", "MySQL", "React", "e-commerce", "row locking", "SELECT FOR UPDATE", "idempotency", "payment callbacks", "ZarinPal", "refresh token rotation", "product variants", "end-to-end tests"],
+				"author": { "@id": "https://www.aboutarvin.ir/#person" }
+			},
+			{
+				"@type": "WebPage",
+				"@id": "https://www.aboutarvin.ir/shop/#webpage",
+				"url": "https://www.aboutarvin.ir/shop/",
+				"name": "Shop — An electronics store, API to admin",
+				"description": "Shop by Arvin Saghafi: an electronics store whose NestJS and MySQL API sells the last unit once, takes a payment exactly once and ends stolen sessions.",
+				"isPartOf": { "@id": "https://www.aboutarvin.ir/#website" },
+				"about": { "@id": "https://www.aboutarvin.ir/shop/#project" },
+				"primaryImageOfPage": "https://www.aboutarvin.ir/assets/images/projects/shop/home.webp",
+				"breadcrumb": { "@id": "https://www.aboutarvin.ir/shop/#breadcrumb" }
+			},
+			{
+				"@type": "BreadcrumbList",
+				"@id": "https://www.aboutarvin.ir/shop/#breadcrumb",
+				"itemListElement": [
+					{ "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.aboutarvin.ir/" },
+					{ "@type": "ListItem", "position": 2, "name": "Shop", "item": "https://www.aboutarvin.ir/shop/" }
+				]
+			}
+		]
+	}
+	</script>
+
+	<script>
+		(function () {
+			try {
+				var d = document.documentElement;
+				if (window.matchMedia &&
+					window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+				d.classList.add("js-motion");
+				if (document.visibilityState === "hidden") {
+					d.classList.add("motion-hold");
+					var release = function () { d.classList.remove("motion-hold"); };
+					document.addEventListener("visibilitychange", release, { once: true });
+					setTimeout(release, 8000);
+				}
+			} catch (e) { }
+		})();
+	</script>
+
+	<link rel="preload" as="font" type="font/woff2" href="../assets/fonts/Roah/roaheregular-maoan.woff2" crossorigin>
+	<link rel="preload" as="font" type="font/woff2" href="../assets/fonts/Poppins/Poppins-Regular.woff2" crossorigin>
+	<link rel="preload" as="font" type="font/woff2" href="../assets/fonts/Vazirmatn/Vazirmatn-NL-Regular.woff2" crossorigin>
+
+	<link rel="stylesheet" href="../assets/stylesheets/base/settings.css">
+	<link rel="stylesheet" href="../assets/stylesheets/layout/header.css">
+	<link rel="stylesheet" href="../assets/stylesheets/layout/footer.css">
+	<link rel="stylesheet" href="../assets/stylesheets/case-study/case-study.css">
+	<link rel="stylesheet" href="../assets/stylesheets/shop/shop.css">
+</head>
+
+<body class="project-page case-shop" style="--accent: #14306b; --accent-ink: #ffffff;">
+
+
+
+	<header class="header header-deactive" id="header">
+		<a class="site-logo" href="../" aria-label="Arvin home">PORTFOLIO<span>.</span></a>
+		<nav class="desktop-nav" aria-label="Primary navigation">
+			<a href="../#home">Home</a>
+			<a href="../#about">About</a>
+			<a href="../#projects">Projects</a>
+			<a href="../#contact">Contact</a>
+		</nav>
+		<button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false"
+			aria-controls="mobile-menu">
+			<span></span>
+			<span></span>
+			<span></span>
+		</button>
+		<nav class="mobile-nav" id="mobile-menu" aria-label="Mobile navigation" aria-hidden="true">
+			<a href="../#home">Home</a>
+			<a href="../#about">About</a>
+			<a href="../#projects">Projects</a>
+			<a href="../#contact">Contact</a>
+		</nav>
+	</header>
+
+	<main class="case">
+
+		<!-- ============ HERO ============ -->
+		<section class="case-hero" aria-labelledby="case-title">
+			<a class="case-back" href="../#projects">
+				<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true">
+					<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+						stroke-width="2" d="M19 12H5m6-6l-6 6l6 6" />
+				</svg>
+				All projects
+			</a>
+			<div class="case-title-wrap">
+				<p class="case-kicker">Case study</p>
+				<h1 class="case-title" id="case-title">Shop</h1>
+			</div>
+			<div class="case-stage">
+				<figure class="shop-window" aria-label="The tellcall storefront: a shopper picks a white 512 GB phone, the last one in stock, pays, and follows the order to a text message that it has shipped">
+					<div class="shop-window-bar" aria-hidden="true"><i></i><i></i><i></i><span><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M7 11V8a5 5 0 0 1 10 0v3M6 11h12v9H6z"/></svg>tellcall.ir/product/iphone-17</span></div>
+					<div class="tc-fit">
+						<div class="tc" lang="fa" dir="rtl" aria-hidden="true">
+							<header class="tc-head">
+								<b class="tc-logo">tell<span>call</span></b>
+								<span class="tc-search">جستجو در گوشی، لپ‌تاپ، تبلت و گجت‌ها…</span>
+								<span class="tc-cart"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M3 4h2l2.4 11.2a1.5 1.5 0 0 0 1.5 1.2h8.6a1.5 1.5 0 0 0 1.5-1.1L21 8H6.2M9 20.5h.01M17 20.5h.01"/></svg>سبد خرید<em class="tc-badge">۱</em></span>
+							</header>
+							<div class="tc-body">
+								<div class="tc-art"><div class="tc-phone" data-colour="black"></div></div>
+								<div class="tc-info">
+									<p class="tc-crumb">خانه / گوشی موبایل / اپل</p>
+									<p class="tc-title">گوشی اپل iPhone 17</p>
+									<p class="tc-label">رنگ: <b data-colour-name>مشکی</b></p>
+									<div class="tc-chips">
+										<span class="tc-chip" data-colour-chip="black"><i style="--c: #1f2430"></i>مشکی</span>
+										<span class="tc-chip" data-colour-chip="white"><i style="--c: #ecece7"></i>سفید</span>
+										<span class="tc-chip" data-colour-chip="blue"><i style="--c: #3b5b9a"></i>آبی</span>
+									</div>
+									<p class="tc-label">حافظه داخلی: <b data-storage-name>۲۵۶ گیگابایت</b></p>
+									<div class="tc-chips">
+										<span class="tc-chip" data-storage-chip="256">۲۵۶ گیگابایت</span>
+										<span class="tc-chip" data-storage-chip="512">۵۱۲ گیگابایت</span>
+									</div>
+									<div class="tc-buy">
+										<p class="tc-price"><b>۱۰۴٬۶۰۰٬۰۰۰</b> تومان</p>
+										<p class="tc-stock">تنها ۳ عدد در انبار</p>
+										<span class="tc-btn">افزودن به سبد خرید</span>
+									</div>
+								</div>
+							</div>
+							<div class="tc-sheet">
+								<p class="tc-sheet-title">پرداخت سفارش</p>
+								<p class="tc-line"><span>iPhone 17 · سفید · ۵۱۲ گیگابایت</span><b>۱۱۸٬۹۰۰٬۰۰۰ تومان</b></p>
+								<div class="tc-pay">
+									<div class="tc-pay-ways"><span class="is-on">کیف پول</span><span>زرین‌پال</span></div>
+									<span class="tc-btn" style="margin-top: 12px">پرداخت</span>
+								</div>
+								<p class="tc-done">پرداخت شد<small>INV-1404-000123</small></p>
+								<ol class="tc-track">
+									<li>پرداخت شده</li>
+									<li>در حال آماده‌سازی</li>
+									<li>ارسال شده</li>
+									<li>تحویل شده</li>
+								</ol>
+							</div>
+							<div class="tc-sms">
+								<p><b>tellcall</b><span>اکنون</span></p>
+								<p>سفارش شما ارسال شد. کد رهگیری: ۴۸۲۱۷۳۰۹۵</p>
+							</div>
+							<span class="tc-cursor"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" stroke="#14306b" stroke-width="1.6" stroke-linejoin="round" d="M5 3l14 8.5-6.3 1.3 3.6 6.4-2.6 1.5-3.6-6.4L5.5 19z"/></svg></span>
+						</div>
+					</div>
+				</figure>
+				<aside class="note pane note-a">
+					<p class="note-title">The last one, sold once</p>
+					<p>Two checkouts for the last unit: one wins, the other is told why.</p>
+				</aside>
+				<aside class="note pane note-b">
+					<p class="note-title">Paid exactly once</p>
+					<p>A double click or a repeated callback changes nothing.</p>
+				</aside>
+			</div>
+		</section>
+
+		<!-- ============ OVERVIEW ============ -->
+		<section class="case-section case-overview" aria-labelledby="overview-title">
+			<div class="overview-copy">
+				<h2 class="case-h2" id="overview-title" data-reveal="wipe">What it is</h2>
+				<p data-reveal>
+					Shop is an online store for electronics: phones, laptops, tablets, watches and audio. I built
+					all of it on my own: an API in NestJS on MySQL, a storefront and an admin panel, both in React.
+				</p>
+				<p data-reveal>
+					A shop looks simple until two people buy at once, a payment gateway calls back twice, or a token
+					leaks. Most of the work went into those moments, in the API, where they are decided.
+				</p>
+				<ul class="problems">
+					<li data-reveal>
+						<a href="#last-unit">
+							<span class="problem-q">Two customers, one phone left.</span>
+							<span class="problem-a">Rows locked in one fixed order, and a read that sees the latest row.</span>
+						</a>
+					</li>
+					<li data-reveal>
+						<a href="#payments">
+							<span class="problem-q">A gateway that calls back twice, or too late.</span>
+							<span class="problem-a">An order is paid once; late money goes back to the wallet.</span>
+						</a>
+					</li>
+					<li data-reveal>
+						<a href="#sessions">
+							<span class="problem-q">A refresh token that leaked.</span>
+							<span class="problem-a">Its reuse is caught, and the whole session ends.</span>
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="overview-side">
+				<dl class="overview-facts" data-reveal>
+					<div><dt>Role</dt><dd>Solo: API, storefront and admin</dd></div>
+					<div><dt>Type</dt><dd>Online store, three apps</dd></div>
+					<div><dt>Stack</dt><dd>NestJS, TypeORM, MySQL, React</dd></div>
+					<div><dt>Tests</dt><dd>Unit and end-to-end, in CI on MySQL</dd></div>
+				</dl>
+				<div class="overview-links" data-reveal>
+					<a class="btn btn-solid" href="https://github.com/eros-codes/Shop" target="_blank" rel="noreferrer">
+						View the code on GitHub
+						<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 6L6 18M8 6h10v10" /></svg>
+					</a>
+				</div>
+			</div>
+		</section>
+
+		<!-- ============ THE LAST UNIT ============ -->
+		<section class="case-section shop-feature" id="last-unit" aria-labelledby="last-unit-title">
+			<div class="shop-copy">
+				<h2 class="case-h2" id="last-unit-title" data-reveal="wipe">One phone, two customers</h2>
+				<p data-reveal>
+					Two checkouts that both read "1 in stock" and both succeed sell the same phone twice. So a
+					checkout locks the rows it is about to change (<code>SELECT … FOR UPDATE</code>), and every
+					path in the API takes its locks in the same order (category, product, variant, user) so two
+					checkouts can wait for each other but never deadlock.
+				</p>
+				<p data-reveal>
+					The lock alone was not enough. I first locked the rows with a query that read only their ids,
+					then read the stock with a plain <code>SELECT</code>. In MySQL that plain read returns the
+					snapshot the transaction took at its first read, from before the other checkout committed, so
+					the last phone could still be sold many times. The stock now comes from the locking read
+					itself, which always sees the latest row. The losing checkout gets <code>INSUFFICIENT_STOCK</code>,
+					naming the line and how many are left.
+				</p>
+			</div>
+			<figure class="shop-panel" id="shop-race" data-reveal>
+				<h3>The last phone</h3>
+				<p class="shop-panel-note">Two customers press "Pay" at the same moment.</p>
+				<div class="shop-tabs" role="tablist" aria-label="How the checkout reads the stock">
+					<button type="button" class="shop-tab" role="tab" data-mode="none" aria-selected="false">No lock</button>
+					<button type="button" class="shop-tab" role="tab" data-mode="bug" aria-selected="true">Lock, then a plain read</button>
+					<button type="button" class="shop-tab" role="tab" data-mode="fix" aria-selected="false">Locking read</button>
+				</div>
+				<p class="race-stock"><span>Stock of the white 512 GB</span><b>1</b></p>
+				<div class="race-lanes">
+					<div class="race-lane" data-lane="a"><h4>Customer A</h4><ol></ol></div>
+					<div class="race-lane" data-lane="b"><h4>Customer B</h4><ol></ol></div>
+				</div>
+				<p class="shop-verdict" aria-live="polite"></p>
+				<button type="button" class="shop-replay">Run again</button>
+			</figure>
+		</section>
+
+		<!-- ============ PAYMENTS ============ -->
+		<section class="case-section shop-feature is-flipped" id="payments" aria-labelledby="payments-title">
+			<div class="shop-copy">
+				<h2 class="case-h2" id="payments-title" data-reveal="wipe">Paid exactly once</h2>
+				<p data-reveal>
+					A checkout carries an <code>Idempotency-Key</code>. Sending it twice, by a double click or a
+					retry on a bad connection, gets back the same order instead of a second one, and reusing the
+					key for a different basket is refused.
+				</p>
+				<p data-reveal>
+					ZarinPal tells the API about a payment by calling it back, and a callback can arrive twice. The
+					order is locked and checked first, so the second call finds it paid and changes nothing. A
+					payment can also arrive after its order expired and gave its stock back. The money did leave the
+					customer, so it goes to their wallet rather than nowhere. Order messages are sent only after the
+					payment is committed, so an SMS outage can never undo a sale.
+				</p>
+			</div>
+			<figure class="shop-panel" id="shop-pay" data-reveal>
+				<h3>What the API answers</h3>
+				<p class="shop-panel-note">Three things the network does to a checkout.</p>
+				<div class="shop-tabs" role="tablist" aria-label="Payment case">
+					<button type="button" class="shop-tab" role="tab" data-case="twice" aria-selected="true">Placed twice</button>
+					<button type="button" class="shop-tab" role="tab" data-case="callback" aria-selected="false">Callback twice</button>
+					<button type="button" class="shop-tab" role="tab" data-case="late" aria-selected="false">Paid too late</button>
+				</div>
+				<ol class="pay-log" aria-live="polite"></ol>
+				<button type="button" class="shop-replay">Run again</button>
+			</figure>
+		</section>
+
+		<!-- ============ SESSIONS ============ -->
+		<section class="case-section shop-feature" id="sessions" aria-labelledby="sessions-title">
+			<div class="shop-copy">
+				<h2 class="case-h2" id="sessions-title" data-reveal="wipe">A stolen token ends the session</h2>
+				<p data-reveal>
+					Signing up is confirmed by an SMS code. The access token lives in the page's memory for
+					15 minutes; the refresh token never reaches JavaScript at all: it is an httpOnly cookie, and
+					the database keeps only its hash.
+				</p>
+				<p data-reveal>
+					Every refresh uses the token up and issues a new one, in one conditional update, so two
+					refreshes racing each other cannot both succeed. A token that comes back after it was used
+					means someone else has a copy, so the whole family of tokens from that sign-in is revoked.
+				</p>
+			</div>
+			<ol class="shop-steps" data-reveal>
+				<li><b>Sign in</b>Token <code>R1</code> is set as an httpOnly cookie; only its hash is stored.</li>
+				<li><b>Refresh</b><code>R1</code> is marked used and <code>R2</code> issued, in one atomic step.</li>
+				<li class="is-alarm"><b>Someone replays R1</b>It was already used: it has leaked.</li>
+				<li class="is-alarm"><b>The family is revoked</b><code>R2</code> stops working too. Whoever holds either token signs in again.</li>
+			</ol>
+		</section>
+
+		<!-- ============ VARIANTS ============ -->
+		<section class="case-section shop-feature is-flipped" id="variants" aria-labelledby="variants-title">
+			<div class="shop-copy">
+				<h2 class="case-h2" id="variants-title" data-reveal="wipe">Filters that tell the truth</h2>
+				<p data-reveal>
+					Each colour and storage is its own variant, with its own price and stock, built from attributes
+					the shop defines with fixed lists of values. A filter's values of one attribute widen the search,
+					different attributes narrow it, and the chosen values have to meet on one variant in stock: a phone
+					that comes in white, and in 1 TB, but not as a white 1 TB, is not a match.
+				</p>
+			</div>
+			<figure class="shop-panel" id="shop-filter" data-reveal>
+				<h3>An example phone</h3>
+				<p class="shop-panel-note">Pick colours and storage, as a shopper would.</p>
+				<div class="shop-filter-group" role="group" aria-label="Colour">
+					<span>Colour</span>
+					<div class="shop-chips">
+						<button type="button" class="shop-chip" data-colour="Black" aria-pressed="false"><i style="--c: #1f2430"></i>Black</button>
+						<button type="button" class="shop-chip" data-colour="White" aria-pressed="true"><i style="--c: #f4f4f2"></i>White</button>
+						<button type="button" class="shop-chip" data-colour="Blue" aria-pressed="false"><i style="--c: #3b5b9a"></i>Blue</button>
+					</div>
+				</div>
+				<div class="shop-filter-group" role="group" aria-label="Storage">
+					<span>Storage</span>
+					<div class="shop-chips">
+						<button type="button" class="shop-chip" data-storage="256 GB" aria-pressed="false">256 GB</button>
+						<button type="button" class="shop-chip" data-storage="512 GB" aria-pressed="false">512 GB</button>
+						<button type="button" class="shop-chip" data-storage="1 TB" aria-pressed="true">1 TB</button>
+					</div>
+				</div>
+				<div class="shop-variants" aria-label="The phone's variants"></div>
+				<p class="shop-result is-hidden" aria-live="polite"><b>Not shown</b><span>It comes in white and in 1 TB, but not as a white 1 TB.</span></p>
+			</figure>
+		</section>
+
+		<!-- ============ ALSO IN THE API ============ -->
+		<section class="case-section" id="also" aria-labelledby="also-title">
+			<h2 class="case-h2" id="also-title" data-reveal="wipe">Also in the API</h2>
+			<ul class="shop-proofs">
+				<li data-reveal>Returns are approved, received, then refunded, with the money and the restocking in one transaction, and never more than was paid for that order.</li>
+				<li data-reveal>Discount codes have a ceiling, a minimum order, a window, total and per-customer limits, and a scope: a code for one category only comes off those lines.</li>
+				<li data-reveal>Invoice numbers come from one atomic counter per Persian year, so two checkouts can never share one.</li>
+				<li data-reveal>Changes to money and permissions go to an audit log that no endpoint can edit or delete.</li>
+				<li data-reveal>Every error carries a stable code, so the storefront writes its own Persian message instead of showing an English one.</li>
+				<li data-reveal>In production the API refuses to start with an open CORS policy, a sandbox gateway or a callback address that is not https.</li>
+				<li data-reveal>On every push, CI type-checks, lints and runs the unit tests and the end-to-end suites (sign-in, a whole checkout, a return) against MySQL.</li>
+				<li data-reveal>The end-to-end suite refuses to run against any database whose name does not end in <code>_test</code>: it writes real rows.</li>
+			</ul>
+		</section>
+
+		<!-- ============ STACK ============ -->
+		<section class="case-section case-stack" aria-labelledby="stack-title">
+			<h2 class="case-h2" id="stack-title" data-reveal="wipe">Built with</h2>
+			<div class="stack-groups">
+				<div class="stack-group" data-reveal>
+					<span>API</span>
+					<ul class="stack-icons">
+						<li><img src="../assets/SVGs/skills/nestjs.svg" alt="" width="40" height="40">NestJS</li>
+						<li><img src="../assets/SVGs/skills/ts.svg" alt="" width="40" height="40">TypeScript</li>
+						<li><img src="../assets/SVGs/skills/mysql.svg" alt="" width="40" height="40">MySQL</li>
+						<li><span class="stack-mark" aria-hidden="true">To</span>TypeORM</li>
+					</ul>
+				</div>
+				<div class="stack-group" data-reveal>
+					<span>STOREFRONT AND ADMIN</span>
+					<ul class="stack-icons">
+						<li><span class="stack-mark" aria-hidden="true">Re</span>React</li>
+						<li><img src="../assets/SVGs/skills/js.svg" alt="" width="40" height="40">JavaScript</li>
+						<li><span class="stack-mark" aria-hidden="true">Vi</span>Vite</li>
+					</ul>
+				</div>
+				<div class="stack-group" data-reveal>
+					<span>QUALITY</span>
+					<ul class="stack-icons">
+						<li><span class="stack-mark" aria-hidden="true">Je</span>Jest</li>
+						<li><span class="stack-mark" aria-hidden="true">Sw</span>Swagger</li>
+						<li><span class="stack-mark" aria-hidden="true">CI</span>GitHub Actions</li>
+					</ul>
+				</div>
+			</div>
+		</section>
+
+		<!-- ============ GALLERY ============ -->
+		<section class="case-section case-gallery" aria-labelledby="gallery-title">
+			<h2 class="case-h2" id="gallery-title" data-reveal="wipe">Screens</h2>
+			<div class="shop-shots">
+				<figure class="shot" data-reveal>
+					<img src="../assets/images/projects/shop/home.webp" alt="The storefront's home page with best sellers" width="1600" height="917" loading="lazy">
+					<figcaption>The storefront</figcaption>
+				</figure>
+				<figure class="shot" data-reveal>
+					<img src="../assets/images/projects/shop/listing.webp" alt="Phones filtered by brand and price, with the category, price and brand filters" width="1600" height="917" loading="lazy">
+					<figcaption>Filters and sorting</figcaption>
+				</figure>
+				<figure class="shot" data-reveal>
+					<img src="../assets/images/projects/shop/product.webp" alt="An iPad Pro page with colour and storage options and its price" width="1600" height="917" loading="lazy">
+					<figcaption>A product and its variants</figcaption>
+				</figure>
+				<figure class="shot" data-reveal>
+					<img src="../assets/images/projects/shop/admin.webp" alt="The admin panel's dashboard: sales, orders by status, best sellers, low stock and returns" width="1600" height="917" loading="lazy">
+					<figcaption>The admin panel</figcaption>
+				</figure>
+			</div>
+		</section>
+
+		<!-- ============ NEXT ============ -->
+		<section class="case-next pane" aria-label="Keep exploring">
+			<a class="next-link" href="../rivo/">
+				<span>Next project</span>
+				<strong>Rivo</strong>
+			</a>
+			<a class="btn btn-mint" href="mailto:saghafiarvin@gmail.com">
+				Start a conversation
+				<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 6L6 18M8 6h10v10" /></svg>
+			</a>
+		</section>
+	</main>
+
+	<footer class="site-footer">
+		<div class="footer-main">
+			<div class="footer-brand">
+				<a class="site-logo" href="../" aria-label="Back to Arvin's home">ARVIN<span>.</span></a>
+				<p>Building thoughtful products with logic, creativity, and a never-settling mindset.</p>
+			</div>
+			<div class="footer-column">
+				<h2 class="footer-heading">Explore</h2>
+				<nav class="footer-links" aria-label="Footer navigation">
+					<a href="../#home">Home</a>
+					<a href="../#about">About</a>
+					<a href="../#projects">Projects</a>
+					<a href="../#contact">Contact</a>
+				</nav>
+			</div>
+			<div class="footer-column">
+				<h2 class="footer-heading">Connect</h2>
+				<nav class="footer-socials" aria-label="Social links">
+					<a href="mailto:saghafiarvin@gmail.com">Email me
+						<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
+							<path d="M0 0h24v24H0z" fill="none" />
+							<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+								stroke-width="2" d="M18 6L6 18M8 6h10v10" />
+						</svg>
+					</a>
+					<a href="https://github.com/eros-codes" target="_blank" rel="noreferrer">GitHub
+						<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
+							<path d="M0 0h24v24H0z" fill="none" />
+							<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+								stroke-width="2" d="M18 6L6 18M8 6h10v10" />
+						</svg>
+					</a>
+					<a href="https://www.linkedin.com/in/eros-codes/" target="_blank" rel="noopener noreferrer">LinkedIn
+						<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true">
+							<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+								d="M18 6L6 18M8 6h10v10" />
+						</svg>
+					</a>
+				</nav>
+			</div>
+		</div>
+		<div class="footer-bottom">
+			<p>© 2026 Arvin Saghafi. Crafted with intent.</p>
+		</div>
+	</footer>
+
+	<script type="module" src="../assets/js/shop/shop.js"></script>
+</body>
+
+</html>

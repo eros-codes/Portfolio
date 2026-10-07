@@ -1,6 +1,6 @@
 # Arvin Saghafi
 
-> Arvin Saghafi (آروین ثقفی) is a backend-focused software developer and Computer Engineering student at the University of Tabriz, Iran. This site is his portfolio, with in-depth case studies of Rivo, a real-time encrypted chat application; OS, a mini operating system shell in C++ and Qt; WA Bank, a Java and JavaFX banking system; and Roof, a café's website and table booking system.
+> Arvin Saghafi (آروین ثقفی) is a backend-focused software developer and Computer Engineering student at the University of Tabriz, Iran. This site is his portfolio, with in-depth case studies of Rivo, a real-time encrypted chat application; OS, a mini operating system shell in C++ and Qt; WA Bank, a Java and JavaFX banking system; Roof, a café's website and table booking system; and Shop, an online electronics store.
 Arvin builds backend systems, REST APIs, real-time applications and database-driven software, with a particular interest in security and in interfaces that make complex systems feel simple.
 
 ## Pages
@@ -10,6 +10,7 @@ Arvin builds backend systems, REST APIs, real-time applications and database-dri
 - [OS case study](https://www.aboutarvin.ir/os/): A mini operating system shell in C++ and Qt, with apps that keep running in the background, an encrypted password vault, installable apps with permissions and a dot-matrix interface
 - [WA Bank case study](https://www.aboutarvin.ir/bank/): A desktop banking system with separate apps for customers, employees and the bank manager, built to feel like visiting a real branch
 - [Roof case study](https://www.aboutarvin.ir/roof/): A café's website and menu, run from an admin panel, and a table booking system where guests pick their exact table on the real floor plan
+- [Shop case study](https://www.aboutarvin.ir/shop/): An online electronics store with a NestJS and MySQL API, a React storefront and a React admin panel: products sold by variant, an itemised checkout, payments and returns
 
 ## Identity
 
@@ -105,7 +106,15 @@ Technologies: Node.js, Express.js, Prisma, PostgreSQL, Zod, JWT, bcrypt, Helmet.
 
 ### Shop
 
-Shop is an e-commerce back end with a REST API, built by Arvin Saghafi with NestJS, TypeScript, TypeORM and MySQL. Its front end is in progress.
+Shop is an online store for electronics (phones, laptops, tablets, watches, audio) that Arvin Saghafi built on his own: an API in NestJS and TypeORM on MySQL, a storefront and an admin panel, both in React. Case study: https://www.aboutarvin.ir/shop/ Code: https://github.com/eros-codes/Shop
+
+- The last unit is sold once: a checkout locks the rows it changes with SELECT ... FOR UPDATE, and every path takes its locks in the same order (category, product, variant, user) so concurrent checkouts cannot deadlock. An early version locked the rows with a query that read only their ids and then read the stock with a plain SELECT; in MySQL that read returns the transaction's earlier snapshot, so the last unit could be sold many times. The stock now comes from the locking read itself. The losing checkout gets an INSUFFICIENT_STOCK error naming the line and how many are left.
+- A payment is taken exactly once: checkouts carry an Idempotency-Key (a repeated request returns the same order; the same key with a different basket is refused with 409 Conflict); a ZarinPal callback locks the order and does nothing if it is already paid; a payment that arrives after its order expired is refunded to the customer's wallet; order SMS messages are sent only after the payment commits.
+- Sessions: sign-up is confirmed by an SMS code; the access token is short-lived and kept in memory; the refresh token is an httpOnly cookie stored only as a hash, rotated on every use in one conditional update, and a reused token revokes the whole session family.
+- Products are sold by variant (colour, storage, RAM), each with its own price and stock, and filters only match a product when the chosen values meet on one real variant in stock.
+- Also: returns that refund and restock in one transaction and never refund more than was paid; discount codes with ceilings, windows, limits and scope; invoice numbers from one atomic counter per Persian year; an append-only audit log; stable error codes; an API that refuses to start in production with unsafe settings; unit and end-to-end tests in CI against MySQL.
+
+Technologies: NestJS, TypeScript, TypeORM, MySQL, React, Vite, Jest, Swagger, GitHub Actions.
 
 ## Frequently asked questions
 
@@ -119,7 +128,7 @@ Java, JavaScript, TypeScript, Python, C#, C++ and SQL; Node.js, Express.js, Nest
 
 ### What projects has Arvin Saghafi built?
 
-His selected work is Rivo, a real-time encrypted chat application; OS, a mini operating system shell in C++ and Qt; WA Bank, a Java and JavaFX banking system; Roof, a café's website and table booking system; and Shop, an e-commerce back end in NestJS.
+His selected work is Rivo, a real-time encrypted chat application; OS, a mini operating system shell in C++ and Qt; WA Bank, a Java and JavaFX banking system; Roof, a café's website and table booking system; and Shop, an online electronics store with a NestJS API, a React storefront and an admin panel.
 
 ### What is Rivo?
 
@@ -144,6 +153,10 @@ OS is a mini operating system shell for the desktop that Arvin Saghafi built alo
 ### What is Roof?
 
 Roof is a café's website and table booking system. Arvin Saghafi built the website and its admin panel alone, and the booking system's back end with a teammate who built its front end. Guests pick their exact table on the café's real floor plan, and a serializable transaction makes double booking impossible.
+
+### What is Shop?
+
+Shop is an online electronics store that Arvin Saghafi built alone: a NestJS and MySQL API, a React storefront and a React admin panel. Its API sells the last unit in stock exactly once using row locks, takes each payment exactly once with idempotency keys and locked payment callbacks, and ends a session when a stolen refresh token is reused.
 
 ### How can I contact Arvin Saghafi?
 
