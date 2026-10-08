@@ -6,7 +6,7 @@ Arvin builds backend systems, REST APIs, real-time applications and database-dri
 ## Pages
 
 - [Home](https://www.aboutarvin.ir/): About Arvin, his skills, education and all of his projects
-- [Rivo case study](https://www.aboutarvin.ir/rivo/): A real-time chat app that sorts conversations by whether they are still alive, with one-time messages, time capsules and Vault-backed encryption
+- [Rivo case study](https://www.aboutarvin.ir/rivo/): A real-time chat app that sorts conversations by whether they are still alive, with one-time messages, time capsules, offline sending without loss and per-message encryption
 - [OS case study](https://www.aboutarvin.ir/os/): A mini operating system shell in C++ and Qt, with apps that keep running in the background, an encrypted password vault, installable apps with permissions and a dot-matrix interface
 - [WA Bank case study](https://www.aboutarvin.ir/bank/): A desktop banking system with separate apps for customers, employees and the bank manager, built to feel like visiting a real branch
 - [Roof case study](https://www.aboutarvin.ir/roof/): A café's website and menu, run from an admin panel, and a table booking system where guests pick their exact table on the real floor plan
@@ -43,15 +43,19 @@ Arvin builds backend systems, REST APIs, real-time applications and database-dri
 Rivo is a real-time chat application developed by Arvin Saghafi. Case study: https://www.aboutarvin.ir/rivo/
 Source code: https://github.com/eros-codes/Rivo
 
-It was built to fix three things ordinary messengers get wrong:
+It was built to fix four things ordinary messengers get wrong:
 
 - Every chat is treated the same. Rivo separates conversations automatically: a chat stays in "Active chats" as long as its last message has not been seen, by either side. Once the last message is seen and nobody replies, the conversation is over and it moves to "Contacts" on its own. A new message brings it back.
 - Messages are permanent and instant. Rivo adds one-time messages, which can be opened only once, and time capsules, which are delivered locked and open at a moment the sender chooses.
 - Archived chats never really leave. In most messengers an archived chat still sits on the main screen inside a folder. In Rivo, an archived chat disappears from the main screen entirely and is reachable only from Settings.
 
-Security: Rivo uses envelope encryption. Each message is encrypted with a data key, and that data key is encrypted by a master key that never leaves HashiCorp Vault. The database stores only the ciphertext and the wrapped key, so a copy of the database on its own reveals nothing.
+- A dropped connection loses nothing. When the app reconnects it asks the server for everything that changed since it last heard from it, minus 30 seconds, so edits, deletions and messages from the gap still arrive; every message carries updatedAt, so a late event never overwrites newer data. Outgoing messages go into an outbox saved in the browser and are sent in order; each carries a random clientId that is unique per sender in the database, so a resend after a lost answer returns the existing message instead of a duplicate.
 
-Technologies: Node.js, Express.js, Socket.IO, Prisma, PostgreSQL, HashiCorp Vault, JavaScript (ES modules), HTML, CSS.
+Security: every message is encrypted with its own random 256-bit key (AES-256-GCM), and that key is wrapped with the server's key-encryption key. The database stores the ciphertext, the wrapped key and the key's name, and no plain text, not even in reply quotes or forwards. The server's keys can be kept in HashiCorp Vault instead of on its disk; rotating to a new key re-wraps each message's key without decrypting any message. Sessions are database rows (logging out a device is immediate), CSRF uses a signed token, quotes and forwards are built by the server from the original message, sign-in limits count only failed attempts, and sign-up and password reset do not reveal whether an email has an account.
+
+Engineering: the server and the app are both TypeScript and share one contract (shared/: data types, live events and the zod schemas every input is checked against). 113 unit, API and browser tests run in GitHub Actions, the browser tests in Chromium, Firefox and WebKit, and a load test measures delivery times under many simultaneous chats.
+
+Technologies: TypeScript, Node.js, Express 5, Socket.IO, React 19, zod, Prisma, PostgreSQL, HashiCorp Vault, esbuild, Playwright, GitHub Actions, Sentry.
 
 ### OS
 
@@ -132,7 +136,7 @@ His selected work is Rivo, a real-time encrypted chat application; OS, a mini op
 
 ### What is Rivo?
 
-Rivo is a real-time chat application by Arvin Saghafi. It sorts chats automatically into Active chats and Contacts, supports one-time and time capsule messages, hides archived chats from the main screen, and encrypts every message with envelope encryption backed by HashiCorp Vault.
+Rivo is a real-time chat application by Arvin Saghafi. It sorts chats automatically into Active chats and Contacts, supports one-time and time capsule messages, hides archived chats from the main screen, loses nothing when the connection drops, and encrypts every message with its own key. The server and the app are written in TypeScript (Express, Socket.IO, React).
 
 ### How does Rivo decide which chats are active?
 
